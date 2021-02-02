@@ -1,5 +1,11 @@
-import react from 'react';
+import React from 'react';
 import Header from '../components/Header/Header';
-const Main: React.FC = () => <Header />;
+import * as S from './styles';
+
+const Main: React.FC = () => (
+    <S.Container>
+        <Header />
+    </S.Container>
+);
 
 export default Main;
