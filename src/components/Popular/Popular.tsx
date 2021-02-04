@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
+import { useHistory } from 'react-router-dom';
 import { fetcher } from '../../utils/request';
 import * as S from './styles';
 import CardList from '../CardList/CardList';
@@ -7,6 +8,7 @@ import Card from '../Card/Card';
 import * as C from '../../utils/constants';
 
 const Popular: React.FC = () => {
+    const history = useHistory();
     const { data, error } = useSWR(
         `${process.env.REACT_APP_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=ko-KR&page=1`,
         fetcher
@@ -17,6 +19,10 @@ const Popular: React.FC = () => {
     if (!data) {
         return <div>Loading...</div>;
     }
+    const onClick = (id: string) => {
+        history.push(`/detail/${id}`);
+    };
+
     return (
         <S.Container>
             <CardList>
@@ -24,8 +30,9 @@ const Popular: React.FC = () => {
                     <Card
                         image={`${C.IMAGE_URL_W500}/${key.backdrop_path}`}
                         title={key.title}
-                        onClick={() => alert(key.overview)}
                         key={idx}
+                        onClick={onClick}
+                        id={key.id}
                     />
                 ))}
             </CardList>
