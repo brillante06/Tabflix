@@ -21,7 +21,12 @@ const Popular: React.FC = () => {
         <S.Container>
             <CardList>
                 {data.results.map((key: any, idx: number) => (
-                    <Card image={`${C.IMAGE_URL_W500}/${key.backdrop_path}`} title={key.title} key={idx} />
+                    <Card
+                        image={`${C.IMAGE_URL_W500}/${key.backdrop_path}`}
+                        title={key.title}
+                        onClick={() => alert(key.overview)}
+                        key={idx}
+                    />
                 ))}
             </CardList>
         </S.Container>
