@@ -10,7 +10,7 @@ interface movieCard {
 const Card: FC<movieCard> = ({ image, title, onClick }) => (
     <S.Container onClick={onClick}>
         <S.movieImage src={image} alt={title} />
-        <S.movieTitle>title</S.movieTitle>
+        <S.movieTitle>{title}</S.movieTitle>
     </S.Container>
 );
 
