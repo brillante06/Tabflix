@@ -9,7 +9,9 @@ export const movieImage = styled.img<image>`
     alt: ${(props) => props.alt};
 `;
 export const movieTitle = styled.p`
-    text-align: end;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: -1rem;
 `;
 export const Container = styled.article`
     border: 1px solid #ccc;
