@@ -6,11 +6,12 @@ import * as S from './styles';
 import CardList from '../CardList/CardList';
 import Card from '../Card/Card';
 import * as C from '../../utils/constants';
+import { movieInfo } from '../../types';
 
 const Popular: React.FC = () => {
     const history = useHistory();
     const { data, error } = useSWR(
-        `${process.env.REACT_APP_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=ko-KR&page=3`,
+        `${process.env.REACT_APP_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=ko-KR&page=1`,
         fetcher
     );
     if (error) {
@@ -19,21 +20,21 @@ const Popular: React.FC = () => {
     if (!data) {
         return <div>Loading...</div>;
     }
-    const onClick = (id: string) => {
+    const onClick = (id: number) => {
         history.push(`/detail/${id}`);
     };
 
     return (
         <S.Container>
             <CardList>
-                {data.results.map((key: any, idx: number) => (
+                {data.results.map((key: movieInfo, idx: number) => (
                     <Card
                         image={`${C.IMAGE_URL_ORIGINAL}/${key.backdrop_path}`}
                         title={key.title}
                         key={idx}
                         onClick={onClick}
                         id={key.id}
-                        adults={key.adults}
+                        adults={key.adult}
                     />
                 ))}
             </CardList>

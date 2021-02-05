@@ -4,8 +4,8 @@ import * as S from './styles';
 interface movieCard {
     image: string;
     title: string;
-    onClick: (id: string) => void;
-    id: string;
+    onClick: (id: number) => void;
+    id: number;
     adults: boolean;
 }
 
