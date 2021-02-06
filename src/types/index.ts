@@ -1,5 +1,5 @@
 export interface movieInfo {
-    adult: Boolean;
+    adult: boolean;
     backdrop_path: string;
     genre_ids: Array<number>;
     id: number;
@@ -10,7 +10,13 @@ export interface movieInfo {
     poster_path: string;
     release_date: Date;
     title: string;
-    video: Boolean;
+    video: boolean;
     vote_average: number;
     vote_count: number;
+}
+export interface popularResponseType {
+    page: number;
+    results: Array<movieInfo>;
+    total_pages: number;
+    total_results: number;
 }

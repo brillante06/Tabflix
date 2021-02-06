@@ -1,25 +1,30 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
-import useSWR from 'swr';
+import useSWR, { useSWRInfinite } from 'swr';
 import { useHistory } from 'react-router-dom';
 import { fetcher } from '../../utils/request';
 import * as S from './styles';
 import CardList from '../CardList/CardList';
 import Card from '../Card/Card';
 import * as C from '../../utils/constants';
-import { movieInfo } from '../../types';
+import { movieInfo, popularResponseType } from '../../types';
+import { useRequest } from '../../hooks/useRequest';
 
 const Popular: React.FC = () => {
     const history = useHistory();
-    const { data, error } = useSWR(
-        `${process.env.REACT_APP_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=ko-KR&page=1`,
-        fetcher
-    );
+    const loadingRef = useRef<HTMLDivElement>(null);
+    const PAGE_SIZE = 20;
+    const { movies, error, isLoadingMore, size, setSize, isReachingEnd } = useRequest();
     if (error) {
-        return <div>failed to load</div>;
+        return <h1>Somthing went wrong</h1>;
     }
-    if (!data) {
-        return <div>Loading...</div>;
+    if (!movies) {
+        return <h1>Loading...</h1>;
     }
+
+    /* eslint-disable no-console */
+
+    console.log('movie', movies);
+    /* eslint-enable no-console */
     const onClick = (id: number) => {
         history.push(`/detail/${id}`);
     };
@@ -27,16 +32,17 @@ const Popular: React.FC = () => {
     return (
         <S.Container>
             <CardList>
-                {data.results.map((key: movieInfo, idx: number) => (
-                    <Card
-                        image={`${C.IMAGE_URL_ORIGINAL}/${key.backdrop_path}`}
-                        title={key.title}
-                        key={idx}
-                        onClick={onClick}
-                        id={key.id}
-                        adults={key.adult}
-                    />
-                ))}
+                {movies.map((res: popularResponseType, id: number) =>
+                    res.results.map((info: movieInfo, idx: number) => (
+                        <Card
+                            title={info.title}
+                            onClick={onClick}
+                            id={idx + 20 * id}
+                            key={id * 20 + idx}
+                            image={`${C.IMAGE_URL_ORIGINAL}${info.backdrop_path}`}
+                        ></Card>
+                    ))
+                )}
             </CardList>
         </S.Container>
     );

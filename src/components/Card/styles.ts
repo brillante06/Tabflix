@@ -5,6 +5,8 @@ interface image {
     alt: string;
 }
 export const movieImage = styled.img<image>`
+    width: 100%;
+    height: 7rem;
     src: ${(props) => props.src};
     alt: ${(props) => props.alt};
 `;
@@ -16,8 +18,4 @@ export const movieTitle = styled.p`
 export const Container = styled.article`
     border: 1px solid #ccc;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-    ${movieImage} {
-        height: 7rem;
-        width: 100%;
-    }
 `;

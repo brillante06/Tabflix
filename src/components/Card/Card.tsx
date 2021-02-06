@@ -6,10 +6,9 @@ interface movieCard {
     title: string;
     onClick: (id: number) => void;
     id: number;
-    adults: boolean;
 }
 
-const Card: FC<movieCard> = ({ image, title, onClick, id, adults }) => {
+const Card: FC<movieCard> = ({ image, title, onClick, id }) => {
     const onClickMove = () => {
         if (!onclick) return;
         onClick(id);
@@ -17,12 +16,9 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, adults }) => {
     return (
         <S.Container onClick={onClickMove}>
             <S.movieImage src={image} alt={title} />
-            {adults === true ? (
-                <S.movieTitle>🔞{title}</S.movieTitle>
-            ) : (
-                <S.movieTitle>{title}</S.movieTitle>
-            )}
-            <S.movieTitle></S.movieTitle>
+            <S.movieTitle>
+                {title} {id}
+            </S.movieTitle>
         </S.Container>
     );
 };
