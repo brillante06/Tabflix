@@ -16,9 +16,7 @@ const Card: FC<movieCard> = ({ image, title, onClick, id }) => {
     return (
         <S.Container onClick={onClickMove}>
             <S.movieImage src={image} alt={title} />
-            <S.movieTitle>
-                {title} {id}
-            </S.movieTitle>
+            <S.movieTitle>{title}</S.movieTitle>
         </S.Container>
     );
 };

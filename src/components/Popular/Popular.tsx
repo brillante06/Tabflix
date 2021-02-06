@@ -8,23 +8,20 @@ import Card from '../Card/Card';
 import * as C from '../../utils/constants';
 import { movieInfo, popularResponseType } from '../../types';
 import { useRequest } from '../../hooks/useRequest';
+import { useIntersecting } from '../../hooks/useIntersecting';
 
 const Popular: React.FC = () => {
     const history = useHistory();
     const loadingRef = useRef<HTMLDivElement>(null);
-    const PAGE_SIZE = 20;
+    const [page, setPage] = useState(0);
     const { movies, error, isLoadingMore, size, setSize, isReachingEnd } = useRequest();
+    useIntersecting(size, setSize, loadingRef);
     if (error) {
         return <h1>Somthing went wrong</h1>;
     }
     if (!movies) {
         return <h1>Loading...</h1>;
     }
-
-    /* eslint-disable no-console */
-
-    console.log('movie', movies);
-    /* eslint-enable no-console */
     const onClick = (id: number) => {
         history.push(`/detail/${id}`);
     };
@@ -37,12 +34,13 @@ const Popular: React.FC = () => {
                         <Card
                             title={info.title}
                             onClick={onClick}
-                            id={idx + 20 * id}
-                            key={id * 20 + idx}
+                            id={info.id}
+                            key={idx}
                             image={`${C.IMAGE_URL_ORIGINAL}${info.backdrop_path}`}
                         ></Card>
                     ))
                 )}
+                <div ref={loadingRef}>{movies ? '' : 'loading'}</div>
             </CardList>
         </S.Container>
     );
