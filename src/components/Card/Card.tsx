@@ -1,17 +1,18 @@
 import React, { FC, MutableRefObject } from 'react';
+import { movieInfo } from '../../types';
 import * as S from './styles';
 
 interface movieCard {
     image: string;
     title: string;
-    onClick: (id: number) => void;
+    onClick: (movie: movieInfo, id: number) => void;
     id: number;
+    movie: movieInfo;
 }
 
-const Card: FC<movieCard> = ({ image, title, onClick, id }) => {
+const Card: FC<movieCard> = ({ image, title, onClick, id, movie }) => {
     const onClickMove = () => {
-        if (!onclick) return;
-        onClick(id);
+        onClick(movie, id);
     };
     return (
         <S.Container onClick={onClickMove}>

@@ -22,8 +22,8 @@ const Popular: React.FC = () => {
     if (!movies) {
         return <h1>Loading...</h1>;
     }
-    const onClick = (id: number) => {
-        history.push(`/detail/${id}`);
+    const onClick = (movie: movieInfo, id: number) => {
+        history.push(`/detail/${id}`, { movie });
     };
 
     return (
@@ -37,6 +37,7 @@ const Popular: React.FC = () => {
                             id={info.id}
                             key={idx}
                             image={`${C.IMAGE_URL_ORIGINAL}${info.backdrop_path}`}
+                            movie={info}
                         ></Card>
                     ))
                 )}
