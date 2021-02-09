@@ -1,4 +1,4 @@
-import React, { FC, MutableRefObject } from 'react';
+import React, { FC } from 'react';
 import { movieInfo } from '../../types';
 import * as S from './styles';
 

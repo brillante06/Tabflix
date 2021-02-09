@@ -7,4 +7,5 @@ export const Container = styled.article`
     grid-gap: 1rem;
     align-items: stretch;
     margin: auto;
+    max-width: 1000px;
 `;

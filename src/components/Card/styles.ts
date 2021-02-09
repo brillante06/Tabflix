@@ -2,17 +2,17 @@ import styled from 'styled-components';
 
 interface image {
     src: string;
-    alt: string;
+    alt?: string;
 }
 export const movieImage = styled.img<image>`
-    width: 100%;
-    height: 7rem;
     src: ${(props) => props.src};
     alt: ${(props) => props.alt};
+    max-width: 100%;
+    min-height: 50%;
 `;
 export const movieTitle = styled.p`
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     padding: -1rem;
 `;
 export const Container = styled.article`
