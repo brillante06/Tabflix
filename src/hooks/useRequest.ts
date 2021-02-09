@@ -4,12 +4,9 @@ import { movieInfo, popularResponseType } from '../types';
 import { fetcher } from '../utils/request';
 import * as C from '../utils/constants';
 
-export const useRequest = () => {
+export const useRequest = (url: string) => {
     const { data, error, size, setSize, mutate } = useSWRInfinite(
-        (index) =>
-            `${C.API_URL}/movie/popular?api_key=${
-                process.env.REACT_APP_API_KEY
-            }&language=ko-KR&page=${index + 1}`,
+        (index) => `${url}${index + 1}`,
         fetcher
     );
     const PAGE_SIZE = 20;

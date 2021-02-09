@@ -9,7 +9,9 @@ import { useRequest } from '../../hooks/useRequest';
 
 const Popular: React.FC = () => {
     const history = useHistory();
-    const { movies, error, isLoadingMore, size, setSize, mutate } = useRequest();
+    const { movies, error, isLoadingMore, size, setSize, mutate } = useRequest(
+        `${C.API_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=ko-KR&page=`
+    );
 
     if (error) {
         return <h1>Something went wrong</h1>;

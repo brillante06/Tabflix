@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styles';
+import * as C from '../../utils/constants';
+import useSWR from 'swr';
+import { fetcher } from '../../utils/request';
 const Search: React.FC = () => {
     const [searchValue, setSearchValue] = useState('');
     useEffect(() => {}, [searchValue]);
