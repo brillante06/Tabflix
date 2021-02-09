@@ -1,20 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import useSWR, { mutate } from 'swr';
 import * as S from './styles';
 import * as C from '../../utils/constants';
-import useSWR from 'swr';
 import { fetcher } from '../../utils/request';
-import { movieInfo } from '../../types';
+import { movieInfo, popularResponseType } from '../../types';
+
 const Search: React.FC = () => {
-    const [searchValue, setSearchValue] = useState('');
-    const [movieList, setMovieList] = useState<Array<string>>([]);
+    const [searchValue, setSearchValue] = useState<string>('');
+    const [movieList, setMovieList] = useState<Array<movieInfo>>([]);
+    const scrollRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
-        const { data, error } = useSWR(`${C.MOVIE_SEARCH}${searchValue}`, fetcher);
-        const searchList: Array<string> = data.results.reduce(
-            (acc: Array<string>, cur: movieInfo) => acc.push(cur.title),
-            []
-        );
-        setMovieList(movieList.concat(...searchList));
+        if (searchValue !== '') {
+            const data = async () => {
+                setMovieList([]);
+                let list: Array<string>;
+                const value: popularResponseType = await fetcher(`${C.MOVIE_SEARCH}${searchValue}`);
+                setMovieList(value.results);
+            };
+            data();
+        }
     }, [searchValue]);
+    useEffect(() => {
+        if (scrollRef.current && movieList.length >= 1) {
+            scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [movieList, scrollRef]);
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
     };
@@ -25,6 +35,12 @@ const Search: React.FC = () => {
                 onChange={onChange}
                 value={searchValue}
             ></S.Input>
+            <div>{movieList.length}</div>
+            <S.movieList ref={scrollRef}>
+                {movieList.map((movie: movieInfo, index: number) => (
+                    <S.movieName key={index}>{movie.title}</S.movieName>
+                ))}
+            </S.movieList>
         </S.Container>
     );
 };
