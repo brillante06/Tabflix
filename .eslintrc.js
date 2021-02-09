@@ -22,7 +22,7 @@ module.exports = {
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error'],
         '@typescript-eslint/explicit-module-boundary-types': 'off',
-        'no-console': ['error', { allow: ['warn', 'error'] }],
+        'no-console': 0,
         'import/prefer-default-export': 'off',
         'comma-dangle': [
             'error',
@@ -58,7 +58,7 @@ module.exports = {
         'object-curly-newline': [
             'error',
             {
-                minProperties: 4,
+                multiline: true,
             },
         ],
         'object-property-newline': 'error',
