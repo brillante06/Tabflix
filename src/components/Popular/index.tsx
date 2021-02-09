@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import * as S from './styles';
-import CardList from '../CardList/CardList';
-import Card from '../Card/Card';
+import Card from '../Card';
+import CardList from '../CardList';
 import * as C from '../../utils/constants';
 import { movieInfo } from '../../types';
 import { useRequest } from '../../hooks/useRequest';
