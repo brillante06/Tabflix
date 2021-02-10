@@ -6,18 +6,42 @@ export const Container = styled.main`
 `;
 
 export const Input = styled.input`
-    width: 100%;
+    width: 80%;
     border: 1px;
     display: block;
-    margin: 0 0 1rem;
+    margin: 0 auto 1rem auto;
+    border-radius: 2rem;
+    border: 1px solid;
+    &:focus {
+        outline: none;
+    }
 `;
 export const movieList = styled.section`
-    width: 100%;
+    width: 85%;
+    height: 15rem;
+    border-left: 2px solid;
+    margin: auto;
+    overflow: hidden;
+    &:hover {
+        overflow-y: scroll;
+    }
+    &::-webkit-scrollbar {
+        width: 0.6rem;
+        height: 1px;
+        border-radius: 3px;
+        background-color: gainsboro;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 1px;
+    }
 `;
 export const movieName = styled.article`
     width: 80%;
-    height: 1rem;
+    height: 2rem;
     &:hover {
-        background-color: gray;
+        background-color: #dee1e5;
     }
+    border-radius: 0.3rem;
+    margin-left: 1rem;
 `;

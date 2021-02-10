@@ -13,7 +13,6 @@ const Search: React.FC = () => {
         if (searchValue !== '') {
             const data = async () => {
                 setMovieList([]);
-                let list: Array<string>;
                 const value: popularResponseType = await fetcher(`${C.MOVIE_SEARCH}${searchValue}`);
                 setMovieList(value.results);
             };
@@ -35,7 +34,6 @@ const Search: React.FC = () => {
                 onChange={onChange}
                 value={searchValue}
             ></S.Input>
-            <div>{movieList.length}</div>
             <S.movieList ref={scrollRef}>
                 {movieList.map((movie: movieInfo, index: number) => (
                     <S.movieName key={index}>{movie.title}</S.movieName>
