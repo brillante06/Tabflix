@@ -4,21 +4,24 @@ import * as S from './styles';
 import * as C from '../../utils/constants';
 import { fetcher } from '../../utils/request';
 import { movieInfo, popularResponseType } from '../../types';
+import { useDebounce } from '../../hooks/useDebounce';
 
 const Search: React.FC = () => {
     const [searchValue, setSearchValue] = useState<string>('');
     const [movieList, setMovieList] = useState<Array<movieInfo>>([]);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const debounceValue = useDebounce(searchValue, 350);
     useEffect(() => {
-        if (searchValue !== '') {
+        if (debounceValue !== '') {
             const data = async () => {
-                setMovieList([]);
                 const value: popularResponseType = await fetcher(`${C.MOVIE_SEARCH}${searchValue}`);
                 setMovieList(value.results);
             };
             data();
+        } else {
+            setMovieList([]);
         }
-    }, [searchValue]);
+    }, [debounceValue]);
     useEffect(() => {
         if (scrollRef.current && movieList.length >= 1) {
             scrollRef.current.scrollIntoView({ behavior: 'smooth' });
