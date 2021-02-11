@@ -24,6 +24,7 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         'no-console': 0,
         'import/prefer-default-export': 'off',
+        'no-shadow': 'off',
         'comma-dangle': [
             'error',
             {
@@ -55,6 +56,7 @@ module.exports = {
             },
         ],
         'no-duplicate-imports': 'error',
+        'no-nested-ternary': 'off',
         'object-curly-newline': [
             'error',
             {
