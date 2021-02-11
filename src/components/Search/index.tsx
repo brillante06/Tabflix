@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import useSWR, { mutate } from 'swr';
+import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import * as C from '../../utils/constants';
 import { fetcher } from '../../utils/request';
@@ -39,6 +38,8 @@ const Search: React.FC = () => {
             <S.movieList>
                 {isSearching ? (
                     <Loader />
+                ) : debounceValue !== '' && movieList.length === 0 ? (
+                    <S.movieName>No results for {searchValue}</S.movieName>
                 ) : (
                     movieList.map((movie: movieInfo, index: number) => (
                         <S.movieName key={index}>{movie.title}</S.movieName>

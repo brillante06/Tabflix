@@ -56,6 +56,7 @@ module.exports = {
             },
         ],
         'no-duplicate-imports': 'error',
+        'no-nested-ternary': 'off',
         'object-curly-newline': [
             'error',
             {
