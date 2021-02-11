@@ -7,30 +7,11 @@ exports[`<Card /> matches snapshot 1`] = `
   >
     <img
       alt="soul"
-      class="sc-bdfBwQ iUeCue"
+      class="sc-bdfBwQ dhhuN"
       src="https://image.tmdb.org/t/p/original/kf456ZqeC45XTvo6W9pW5clYKfQ.jpg"
     />
     <p
-      class="sc-gsTCUz kSAqZy"
-    >
-      soul
-    </p>
-  </article>
-</div>
-`;
-
-exports[`<Card /> renders card 1`] = `
-<div>
-  <article
-    class="sc-dlfnbm rBwJX"
-  >
-    <img
-      alt="soul"
-      class="sc-bdfBwQ iUeCue"
-      src="https://image.tmdb.org/t/p/original/kf456ZqeC45XTvo6W9pW5clYKfQ.jpg"
-    />
-    <p
-      class="sc-gsTCUz kSAqZy"
+      class="sc-gsTCUz dookHH"
     >
       soul
     </p>

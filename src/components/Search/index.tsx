@@ -34,8 +34,9 @@ const Search: React.FC = () => {
                 placeholder="영화를 검색해보세요"
                 onChange={onChange}
                 value={searchValue}
+                aria-label="movie-input"
             ></S.Input>
-            <S.movieList>
+            <S.movieList data-testid="movie-list">
                 {isSearching ? (
                     <Loader />
                 ) : debounceValue !== '' && movieList.length === 0 ? (

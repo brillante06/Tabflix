@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
-import Card from '../Card';
+import Card from '../index';
 import { dummyMovie, dummyImage } from '../../../dummy/movieDummy';
 
 describe('<Card />', () => {
