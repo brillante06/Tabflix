@@ -20,3 +20,20 @@ export interface popularResponseType {
     total_pages: number;
     total_results: number;
 }
+
+export interface watchProvider {
+    display_priority: number;
+    logo_path: string;
+    provider_id: number;
+    provider_name: string;
+}
+export interface watchProviderResponse {
+    id: string;
+    results: Array<providerCountry>;
+}
+export interface providerCountry {
+    link: string;
+    buy: Array<watchProvider>;
+    rent: Array<watchProvider>;
+    flatrate: Array<watchProvider>;
+}
