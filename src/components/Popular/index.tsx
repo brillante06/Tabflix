@@ -19,7 +19,7 @@ const Popular: React.FC = () => {
         return <h1>Loading...</h1>;
     }
     const onClick = (movie: movieInfo, id: number) => {
-        history.push(`/detail/${id}`, { movie });
+        history.push({ pathname: `/detail/${id}`, state: { movieID: id } });
     };
     return (
         <S.Container>

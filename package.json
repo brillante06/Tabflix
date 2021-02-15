@@ -15,6 +15,7 @@
     "global": "^4.4.0",
     "jest-dom": "^4.0.0",
     "lodash": "^4.17.20",
+    "msw": "^0.26.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -82,7 +83,7 @@
     "transformIgnorePatterns": [
       "node_modules/(?!variables/.*)"
     ],
-     "moduleNameMapper": {
+    "moduleNameMapper": {
       ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
     },
     "globals": {
