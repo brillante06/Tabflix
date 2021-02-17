@@ -77,7 +77,7 @@ export interface watchProvider {
 }
 export interface watchProviderResponse {
     id: string;
-    results: Array<providerCountry>;
+    results: { [key: string]: providerCountry };
 }
 export interface providerCountry {
     link: string;

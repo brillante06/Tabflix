@@ -1,19 +1,16 @@
 import React from 'react';
-import { render, fireEvent, waitFor, getByText } from '@testing-library/react';
+import { render, fireEvent, waitFor, getByText, getByTestId } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Detail from '../index';
-import { history } from 'history';
 import movieDetailDummy from '../../../dummy/movieDummy';
-import { createMemoryHistory } from 'history';
-import { Router, Route, MemoryRouter } from 'react-router-dom';
-import { get } from 'lodash';
+import { Route, MemoryRouter } from 'react-router-dom';
 
 jest.mock('../../../utils/request');
 
 const server = setupServer(
     rest.get('/detail/343611', (req, res, ctx) => {
-        return res.ctx.json(movieDetailDummy);
+        return res(ctx.status(200), ctx.json(movieDetailDummy));
     })
 );
 beforeAll(() => server.listen());
@@ -30,7 +27,16 @@ const renderComponenet = ({ movieID }) =>
     );
 
 describe('<Detail />', () => {
-    it('check match.param', async () => {
+    it('get movieDetail from tmdb', async () => {
+        server.use(
+            rest.get('/detail', (req, res, ctx) => {
+                return res.once(ctx.status(200), ctx.json(movieDetailDummy));
+            })
+        );
+        const { getByTestId } = await renderComponenet({ movieID: 343611 });
+        await waitFor(() => getByTestId('Jack Reacher: Never Go Back"'));
+    });
+    it('check param from parent component', async () => {
         const { getByText } = renderComponenet({ movieID: 343611 });
         await waitFor(() => getByText('343611'));
     });
