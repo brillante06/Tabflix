@@ -10,7 +10,24 @@ interface movieID {
 }
 const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     const [detail, setDetail] = useState<detailMovie>();
-
+    const [provider, setProvider] = useState<watchProviderResponse>();
+    const [similar, setSimilar] = useState<Array<movieInfo>>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    useEffect(() => {
+        const getData = async () => {
+            setIsLoading(true);
+            const movieDetail: detailMovie = await fetcher(requestDetail(match.params.id));
+            setDetail(movieDetail);
+            const movieProvider: watchProviderResponse = await fetcher(
+                requestProvider(match.params.id)
+            );
+            setProvider(movieProvider);
+            const movieSimilar: Array<movieInfo> = await fetcher(requestSimilar(match.params.id));
+            setSimilar(movieSimilar);
+            setIsLoading(false);
+        };
+        getData();
+    }, []);
     return (
         <S.Container>
             <h1 data-testid="movie-title">{detail?.title}</h1>
