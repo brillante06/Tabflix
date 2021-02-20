@@ -14,6 +14,24 @@ export interface movieInfo {
     vote_average?: number;
     vote_count?: number;
 }
+export interface creditResponse {
+    id: string;
+    cast: Array<actorInfo>;
+}
+export interface actorInfo {
+    adult: true;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string | null;
+    cast_id: number;
+    character: string;
+    credit_id: string;
+    order: number;
+}
 export interface popularResponseType {
     page: number;
     results: Array<movieInfo>;

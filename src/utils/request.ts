@@ -12,8 +12,10 @@ export const fetcher = async (url: string) => {
 };
 
 export const requestDetail = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}${API_KEY}&language=kr-KR`;
+    `${API_URL_MOVIE}/${movieID}${API_KEY}&language=ko-KR`;
 export const requestSimilar = (movieID: string) =>
     `${API_URL_MOVIE}/${movieID}/similar${API_KEY}&language=kr-KR&page=1`;
 export const requestProvider = (movieID: string) =>
     `${API_URL_MOVIE}/${movieID}/watch/providers${API_KEY}`;
+export const requestCredit = (movieID: string) =>
+    `${API_URL_MOVIE}/${movieID}/credits${API_KEY}&language=kr-KR`;

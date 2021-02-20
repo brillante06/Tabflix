@@ -67,7 +67,8 @@ module.exports = {
         'react/prop-types': 0,
         '@typescript-eslint/explicit-function-return-type': 0,
         'import/no-extraneous-dependencies': 0,
-        semi: 'error',
+        semi: 0,
+        'array-callback-return': 'warn',
         'import/extensions': [
             'off',
             'ignorePackages',
