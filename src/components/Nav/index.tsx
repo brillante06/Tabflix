@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Detail, Popular, Search } from '..';
 import * as S from './styles';
 
 const Header: React.FC = () => (

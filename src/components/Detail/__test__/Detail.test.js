@@ -7,20 +7,6 @@ import movieDetailDummy from '../../../dummy/movieDummy';
 import { Route, MemoryRouter } from 'react-router-dom';
 import { API_KEY } from '../../../utils/constants';
 
-jest.mock('../../../utils/request');
-
-const server = setupServer(
-    rest.get(
-        `https://api.themoviedb.org/3/movie/343611?api_key=${API_KEY}&language=en-US`,
-        (req, res, ctx) => {
-            return res(ctx.status(200), ctx.json(movieDetailDummy));
-        }
-    )
-);
-beforeAll(() => server.listen());
-afterAll(() => server.close());
-afterEach(() => server.resetHandlers());
-
 const renderComponenet = ({ movieID }) =>
     render(
         <MemoryRouter initialEntries={[`/detail/${movieID}`]}>
@@ -30,13 +16,18 @@ const renderComponenet = ({ movieID }) =>
         </MemoryRouter>
     );
 
+const server = setupServer(
+    rest.get(`https://api.themoviedb.org/3/movie/343611${API_KEY}`, (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(movieDetailDummy));
+    })
+);
+beforeAll(() => server.listen());
+afterAll(() => server.close());
+afterEach(() => server.resetHandlers());
+
 describe('<Detail />', () => {
-    it('get movieDetail from tmdb', async () => {
-        const utils = render(<Detail />);
-        expect(utils.getByText('undefined')).toBeInTheDocument();
-        await waitFor(() => {
-            expect(utils.getByText(/Jack Reacher: Never Go Back/i)).toBeInTheDocument();
-            expect(utils.getByText(/Jack Reacher: Never Go Back/i)).toBeInTheDocument();
-        });
+    test('get movieDetail from tmdb', async () => {
+        const utils = await render(<Detail />);
+        await waitFor(() => expect(utils.getByText('잭')));
     });
 });

@@ -21,14 +21,14 @@ export const Background = styled.section<image>`
 export const Similar = styled.article`
     border: 1px solid #ccc;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-    margin: 0 1rem 0 1rem;
+    margin: 0 1rem 2rem 1rem;
 `;
 export const SimilarImage = styled.img`
-    width: 15vw;
+    width: 12.5vw;
 `;
 
 export const SimilarTitle = styled.p`
-    width: 2rem;
+    font-size: 0.3rem;
 `;
 export const SimilarContainer = styled.section`
     display: flex;
@@ -87,20 +87,23 @@ export const InfoContainer = styled.section`
     display: flex;
     flex-direction: column;
     align-content: space-between;
+    margin-left: 2rem;
 `;
 export const Title = styled.article`
     font-size: 20px;
-    margin: auto;
+    font-weight: bold;
+    margin: 1rem 0 1.5rem 0;
 `;
 
 export const Poster = styled.img`
     width: 20vw;
+    height: 30vw;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 `;
 
 export const Description = styled.section`
     font-size: 12px;
-    margin: 0.5rem 2rem 0.5rem;
+    margin: 0.5rem 0 0.5rem;
 `;
 export const Genre = styled.article`
     width: 1rem;
@@ -108,5 +111,15 @@ export const Genre = styled.article`
 
 export const RunningTime = styled.article`
     font-size: 20px;
-    margin: 0.5rem auto 0.6rem;
+    margin: 1rem 0 1.1rem;
+`;
+export const Tagline = styled.article`
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0.1rem 0 0.1rem;
+`;
+export const Distinct = styled.div`
+    border: 1px solid #c1c1c1;
+    width: 95%;
+    margin: 2rem 0.3rem 0.8rem;
 `;

@@ -22,21 +22,18 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const history = useHistory();
-
+    const getData = async () => {
+        setIsLoading(true);
+        const movieDetail: detailMovie = await fetcher(requestDetail(match.params.id));
+        setDetail(movieDetail);
+        const movieCredit: creditResponse = await fetcher(requestCredit(match.params.id));
+        const credit: Array<actorInfo> = movieCredit.cast;
+        setCredits(credit);
+        const movieSimilar: popularResponseType = await fetcher(requestSimilar(match.params.id));
+        setSimilar(movieSimilar.results);
+        setIsLoading(false);
+    };
     useEffect(() => {
-        const getData = async () => {
-            setIsLoading(true);
-            const movieDetail: detailMovie = await fetcher(requestDetail(match.params.id));
-            setDetail(movieDetail);
-            const movieCredit: creditResponse = await fetcher(requestCredit(match.params.id));
-            const credit: Array<actorInfo> = movieCredit.cast;
-            setCredits(credit);
-            const movieSimilar: popularResponseType = await fetcher(
-                requestSimilar(match.params.id)
-            );
-            setSimilar(movieSimilar.results);
-            setIsLoading(false);
-        };
         getData();
     }, []);
     if (error) {
@@ -56,11 +53,20 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                     <S.Poster />
                 )}
                 <S.InfoContainer>
-                    <S.Title>{detail?.title}</S.Title>
-                    <S.RunningTime>{`${detail?.runtime}분`}</S.RunningTime>
-                    <S.Description>{detail?.overview}</S.Description>
+                    <S.Title>
+                        🎥{detail?.title}(
+                        {detail ? new Date(detail?.release_date).getFullYear() : ' '})
+                    </S.Title>
+                    <S.RunningTime>⏱️{`${detail?.runtime}분`}</S.RunningTime>
+                    <S.Title>
+                        👀
+                        {detail?.genres.map((value, index) => (index ? ', ' : '') + value.name)}
+                    </S.Title>
                 </S.InfoContainer>
             </S.IntroduceContainer>
+            <S.Distinct />
+            {detail?.tagline !== '' ? <S.Tagline>{detail?.tagline}</S.Tagline> : ''}
+            <S.Description>{detail?.overview}</S.Description>
             <h3>Actor</h3>
             <S.ListContainer>
                 {credits?.map((value, index) => (

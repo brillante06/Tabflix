@@ -59,12 +59,16 @@ export interface spokenLanguage {
     iso_639_1: string;
     name: string;
 }
+export interface genre {
+    id: number;
+    name: string;
+}
 export interface detailMovie {
     adult: boolean;
     backdrop_path: string;
     belongs_to_collection: collectionType;
     budget: number;
-    genres: Array<number>;
+    genres: Array<genre>;
     homepage: string;
     id: number;
     imdb_id: string;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.nav`
     height: 4rem;
-    width: 100%;
+    width: 97%;
     display: flex;
     justify-content: flex-end;
     margin-top: 0.5rem;
