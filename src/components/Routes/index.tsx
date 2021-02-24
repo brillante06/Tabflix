@@ -1,23 +1,20 @@
-import { Route, Router } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import { Route, Router, Switch } from 'react-router-dom';
 import React from 'react';
 import Main from '../../pages/main';
-import Search from '../Search';
-import { Header } from '..';
-import Detail from '../Detail';
+import { Detail, Header, Search } from '../index';
+import { browserHistory } from '../../utils/constants';
 
-const Routes: React.FC = () => {
-    const history = createBrowserHistory();
-    return (
-        <Router history={history}>
-            <Header />
-            <main>
+const Routes: React.FC = () => (
+    <Router history={browserHistory}>
+        <Header />
+        <main>
+            <Switch>
                 <Route exact path="/" component={Main}></Route>
                 <Route exact path="/search" component={Search}></Route>
-                <Route path="/detail/:id" component={Detail}></Route>
-            </main>
-        </Router>
-    );
-};
+                <Route exact path="/detail/:id" component={Detail}></Route>
+            </Switch>
+        </main>
+    </Router>
+);
 
 export default Routes;

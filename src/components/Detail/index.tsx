@@ -41,6 +41,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     }
     const onClick = (id: number) => {
         history.push(`/detail/${id}`);
+        history.go(0);
     };
     return isLoading ? (
         <Loader />
