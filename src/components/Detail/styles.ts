@@ -51,20 +51,7 @@ export const SimilarContainer = styled.section`
 export const ListContainer = styled.section`
     display: flex;
     align-content: flex-end;
-    &:hover {
-        overflow-x: scroll;
-        overflow-y: hidden;
-    }
-    &::-webkit-scrollbar {
-        width: 0.6rem;
-        height: 7px;
-        border-radius: 5px;
-        background-color: gainsboro;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-    }
+    overflow-x: scroll;
 `;
 export const ActorImage = styled.img`
     width: 10vw;
@@ -86,13 +73,12 @@ export const IntroduceContainer = styled.section`
 export const InfoContainer = styled.section`
     display: flex;
     flex-direction: column;
-    align-content: space-between;
+    justify-content: space-around;
     margin-left: 2rem;
 `;
 export const Title = styled.article`
     font-size: 20px;
     font-weight: bold;
-    margin: 1rem 0 1.5rem 0;
 `;
 
 export const Poster = styled.img`
@@ -103,7 +89,6 @@ export const Poster = styled.img`
 
 export const Description = styled.section`
     font-size: 12px;
-    margin: 0.5rem 0 0.5rem;
 `;
 export const Genre = styled.article`
     width: 1rem;

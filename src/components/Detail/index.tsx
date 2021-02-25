@@ -11,6 +11,7 @@ import { fetcher, requestCredit, requestDetail, requestSimilar } from '../../uti
 import * as S from './styles';
 import * as C from '../../utils/constants';
 import Loader from '../Loader';
+import noImage from '../../assets/noImage.jpg';
 
 interface movieID {
     id: string;
@@ -72,7 +73,13 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
             <S.ListContainer>
                 {credits?.map((value, index) => (
                     <S.Actor key={index}>
-                        <S.ActorImage src={`${C.IMAGE_URL_W500}/${value.profile_path}`} />
+                        <S.ActorImage
+                            src={
+                                value.profile_path
+                                    ? `${C.IMAGE_URL_W500}/${value.profile_path}`
+                                    : noImage
+                            }
+                        />
                         <S.ActorName>{value.character}</S.ActorName>
                     </S.Actor>
                 ))}
@@ -81,7 +88,13 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
             <S.ListContainer>
                 {similar.map((value, index) => (
                     <S.Similar key={index} onClick={() => onClick(value.id)}>
-                        <S.SimilarImage src={`${C.IMAGE_URL_W500}/${value.poster_path}`} />
+                        <S.SimilarImage
+                            src={
+                                value.poster_path
+                                    ? `${C.IMAGE_URL_W500}/${value.poster_path}`
+                                    : noImage
+                            }
+                        />
                         <S.SimilarTitle>{value.title}</S.SimilarTitle>
                     </S.Similar>
                 ))}

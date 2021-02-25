@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ImgHTMLAttributes, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as S from './styles';
 import Card from '../Card';
@@ -11,6 +11,8 @@ import noImage from '../../assets/noImage.jpg';
 const Popular: React.FC = () => {
     const history = useHistory();
     const { movies, error, isLoadingMore, size, setSize, mutate } = useRequest(C.MOVIE_POPULAR);
+
+    const ref = useRef<React.MutableRefObject<HTMLDivElement | null>>(null);
 
     if (error) {
         return <h1>Something went wrong</h1>;
