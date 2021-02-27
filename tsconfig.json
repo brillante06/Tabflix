@@ -24,6 +24,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src","jest.config.js"
+    "src","jest.config.js","fonts"
   ]
 }

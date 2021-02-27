@@ -31,9 +31,7 @@ const Popular: React.FC = () => {
                         id={info.id}
                         key={id}
                         image={
-                            info.backdrop_path
-                                ? `${C.IMAGE_URL_W500}/${info.backdrop_path}`
-                                : noImage
+                            info.backdrop_path ? `${C.IMAGE_URL_W500}/${info.poster_path}` : noImage
                         }
                         movie={info}
                     ></Card>
