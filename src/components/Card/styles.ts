@@ -7,8 +7,7 @@ interface image {
 export const movieImage = styled.img<image>`
     src: ${(props) => props.src};
     alt: ${(props) => props.alt};
-    max-width: 100%;
-    min-height: 50%;
+    width: 100%;
 `;
 export const movieTitle = styled.p`
     text-align: center;

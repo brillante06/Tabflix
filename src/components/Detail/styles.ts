@@ -18,53 +18,13 @@ export const Background = styled.section<image>`
     background-repeat: no-repeat;
     background-size: 100% 150%;
 `;
-export const Similar = styled.article`
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-    margin: 0 1rem 2rem 1rem;
-`;
-export const SimilarImage = styled.img`
-    width: 12.5vw;
-`;
 
-export const SimilarTitle = styled.p`
-    font-size: 0.3rem;
-`;
-export const SimilarContainer = styled.section`
-    display: flex;
-    align-content: flex-end;
-    &:hover {
-        overflow-x: scroll;
-        overflow-y: hidden;
-    }
-    &::-webkit-scrollbar {
-        width: 0.6rem;
-        height: 7px;
-        border-radius: 5px;
-        background-color: gainsboro;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-    }
-`;
 export const ListContainer = styled.section`
     display: flex;
     align-content: flex-end;
     overflow-x: scroll;
 `;
-export const ActorImage = styled.img`
-    width: 10vw;
-`;
-export const ActorName = styled.div`
-    font-size: 0.3rem;
-    margin: auto;
-`;
-export const Actor = styled.section`
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-    margin: 0 1rem 0 1rem;
-`;
+
 export const IntroduceContainer = styled.section`
     width: 100%;
     height: 100%;

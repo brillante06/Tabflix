@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
 import {
     actorInfo,
@@ -12,6 +12,10 @@ import * as S from './styles';
 import * as C from '../../utils/constants';
 import Loader from '../Loader';
 import noImage from '../../assets/noImage.jpg';
+import lazyImage from '../../assets/lazyImage.jpg';
+import { useIntersecting } from '../../hooks/useIntersecting';
+import Card from '../Card';
+import SmallCard from '../SmallCard';
 
 interface movieID {
     id: string;
@@ -23,6 +27,8 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const history = useHistory();
+    const lazyRef = useRef<HTMLImageElement | null>(null);
+
     const getData = async () => {
         setIsLoading(true);
         const movieDetail: detailMovie = await fetcher(requestDetail(match.params.id));
@@ -37,6 +43,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     useEffect(() => {
         getData();
     }, []);
+
     if (error) {
         return <p>something went wrong</p>;
     }
@@ -72,31 +79,30 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
             <h3>Actor</h3>
             <S.ListContainer>
                 {credits?.map((value, index) => (
-                    <S.Actor key={index}>
-                        <S.ActorImage
-                            src={
-                                value.profile_path
-                                    ? `${C.IMAGE_URL_W500}/${value.profile_path}`
-                                    : noImage
-                            }
-                        />
-                        <S.ActorName>{value.character}</S.ActorName>
-                    </S.Actor>
+                    <SmallCard
+                        key={index}
+                        imgName={
+                            value.profile_path ? `${C.IMAGE_URL_W500}/${value.profile_path}` : null
+                        }
+                        name={value.character}
+                        tag={'actor'}
+                        id={value.id}
+                    />
                 ))}
             </S.ListContainer>
             <h2>Similar movie</h2>
             <S.ListContainer>
                 {similar.map((value, index) => (
-                    <S.Similar key={index} onClick={() => onClick(value.id)}>
-                        <S.SimilarImage
-                            src={
-                                value.poster_path
-                                    ? `${C.IMAGE_URL_W500}/${value.poster_path}`
-                                    : noImage
-                            }
-                        />
-                        <S.SimilarTitle>{value.title}</S.SimilarTitle>
-                    </S.Similar>
+                    <SmallCard
+                        name={value.title}
+                        imgName={
+                            value.poster_path ? `${C.IMAGE_URL_W500}/${value.poster_path}` : noImage
+                        }
+                        onClick={() => onClick(value.id)}
+                        id={value.id}
+                        tag={'similar'}
+                        key={index}
+                    />
                 ))}
             </S.ListContainer>
         </S.Container>
