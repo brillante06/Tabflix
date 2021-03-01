@@ -7,10 +7,14 @@ const Header: React.FC = () => (
         <S.HeaderName>Tabflix</S.HeaderName>
         <S.NavContainer>
             <S.navigation>
-                <Link to="/">home</Link>
+                <Link to="/" style={{ textDecoration: 'none' }}>
+                    🏠home
+                </Link>
             </S.navigation>
             <S.navigation>
-                <Link to="/search">search</Link>
+                <Link to="/search" style={{ textDecoration: 'none' }}>
+                    🔍search
+                </Link>
             </S.navigation>
         </S.NavContainer>
     </S.Container>

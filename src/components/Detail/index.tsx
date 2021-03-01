@@ -12,9 +12,6 @@ import * as S from './styles';
 import * as C from '../../utils/constants';
 import Loader from '../Loader';
 import noImage from '../../assets/noImage.jpg';
-import lazyImage from '../../assets/lazyImage.jpg';
-import { useIntersecting } from '../../hooks/useIntersecting';
-import Card from '../Card';
 import SmallCard from '../SmallCard';
 
 interface movieID {
@@ -74,7 +71,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                 </S.InfoContainer>
             </S.IntroduceContainer>
             <S.Distinct />
-            {detail?.tagline !== '' ? <S.Tagline>{detail?.tagline}</S.Tagline> : ''}
+            {detail?.tagline && <S.Tagline>{detail?.tagline}</S.Tagline>}
             <S.Description>{detail?.overview}</S.Description>
             <h3>Actor</h3>
             <S.ListContainer>

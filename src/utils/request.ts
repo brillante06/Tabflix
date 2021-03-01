@@ -12,7 +12,7 @@ export const fetcher = async (url: string) => {
 };
 
 export const requestDetail = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}${API_KEY}&language=ko-KR`;
+    `${API_URL_MOVIE}/${movieID}${API_KEY}&language=ko-KR&append_to_response=similar,credits`;
 export const requestSimilar = (movieID: string) =>
     `${API_URL_MOVIE}/${movieID}/similar${API_KEY}&language=kr-KR&page=1`;
 export const requestProvider = (movieID: string) =>

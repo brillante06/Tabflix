@@ -4,7 +4,7 @@ interface image {
     logoImg: string;
 }
 export const Container = styled.main`
-    width: 95%;
+    width: 85%;
     padding-bottom: 2rem;
     display: flex;
     margin: auto;
@@ -22,7 +22,20 @@ export const Background = styled.section<image>`
 export const ListContainer = styled.section`
     display: flex;
     align-content: flex-end;
-    overflow-x: scroll;
+    overflow: hidden;
+    &:hover {
+        overflow-x: scroll;
+    }
+    &::-webkit-scrollbar {
+        width: 0.6rem;
+        height: 10px;
+        border-radius: 2rem;
+        background-color: gainsboro;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 1px;
+    }
 `;
 
 export const IntroduceContainer = styled.section`

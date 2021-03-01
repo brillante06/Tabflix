@@ -13,6 +13,7 @@ export const NavContainer = styled.section`
 export const navigation = styled.section`
     height: 2rem;
     margin: 0 1rem 0 1.5rem;
+    text-decoration: none;
 `;
 export const HeaderName = styled.section`
     margin: auto;
