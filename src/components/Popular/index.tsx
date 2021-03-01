@@ -10,8 +10,7 @@ import noImage from '../../assets/noImage.jpg';
 
 const Popular: React.FC = () => {
     const history = useHistory();
-    const { movies, error, isLoadingMore, size, setSize, mutate } = useRequest(C.MOVIE_POPULAR);
-
+    const { movies, error } = useRequest(C.MOVIE_POPULAR);
     if (error) {
         return <h1>Something went wrong</h1>;
     }

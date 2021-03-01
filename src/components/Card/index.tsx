@@ -1,4 +1,5 @@
 import React, { FC, useRef } from 'react';
+import moment from 'moment';
 import { useIntersecting } from '../../hooks/useIntersecting';
 import { movieInfo } from '../../types';
 import * as S from './styles';
@@ -17,7 +18,6 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, movie }) => {
     const onClickMove = () => {
         onClick(id);
     };
-
     const lazyRef = useRef<HTMLImageElement | null>(null);
     const lazyLoading: IntersectionObserverCallback = (entries, observer) => {
         entries.forEach((entry) => {
@@ -37,7 +37,11 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, movie }) => {
                 ref={lazyRef}
                 data-src={image !== null ? image : noImage}
             />
-            <S.movieTitle>{title}</S.movieTitle>
+            <S.movieInfo>{title}</S.movieInfo>
+            <S.InfoContainer>
+                <S.movieInfo>{moment(movie?.release_date).year()}</S.movieInfo>
+                <S.movieRating> ⭐{movie?.vote_average}/10</S.movieRating>
+            </S.InfoContainer>
         </S.Container>
     );
 };

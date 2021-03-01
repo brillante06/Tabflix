@@ -24,7 +24,6 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const history = useHistory();
-    const lazyRef = useRef<HTMLImageElement | null>(null);
 
     const getData = async () => {
         setIsLoading(true);
