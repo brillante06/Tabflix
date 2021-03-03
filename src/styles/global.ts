@@ -1,11 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
-import spoqaHanSansNeoMedium from '../fonts/spoqaHanSansNeoMedium.woff2';
-import spoqaHanSansNeoBold from '../fonts/spoqaHanSansNeoBold.woff2';
 import '../fonts/fonts.css';
 
-const Global = createGlobalStyle`
+interface themeInterface {
+    theme: {
+        bgColor: string;
+        textColor: string;
+        toggleBorder: string;
+        gradient: string;
+        translateFirst: string;
+        translateSecond: string;
+    };
+}
+
+const Global = createGlobalStyle<themeInterface>`
     *{
-        font-family:'spoqaNeo';
+        font-family:'spoqaNeo',sans-serif;
+    }
+    body{
+        background:${({ theme }) => theme.bgColor};
+        color:${({ theme }) => theme.textColor};
     }
 `;
 
