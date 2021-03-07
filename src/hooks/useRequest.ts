@@ -19,8 +19,6 @@ export const useRequest = (url: string) => {
     const isLoadingInitialData = !data && !error;
     const isLoadingMore =
         isLoadingInitialData || (size > 0 && data && typeof data[size - 1] === 'undefined');
-    const isEmpty = data?.[0]?.length === 0;
-    const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
 
-    return { movies, error, isLoadingMore, size, setSize, isReachingEnd, mutate };
+    return { movies, error, isLoadingMore };
 };

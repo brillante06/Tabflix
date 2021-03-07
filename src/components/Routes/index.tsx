@@ -1,15 +1,18 @@
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
 import React from 'react';
 import Main from '../../pages/main';
-import Search from '../Search';
-import { Header } from '..';
+import { Detail, Header, Search } from '../index';
+import { browserHistory } from '../../utils/constants';
 
 const Routes: React.FC = () => (
-    <Router>
+    <Router history={browserHistory}>
         <Header />
         <main>
-            <Route exact path="/" component={Main}></Route>
-            <Route exact path="/search" component={Search}></Route>
+            <Switch>
+                <Route exact path="/" component={Main}></Route>
+                <Route exact path="/search" component={Search}></Route>
+                <Route exact path="/detail/:id" component={Detail}></Route>
+            </Switch>
         </main>
     </Router>
 );

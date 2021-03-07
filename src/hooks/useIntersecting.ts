@@ -7,14 +7,12 @@ export const useIntersecting = (
     const options = {
         root: null,
         rootMargin: '0px',
-        threshold: 1.0,
+        threshold: 0.4,
     };
 
     useEffect(() => {
         const io = new IntersectionObserver(onIntersect, options);
-        /* eslint-disable no-console */
-        console.log(loadingRef.current);
-        /* eslint-disable no-console */
+
         if (loadingRef.current) {
             io.observe(loadingRef.current);
         }

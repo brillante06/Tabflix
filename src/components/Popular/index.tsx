@@ -10,16 +10,15 @@ import noImage from '../../assets/noImage.jpg';
 
 const Popular: React.FC = () => {
     const history = useHistory();
-    const { movies, error, isLoadingMore, size, setSize, mutate } = useRequest(C.MOVIE_POPULAR);
-
+    const { movies, error } = useRequest(C.MOVIE_POPULAR);
     if (error) {
         return <h1>Something went wrong</h1>;
     }
     if (!movies) {
         return <h1>Loading...</h1>;
     }
-    const onClick = (movie: movieInfo, id: number) => {
-        history.push(`/detail/${id}`, { movie });
+    const onClick = (id: number) => {
+        history.push(`/detail/${id}`);
     };
     return (
         <S.Container>
@@ -31,9 +30,7 @@ const Popular: React.FC = () => {
                         id={info.id}
                         key={id}
                         image={
-                            info.backdrop_path
-                                ? `${C.IMAGE_URL_W500}/${info.backdrop_path}`
-                                : noImage
+                            info.backdrop_path ? `${C.IMAGE_URL_W500}/${info.poster_path}` : noImage
                         }
                         movie={info}
                     ></Card>
