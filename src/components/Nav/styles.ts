@@ -6,24 +6,24 @@ interface props {
 }
 
 export const Container = styled.nav`
-    height: 5rem;
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 2rem;
 `;
 export const NavContainer = styled.section`
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 5rem;
 `;
 export const navigation = styled.section`
     height: 2rem;
     margin: 0 1rem 0 1.5rem;
     text-decoration: none;
+    font-size: 2.3rem;
 `;
 export const HeaderName = styled.section`
-    margin: auto;
-    font-size: 2rem;
+    margin: 0 auto 1rem;
+    font-size: 5rem;
 `;
 export const DarkToggle = styled.button<props>`
     background: ${({ theme }) => theme.gradient};

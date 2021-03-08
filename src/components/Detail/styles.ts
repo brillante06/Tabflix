@@ -50,7 +50,7 @@ export const InfoContainer = styled.section`
     margin-left: 2rem;
 `;
 export const Title = styled.article`
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: bold;
 `;
 
@@ -61,18 +61,18 @@ export const Poster = styled.img`
 `;
 
 export const Description = styled.section`
-    font-size: 12px;
+    font-size: 1.7rem;
 `;
 export const Genre = styled.article`
     width: 1rem;
 `;
 
 export const RunningTime = styled.article`
-    font-size: 20px;
+    font-size: 2rem;
     margin: 1rem 0 1.1rem;
 `;
 export const Tagline = styled.article`
-    font-size: 20px;
+    font-size: 2.2rem;
     font-weight: bold;
     margin: 0.1rem 0 0.1rem;
 `;

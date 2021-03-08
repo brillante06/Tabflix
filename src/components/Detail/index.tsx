@@ -72,7 +72,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
             <S.Distinct />
             {detail?.tagline && <S.Tagline>{detail?.tagline}</S.Tagline>}
             <S.Description>{detail?.overview}</S.Description>
-            <h3>Actor</h3>
+            <h2>Actor</h2>
             <S.ListContainer>
                 {credits?.map((value, index) => (
                     <SmallCard
@@ -105,4 +105,4 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     );
 };
 
-export default withRouter(Detail);
+export default withRouter(React.memo(Detail));

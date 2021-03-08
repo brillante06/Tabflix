@@ -15,5 +15,5 @@ export const Image = styled.img<props>`
 
 export const Name = styled.p`
     text-align: center;
-    font-size: 0.3rem;
+    font-size: 1rem;
 `;

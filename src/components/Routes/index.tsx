@@ -6,8 +6,8 @@ import { browserHistory } from '../../utils/constants';
 
 const Routes: React.FC = () => (
     <Router history={browserHistory}>
-        <Header />
         <main>
+            <Header />
             <Switch>
                 <Route exact path="/" component={Main}></Route>
                 <Route exact path="/search" component={Search}></Route>
