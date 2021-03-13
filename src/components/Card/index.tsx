@@ -36,6 +36,7 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, movie }) => {
                 alt={title}
                 ref={lazyRef}
                 data-src={image !== null ? image : noImage}
+                data-testid="movie-image"
             />
             <S.movieInfo>{title}</S.movieInfo>
             <S.InfoContainer>

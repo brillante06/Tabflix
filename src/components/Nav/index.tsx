@@ -13,13 +13,8 @@ const Header: React.FC = () => {
                 <S.CheckBox id="checkbox" type="checkbox" onClick={toggleTheme} />
                 <S.CheckBoxLabel htmlFor="checkbox" />
             </S.CheckBoxContainer>
-            <S.HeaderName>Tabflix</S.HeaderName>
+            <S.HeaderName to="/">Tabflix</S.HeaderName>
             <S.NavContainer>
-                <S.navigation>
-                    <Link to="/" style={{ textDecoration: 'none' }}>
-                        🏠home
-                    </Link>
-                </S.navigation>
                 <S.navigation>
                     <Link to="/search" style={{ textDecoration: 'none' }}>
                         🔍search

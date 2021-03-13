@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Light, Theme } from '../../styles/theme';
 
@@ -21,9 +22,13 @@ export const navigation = styled.section`
     text-decoration: none;
     font-size: 2.3rem;
 `;
-export const HeaderName = styled.section`
+export const HeaderName = styled(Link)`
     margin: 0 auto 1rem;
     font-size: 5rem;
+    text-decoration: none;
+    &:visited {
+        color: black;
+    }
 `;
 export const DarkToggle = styled.button<props>`
     background: ${({ theme }) => theme.gradient};

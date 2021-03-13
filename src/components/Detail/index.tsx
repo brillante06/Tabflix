@@ -53,7 +53,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
         <S.Container>
             <S.IntroduceContainer>
                 {detail ? (
-                    <S.Poster src={`${C.IMAGE_URL_W500}/${detail?.poster_path}`} />
+                    <S.Poster src={`${C.IMAGE_URL_W500}${detail?.poster_path}`} />
                 ) : (
                     <S.Poster />
                 )}
@@ -62,7 +62,9 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                         🎥{detail?.title}(
                         {detail ? new Date(detail?.release_date).getFullYear() : ' '})
                     </S.Title>
-                    <S.RunningTime>⏱️{`${detail?.runtime}분`}</S.RunningTime>
+                    <S.RunningTime data-testid="running-time">
+                        ⏱️{`${detail?.runtime}분`}
+                    </S.RunningTime>
                     <S.Title>
                         👀
                         {detail?.genres.map((value, index) => (index ? ', ' : '') + value.name)}
@@ -78,7 +80,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                     <SmallCard
                         key={index}
                         imgName={
-                            value.profile_path ? `${C.IMAGE_URL_W500}/${value.profile_path}` : null
+                            value.profile_path ? `${C.IMAGE_URL_W500}${value.profile_path}` : null
                         }
                         name={value.character}
                         tag={'actor'}
@@ -92,7 +94,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                     <SmallCard
                         name={value.title}
                         imgName={
-                            value.poster_path ? `${C.IMAGE_URL_W500}/${value.poster_path}` : noImage
+                            value.poster_path ? `${C.IMAGE_URL_W500}${value.poster_path}` : noImage
                         }
                         onClick={() => onClick(value.id)}
                         id={value.id}

@@ -40,4 +40,4 @@ const Popular: React.FC = () => {
     );
 };
 
-export default Popular;
+export default React.memo(Popular);
