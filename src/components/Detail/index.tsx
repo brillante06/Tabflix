@@ -50,28 +50,29 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     return isLoading ? (
         <Loader />
     ) : (
-        <S.Container>
+        <S.Container poster={`${C.IMAGE_URL_W500}/${detail?.poster_path}`}>
+            <S.Title>
+                🎥{detail?.title}({detail ? new Date(detail?.release_date).getFullYear() : ' '})
+            </S.Title>
             <S.IntroduceContainer>
                 {detail ? (
-                    <S.Poster src={`${C.IMAGE_URL_W500}${detail?.poster_path}`} />
+                    <S.Poster src={`${C.IMAGE_URL_W500}/${detail?.poster_path}`} />
                 ) : (
                     <S.Poster />
                 )}
                 <S.InfoContainer>
-                    <S.Title>
-                        🎥{detail?.title}(
-                        {detail ? new Date(detail?.release_date).getFullYear() : ' '})
-                    </S.Title>
-                    <S.RunningTime data-testid="running-time">
-                        ⏱️{`${detail?.runtime}분`}
-                    </S.RunningTime>
-                    <S.Title>
+                    <S.Info>평점:{detail?.vote_average}</S.Info>
+                    <S.Info>런타임:{detail?.runtime}m</S.Info>
+                </S.InfoContainer>
+                <S.InfoContainer>
+                    <S.Info>
                         👀
                         {detail?.genres.map((value, index) => (index ? ', ' : '') + value.name)}
-                    </S.Title>
+                    </S.Info>
+                    <S.Info>개봉일:{detail?.release_date}</S.Info>
                 </S.InfoContainer>
             </S.IntroduceContainer>
-            <S.Distinct />
+
             {detail?.tagline && <S.Tagline>{detail?.tagline}</S.Tagline>}
             <S.Description>{detail?.overview}</S.Description>
             <h2>Actor</h2>
@@ -80,7 +81,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                     <SmallCard
                         key={index}
                         imgName={
-                            value.profile_path ? `${C.IMAGE_URL_W500}${value.profile_path}` : null
+                            value.profile_path ? `${C.IMAGE_URL_W500}/${value.profile_path}` : null
                         }
                         name={value.character}
                         tag={'actor'}
@@ -94,7 +95,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                     <SmallCard
                         name={value.title}
                         imgName={
-                            value.poster_path ? `${C.IMAGE_URL_W500}${value.poster_path}` : noImage
+                            value.poster_path ? `${C.IMAGE_URL_W500}/${value.poster_path}` : noImage
                         }
                         onClick={() => onClick(value.id)}
                         id={value.id}

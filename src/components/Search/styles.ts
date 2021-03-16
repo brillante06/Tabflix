@@ -6,11 +6,11 @@ export const Container = styled.main`
 `;
 
 export const Input = styled.input`
-    width: 80%;
+    width: 95%;
     font-size: 2rem;
     border: 1px;
     display: block;
-    margin: 0 auto 1rem auto;
+    margin: 0 auto 2rem;
     border-radius: 2rem;
     border: 1px solid;
     &:focus {
@@ -20,7 +20,6 @@ export const Input = styled.input`
 export const movieList = styled.section`
     width: 95%;
     height: 30rem;
-    border-left: 2px solid;
     margin: auto;
     overflow: hidden;
     &:hover {

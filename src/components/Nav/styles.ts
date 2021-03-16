@@ -26,9 +26,6 @@ export const HeaderName = styled(Link)`
     margin: 0 auto 1rem;
     font-size: 5rem;
     text-decoration: none;
-    &:visited {
-        color: black;
-    }
 `;
 export const DarkToggle = styled.button<props>`
     background: ${({ theme }) => theme.gradient};

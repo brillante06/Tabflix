@@ -1,5 +1,4 @@
 import React, { createContext, Fragment } from 'react';
-import { ThemeProvider } from 'styled-components';
 import Routes from './components/Routes';
 import { useDarkMode } from './hooks/useDarkMode';
 import Global from './styles/global';
