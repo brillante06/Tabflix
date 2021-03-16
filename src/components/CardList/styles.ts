@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.article`
-    width: 95%;
+    width: 90%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, auto));
     grid-gap: 1rem;
     align-items: stretch;
     margin: auto;
-    max-width: 1000px;
 `;

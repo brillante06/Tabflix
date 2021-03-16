@@ -12,12 +12,12 @@ export const movieImage = styled.img<image>`
     border-radius: 1rem;
 `;
 export const movieInfo = styled.p`
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     padding: -1rem 0 0 4rem;
     margin: 0.6rem 0 1rem 0.8rem;
 `;
 export const movieRating = styled.p`
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     padding: -1rem 0 0 4rem;
     margin: 0.4rem 0.8rem 1rem 0;
 `;

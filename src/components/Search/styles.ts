@@ -6,10 +6,11 @@ export const Container = styled.main`
 `;
 
 export const Input = styled.input`
-    width: 80%;
+    width: 95%;
+    font-size: 2rem;
     border: 1px;
     display: block;
-    margin: 0 auto 1rem auto;
+    margin: 0 auto 2rem;
     border-radius: 2rem;
     border: 1px solid;
     &:focus {
@@ -17,9 +18,8 @@ export const Input = styled.input`
     }
 `;
 export const movieList = styled.section`
-    width: 85%;
-    height: 15rem;
-    border-left: 2px solid;
+    width: 95%;
+    height: 30rem;
     margin: auto;
     overflow: hidden;
     &:hover {
@@ -38,10 +38,10 @@ export const movieList = styled.section`
 `;
 export const movieName = styled.article`
     width: 80%;
-    height: 2rem;
+    font-size: 2.1rem;
     &:hover {
         background-color: #dee1e5;
     }
     border-radius: 0.3rem;
-    margin-left: 1rem;
+    margin: 0 0 0.5rem 1rem;
 `;

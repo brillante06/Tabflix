@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import '../fonts/fonts.css';
 
 interface themeInterface {
     theme: {
@@ -13,13 +12,19 @@ interface themeInterface {
 }
 
 const Global = createGlobalStyle<themeInterface>`
-    *{
-        font-family:'spoqaNeo',sans-serif;
-    }
+
+     *{
+        font-family: 'Noto Sans KR', sans-serif;
+    } 
     body{
         background:${({ theme }) => theme.bgColor};
         color:${({ theme }) => theme.textColor};
     }
+    a{
+        color:${({ theme }) => theme.textColor};
+
+    }
+    
 `;
 
 export default Global;
