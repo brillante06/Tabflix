@@ -7,6 +7,7 @@ import * as C from '../../utils/constants';
 import { movieInfo } from '../../types';
 import { useRequest } from '../../hooks/useRequest';
 import noImage from '../../assets/noImage.jpg';
+import Carousel from '../Carousel';
 
 const Popular: React.FC = () => {
     const history = useHistory();
@@ -22,6 +23,7 @@ const Popular: React.FC = () => {
     };
     return (
         <S.Container>
+            <Carousel />
             <CardList>
                 {movies.map((info: movieInfo, id: number) => (
                     <Card
