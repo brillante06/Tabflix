@@ -29,10 +29,22 @@ const Carousel: React.FC = () => {
         <S.Container>
             {index}
             <S.slideContainer ref={slideRef}>
-                <img
-                    src="https://image.tmdb.org/t/p/original/kf456ZqeC45XTvo6W9pW5clYKfQ.jpg"
-                    style={{ width: '100%' }}
-                />
+                <div>
+                    <h1
+                        style={{
+                            position: 'relative',
+                            top: '50rem',
+                            color: 'yellow',
+                            fontSize: '34rem',
+                        }}
+                    >
+                        df
+                    </h1>
+                    <img
+                        src="https://image.tmdb.org/t/p/original/kf456ZqeC45XTvo6W9pW5clYKfQ.jpg"
+                        style={{ width: '100%' }}
+                    ></img>
+                </div>
                 <img
                     src="https://image.tmdb.org/t/p/original/hziiv14OpD73u9gAak4XDDfBKa2.jpg"
                     style={{ width: '100%' }}
