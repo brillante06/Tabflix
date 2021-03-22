@@ -8,19 +8,15 @@ import { ThemeContext } from '../../App';
 const Header: React.FC = () => {
     const { theme, toggleTheme } = useContext(ThemeContext);
     return (
-        <S.Container>
-            <S.CheckBoxContainer>
-                <S.CheckBox id="checkbox" type="checkbox" onClick={toggleTheme} />
-                <S.CheckBoxLabel htmlFor="checkbox" />
-            </S.CheckBoxContainer>
+        <S.Container theme={theme}>
+            <S.CheckBox id="checkbox" type="checkbox" onClick={toggleTheme} />
+            <S.CheckBoxLabel htmlFor="checkbox" />
             <S.HeaderName to="/">Tabflix</S.HeaderName>
-            <S.NavContainer>
-                <S.navigation>
-                    <Link to="/search" style={{ textDecoration: 'none' }}>
-                        🔍search
-                    </Link>
-                </S.navigation>
-            </S.NavContainer>
+            <S.navigation>
+                <Link to="/search" style={{ textDecoration: 'none' }}>
+                    🔍search
+                </Link>
+            </S.navigation>
         </S.Container>
     );
 };

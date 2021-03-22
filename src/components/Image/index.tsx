@@ -3,16 +3,16 @@ import lazyImage from '../../assets/lazyImage.jpg';
 import noImage from '../../assets/noImage.jpg';
 
 type Props = {
-    width: string;
-    height: string;
-    src: string;
+    width?: string;
+    height?: string;
+    src: string | null;
     alt: string;
     lazyRef?: React.Ref<HTMLImageElement>;
-    dataSrc?: string;
+    tag?: string;
 };
 
 const Image: React.ForwardRefExoticComponent<Props> = forwardRef(
-    ({ width, height, src, alt, lazyRef, dataSrc }) => (
+    ({ width, height, src, alt, lazyRef, tag = null }) => (
         <img
             src={lazyImage}
             alt={alt}

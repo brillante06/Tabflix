@@ -29,29 +29,48 @@ const Carousel: React.FC = () => {
         <S.Container>
             {index}
             <S.slideContainer ref={slideRef}>
-                <div>
-                    <h1
-                        style={{
-                            position: 'relative',
-                            top: '50rem',
-                            color: 'yellow',
-                            fontSize: '34rem',
-                        }}
-                    >
-                        df
-                    </h1>
+                <div style={{ position: 'relative' }}>
                     <img
-                        src="https://image.tmdb.org/t/p/original/kf456ZqeC45XTvo6W9pW5clYKfQ.jpg"
-                        style={{ width: '100%' }}
+                        src="https://image.tmdb.org/t/p/w500/19fT7TrozEwtU3IWhewIOD8pseF.jpg"
+                        style={{ width: '20%' }}
                     ></img>
+                    <h3 style={{ position: 'absolute', top: '8px', color: 'yellow' }}>hello</h3>
                 </div>
                 <img
-                    src="https://image.tmdb.org/t/p/original/hziiv14OpD73u9gAak4XDDfBKa2.jpg"
-                    style={{ width: '100%' }}
+                    src="https://image.tmdb.org/t/p/w500/8Zqh8LSRzsiGx8qkYJQm9U8Ul04.jpg"
+                    style={{ width: '20%' }}
                 />
                 <img
-                    src="https://image.tmdb.org/t/p/original/mTRrGeLphIlj4JM7EauuEYpS3iv.jpg"
-                    style={{ width: '100%' }}
+                    src="https://image.tmdb.org/t/p/w500/mTRrGeLphIlj4JM7EauuEYpS3iv.jpg"
+                    style={{ width: '20%' }}
+                />
+                <img
+                    src="https://image.tmdb.org/t/p/w500/zygmx5abXeDpr3fWYX4jlXFZ1wh.jpg"
+                    style={{ width: '20%' }}
+                />
+                <img
+                    src="https://image.tmdb.org/t/p/w500/uvcPUOu88Wws5ZtCy6mpFA8WztS.jpg"
+                    style={{ width: '20%' }}
+                />
+                <img
+                    src="https://image.tmdb.org/t/p/w500/19fT7TrozEwtU3IWhewIOD8pseF.jpg"
+                    style={{ width: '20%' }}
+                ></img>
+                <img
+                    src="https://image.tmdb.org/t/p/w500/8Zqh8LSRzsiGx8qkYJQm9U8Ul04.jpg"
+                    style={{ width: '20%' }}
+                />
+                <img
+                    src="https://image.tmdb.org/t/p/w500/mTRrGeLphIlj4JM7EauuEYpS3iv.jpg"
+                    style={{ width: '20%' }}
+                />
+                <img
+                    src="https://image.tmdb.org/t/p/w500/zygmx5abXeDpr3fWYX4jlXFZ1wh.jpg"
+                    style={{ width: '20%' }}
+                />
+                <img
+                    src="https://image.tmdb.org/t/p/w500/uvcPUOu88Wws5ZtCy6mpFA8WztS.jpg"
+                    style={{ width: '20%' }}
                 />
             </S.slideContainer>
             <S.Arrow onClick={moveNext} rightIndex={'0'}>

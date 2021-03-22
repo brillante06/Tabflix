@@ -6,26 +6,33 @@ interface props {
     theme: Theme;
 }
 
-export const Container = styled.nav`
+export const Container = styled.nav<props>`
     width: 100%;
     display: flex;
-    flex-direction: column;
+    height: 4.5rem;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: ${({ theme }) => theme.bgColor};
 `;
 export const NavContainer = styled.section`
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 5rem;
 `;
 export const navigation = styled.section`
     height: 2rem;
-    margin: 0 1rem 0 1.5rem;
+    margin: 1rem 1rem 0 1.5rem;
     text-decoration: none;
     font-size: 2.3rem;
 `;
 export const HeaderName = styled(Link)`
-    margin: 0 auto 1rem;
-    font-size: 5rem;
+    font-size: 3.5rem;
     text-decoration: none;
+    margin-right: 38rem;
 `;
 export const DarkToggle = styled.button<props>`
     background: ${({ theme }) => theme.gradient};
@@ -64,12 +71,15 @@ export const Emoji = styled.figure`
 
 export const CheckBoxContainer = styled.div`
     position: relative;
+    margin-left: 1rem;
 `;
 
 export const CheckBoxLabel = styled.label`
+    margin: 1.5rem 0 0 1rem;
     position: absolute;
     top: 0;
     left: 0;
+    right: 0.1;
     width: 42px;
     height: 26px;
     border-radius: 16px;

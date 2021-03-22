@@ -8,6 +8,7 @@ export const Container = styled.article`
     margin: 0 auto 5rem;
     max-height: 30rem;
     overflow: hidden;
+    width: 70%;
 `;
 
 export const Slide = styled.section`
