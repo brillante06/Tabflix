@@ -7,18 +7,18 @@ type Props = {
     height?: string;
     src: string | null;
     alt: string;
-    lazyRef?: React.Ref<HTMLImageElement>;
+    ref?: React.Ref<HTMLImageElement>;
     tag?: string;
 };
 
 const Image: React.ForwardRefExoticComponent<Props> = forwardRef(
-    ({ width, height, src, alt, lazyRef, tag = null }) => (
+    ({ width, height, src, alt, tag = null }, ref) => (
         <img
             src={lazyImage}
             alt={alt}
             width={width}
             height={height}
-            ref={lazyRef}
+            ref={ref}
             data-src={src !== null ? src : noImage}
         />
     )

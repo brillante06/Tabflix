@@ -51,7 +51,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
         <Loader />
     ) : (
         <S.Container poster={`${C.IMAGE_URL_ORIGINAL}${detail?.backdrop_path}`}>
-            <S.Background poster={`${C.IMAGE_URL_ORIGINAL}${detail?.backdrop_path}`} />
+            <S.Background poster={`${C.IMAGE_URL_ORIGINAL}/${detail?.backdrop_path}`} />
             <S.IntroduceContainer>
                 {detail ? (
                     <S.Poster src={`${C.IMAGE_URL_W500}/${detail?.poster_path}`} />

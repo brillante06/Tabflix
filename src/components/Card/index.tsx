@@ -30,7 +30,7 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, movie }) => {
     useIntersecting(lazyRef, lazyLoading);
     return (
         <S.Container onClick={onClickMove}>
-            <Image src={image} alt={title} width={'100%'} height={'500vh'} lazyRef={lazyRef} />
+            <Image src={image} alt={title} width={'100%'} height={'500vh'} ref={lazyRef} />
             <S.movieInfo>{title}</S.movieInfo>
             <S.InfoContainer>
                 <S.movieInfo>{moment(movie?.release_date).year()}</S.movieInfo>
