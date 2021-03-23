@@ -6,14 +6,13 @@ interface image {
 interface posterImage {
     poster: string;
 }
-export const Container = styled.main<posterImage>`
+export const Container = styled.main`
     width: 100%;
     padding-bottom: 2rem;
     display: flex;
     margin: auto;
     flex-direction: column;
     z-index: -1;
-    background: (${(props) => props.poster}) no-repeat center;
 `;
 
 export const Background = styled.section<posterImage>`

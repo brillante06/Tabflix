@@ -47,17 +47,26 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
         history.push(`/detail/${id}`);
         history.go(0);
     };
+    /* eslint-disable no-console */
+    console.log(detail?.backdrop_path);
+    /* eslint-disable no-console */
     return isLoading ? (
         <Loader />
     ) : (
-        <S.Container poster={`${C.IMAGE_URL_ORIGINAL}${detail?.backdrop_path}`}>
-            <S.Background poster={`${C.IMAGE_URL_ORIGINAL}/${detail?.backdrop_path}`} />
+        <S.Container>
+            <S.Background
+                poster={
+                    detail?.backdrop_path
+                        ? `${C.IMAGE_URL_ORIGINAL}/${detail?.backdrop_path}`
+                        : noImage
+                }
+            />
             <S.IntroduceContainer>
-                {detail ? (
-                    <S.Poster src={`${C.IMAGE_URL_W500}/${detail?.poster_path}`} />
-                ) : (
-                    <S.Poster />
-                )}
+                <S.Poster
+                    src={
+                        detail?.poster_path ? `${C.IMAGE_URL_W500}/${detail?.poster_path}` : noImage
+                    }
+                />
                 <S.InfoContainer>
                     <S.Title>
                         {detail?.title}(
@@ -85,7 +94,9 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                     <SmallCard
                         key={index}
                         imgName={
-                            value.profile_path ? `${C.IMAGE_URL_W500}/${value.profile_path}` : null
+                            value.profile_path
+                                ? `${C.IMAGE_URL_W500}/${value.profile_path}`
+                                : noImage
                         }
                         name={value.character}
                         tag={'actor'}
