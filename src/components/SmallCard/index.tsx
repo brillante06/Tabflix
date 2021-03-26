@@ -29,7 +29,7 @@ const SmallCard: React.FC<infoProps> = ({ name, imgName, tag, id, onClick }) => 
     useIntersecting(lazyRef, lazyLoading);
     return (
         <S.Container onClick={onClickMove} tag={tag}>
-            <Image src={imgName} alt={name} tag={tag} ref={lazyRef} width={'200vw'} />
+            <Image src={imgName} alt={name} ref={lazyRef} width={'200vw'} />
             <S.Name>{name}</S.Name>
         </S.Container>
     );
