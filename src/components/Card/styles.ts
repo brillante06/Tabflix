@@ -7,8 +7,6 @@ interface image {
 export const movieImage = styled.img<image>`
     src: ${(props) => props.src};
     alt: ${(props) => props.alt};
-    width: 100%;
-    height: 50vh;
     border-radius: 1rem;
 `;
 export const movieInfo = styled.p`
@@ -25,7 +23,8 @@ export const Container = styled.article`
     border: 1px solid #ccc;
     border-radius: 1rem;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-    width: 60rem;
+    width: 10rem;
+    height: 24rem;
 `;
 export const InfoContainer = styled.article`
     display: flex;

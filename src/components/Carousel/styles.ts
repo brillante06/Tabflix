@@ -15,8 +15,10 @@ export const Slide = styled.section`
 `;
 
 export const slideContainer = styled.div`
-    width: 100%;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+
+    width: 400%;
 `;
 export const Arrow = styled.button<isRight>`
     cursor: pointer;

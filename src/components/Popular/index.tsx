@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as S from './styles';
-import Card from '../Card';
-import CardList from '../CardList';
 import * as C from '../../utils/constants';
 import { movieInfo } from '../../types';
 import { useRequest } from '../../hooks/useRequest';
-import noImage from '../../assets/noImage.jpg';
 import Carousel from '../Carousel';
 import { fetcher } from '../../utils/request';
 

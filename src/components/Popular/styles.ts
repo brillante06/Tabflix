@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface Props {
+    videoURL: string;
+}
+
 export const Container = styled.article`
     width: 100%;
     padding: 3rem auto;
