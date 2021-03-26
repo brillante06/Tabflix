@@ -6,9 +6,8 @@ interface isRight {
 export const Container = styled.article`
     position: relative;
     margin: 0 auto 5rem;
-    max-height: 30rem;
     overflow: hidden;
-    width: 70%;
+    width: 100%;
 `;
 
 export const Slide = styled.section`

@@ -11,9 +11,10 @@ interface movieCard {
     onClick: (id: number) => void;
     id: number;
     movie?: movieInfo;
+    tag?: boolean;
 }
 
-const Card: FC<movieCard> = ({ image, title, onClick, id, movie }) => {
+const Card: FC<movieCard> = ({ image, title, onClick, id, movie, tag }) => {
     const onClickMove = () => {
         onClick(id);
     };
@@ -37,6 +38,7 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, movie }) => {
                 height={'500vh'}
                 ref={lazyRef}
                 key={title}
+                tag={tag}
             />
             <S.movieInfo>{title}</S.movieInfo>
             <S.InfoContainer>

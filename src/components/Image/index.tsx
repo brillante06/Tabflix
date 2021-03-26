@@ -6,13 +6,14 @@ import { useIntersecting } from '../../hooks/useIntersecting';
 type Props = {
     width?: string;
     height?: string;
-    src: string | null;
+    src: string | undefined;
     alt: string;
     ref?: React.Ref<HTMLImageElement>;
+    tag?: boolean;
 };
 
 const Image: React.ForwardRefExoticComponent<Props> = forwardRef(
-    ({ width, height, src, alt }, ref) => {
+    ({ width, height, src, alt, tag }, ref) => {
         const lazyRef = useRef<HTMLImageElement | null>(null);
         const lazyLoading: IntersectionObserverCallback = (entries, observer) => {
             entries.forEach((entry) => {
@@ -26,11 +27,11 @@ const Image: React.ForwardRefExoticComponent<Props> = forwardRef(
         useIntersecting(lazyRef, lazyLoading);
         return (
             <img
-                src={lazyImage}
+                src={tag ? lazyImage : src}
                 alt={alt}
                 width={width}
                 height={height}
-                ref={lazyRef}
+                ref={tag ? lazyRef : null}
                 data-src={src !== null ? src : noImage}
             />
         );

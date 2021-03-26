@@ -25,6 +25,7 @@ export const Container = styled.article`
     border: 1px solid #ccc;
     border-radius: 1rem;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+    width: 60rem;
 `;
 export const InfoContainer = styled.article`
     display: flex;

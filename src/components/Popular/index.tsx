@@ -19,6 +19,7 @@ const Popular: React.FC = () => {
     requestType.popular = C.MOVIE_POPULAR;
     requestType.topRated = C.MOVIE_TOP_RATED;
     requestType.playing = C.MOVIE_NOW_PLAYING;
+
     useEffect(() => {
         const request = async () => {
             const result = await fetcher(requestType[req]);
@@ -51,26 +52,12 @@ const Popular: React.FC = () => {
     };
     return (
         <S.Container>
-            <Carousel />
             <S.TextContainer>
                 <S.Text onClick={clickEvent}>Now playing</S.Text> /
                 <S.Text onClick={clickEvent}>Popular</S.Text> /
                 <S.Text onClick={clickEvent}>Most Rated</S.Text>
             </S.TextContainer>
-            <CardList>
-                {movie.map((info: movieInfo, id: number) => (
-                    <Card
-                        title={info.title}
-                        onClick={onClick}
-                        id={info.id}
-                        key={id}
-                        image={
-                            info.backdrop_path ? `${C.IMAGE_URL_W500}/${info.poster_path}` : noImage
-                        }
-                        movie={info}
-                    ></Card>
-                ))}
-            </CardList>
+            <Carousel movieArray={movie} />
         </S.Container>
     );
 };

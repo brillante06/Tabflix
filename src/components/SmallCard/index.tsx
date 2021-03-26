@@ -7,7 +7,7 @@ import Image from '../Image';
 
 interface infoProps {
     name: string;
-    imgName: string | null;
+    imgName: string | undefined;
     onClick?: (id: number) => void;
     tag: string;
     id: number;
