@@ -35,9 +35,7 @@ const Popular: React.FC = () => {
     if (!movies) {
         return <h1>Loading...</h1>;
     }
-    const onClick = (id: number) => {
-        history.push(`/detail/${id}`);
-    };
+
     const clickEvent = (event: any) => {
         if (event.target.innerHTML === 'Now playing') {
             setReq('playing');
@@ -49,6 +47,17 @@ const Popular: React.FC = () => {
     };
     return (
         <S.Container>
+            <div style={{ opacity: '0.5', zIndex: -1 }}>
+                <iframe
+                    src="https://www.youtube.com/embed/hEnr6Ewpu_U?autoplay=1&mute=1"
+                    frameBorder="0"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    title="video"
+                    width="100%"
+                    height="400px"
+                />
+            </div>
             <S.TextContainer>
                 <S.Text onClick={clickEvent}>Now playing</S.Text> /
                 <S.Text onClick={clickEvent}>Popular</S.Text> /

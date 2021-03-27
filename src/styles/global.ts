@@ -15,6 +15,7 @@ const Global = createGlobalStyle<themeInterface>`
 
      *{
         font-family: 'Noto Sans KR', sans-serif;
+        font-size: 100%;
     } 
     body{
         background:${({ theme }) => theme.bgColor};

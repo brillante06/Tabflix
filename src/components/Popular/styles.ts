@@ -12,10 +12,11 @@ export const Container = styled.article`
 
 export const TextContainer = styled.section`
     display: flex;
-    width: 30%;
-    margin-left: 10rem;
+    width: 85%;
+    margin: 2rem auto 2rem;
     font-weight: bold;
     font-size: 1.4rem;
+    justify-content: center;
 `;
 
 export const Text = styled.article`
