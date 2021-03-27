@@ -7,21 +7,27 @@ interface props {
 }
 
 export const Container = styled.nav<props>`
-    width: 100%;
+    width: 70%;
     display: flex;
+    flex-direction: column;
     height: 4.5rem;
-    justify-content: flex-end;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 10;
     background: ${({ theme }) => theme.bgColor};
+    margin: 0 auto 0;
 `;
 export const NavContainer = styled.section`
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 5rem;
+    width: 60%;
+`;
+export const HeaderContainer = styled.section`
+    display: flex;
+    justify-content: flex-end;
+    width: 95%;
+    margin: -1.5rem auto 0;
 `;
 export const navigation = styled.section`
     height: 2rem;
@@ -30,9 +36,9 @@ export const navigation = styled.section`
     font-size: 2.3rem;
 `;
 export const HeaderName = styled(Link)`
-    font-size: 3.5rem;
+    font-size: 1.2rem;
     text-decoration: none;
-    margin-right: 38rem;
+    margin: -0.45rem 2em 0 1.5rem;
 `;
 export const DarkToggle = styled.button<props>`
     background: ${({ theme }) => theme.gradient};
@@ -77,11 +83,11 @@ export const CheckBoxContainer = styled.div`
 export const CheckBoxLabel = styled.label`
     margin: 1.5rem 0 0 1rem;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0.1rem;
+    left: 95%;
     right: 0.1;
-    width: 42px;
-    height: 26px;
+    width: 2.6rem;
+    height: 1.6rem;
     border-radius: 16px;
     background: #1e1e1e;
     cursor: pointer;
