@@ -7,7 +7,7 @@ interface props {
 }
 
 export const Container = styled.nav<props>`
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     height: 4.5rem;
@@ -17,7 +17,6 @@ export const Container = styled.nav<props>`
     right: 0;
     z-index: 10;
     background: ${({ theme }) => theme.bgColor};
-    margin: 0 auto 0;
 `;
 export const NavContainer = styled.section`
     display: flex;
@@ -39,6 +38,10 @@ export const HeaderName = styled(Link)`
     font-size: 1.2rem;
     text-decoration: none;
     margin: -0.45rem 2em 0 1.5rem;
+`;
+export const Header = styled.section`
+    width: 70%;
+    margin: 0 auto 0;
 `;
 export const DarkToggle = styled.button<props>`
     background: ${({ theme }) => theme.gradient};
@@ -63,16 +66,6 @@ export const DarkToggle = styled.button<props>`
             transform: ${({ theme }) => theme.translateSecond};
         }
     }
-`;
-
-export const Emoji = styled.figure`
-    width: 33px;
-    height: 33px;
-    border-radius: 100%;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 `;
 
 export const CheckBoxContainer = styled.div`

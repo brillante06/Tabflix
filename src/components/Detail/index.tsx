@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
 import {
     actorInfo,
@@ -10,9 +10,8 @@ import {
 import { fetcher, requestCredit, requestDetail, requestSimilar } from '../../utils/request';
 import * as S from './styles';
 import * as C from '../../utils/constants';
-import Loader from '../Loader';
+import { Loader, SmallCard } from '../index';
 import noImage from '../../assets/noImage.jpg';
-import SmallCard from '../SmallCard';
 
 interface movieID {
     id: string;

@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import { movieInfo } from '../../types';
-import Card from '../Card';
+import { Card } from '../index';
 import * as S from './styles';
-import noImage from '../../assets/noImage.jpg';
 import * as C from '../../utils/constants';
+import noImage from '../../assets/noImage.jpg';
 
 interface Props {
     movieArray: Array<movieInfo>;

@@ -1,9 +1,7 @@
 import React, { useRef } from 'react';
 import * as S from './styles';
 import { useIntersecting } from '../../hooks/useIntersecting';
-import lazyImage from '../../assets/lazyImage.jpg';
-import noImage from '../../assets/noImage.jpg';
-import Image from '../Image';
+import { Image } from '../index';
 
 interface infoProps {
     name: string;

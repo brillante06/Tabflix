@@ -12,7 +12,7 @@ export const Container = styled.article`
 
 export const TextContainer = styled.section`
     display: flex;
-    width: 85%;
+    width: 65%;
     margin: 2rem auto 2rem;
     font-weight: bold;
     font-size: 1.4rem;

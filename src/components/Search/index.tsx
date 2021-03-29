@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { fetcher } from '../../utils/request';
 import { movieInfo, popularResponseType } from '../../types';
 import { useDebounce } from '../../hooks/useDebounce';
-import Loader from '../Loader';
+import { Loader } from '../index';
 import * as S from './styles';
 import * as C from '../../utils/constants';
 
