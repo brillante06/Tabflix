@@ -3,8 +3,7 @@ import moment from 'moment';
 import { useIntersecting } from '../../hooks/useIntersecting';
 import { movieInfo } from '../../types';
 import * as S from './styles';
-import lazyImage from '../../assets/lazyImage.jpg';
-import noImage from '../../assets/noImage.jpg';
+import { Image } from '../index';
 
 interface movieCard {
     image: string;
@@ -12,9 +11,10 @@ interface movieCard {
     onClick: (id: number) => void;
     id: number;
     movie?: movieInfo;
+    tag?: boolean;
 }
 
-const Card: FC<movieCard> = ({ image, title, onClick, id, movie }) => {
+const Card: FC<movieCard> = ({ image, title, onClick, id, movie, tag }) => {
     const onClickMove = () => {
         onClick(id);
     };
@@ -31,13 +31,7 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, movie }) => {
     useIntersecting(lazyRef, lazyLoading);
     return (
         <S.Container onClick={onClickMove}>
-            <S.movieImage
-                src={lazyImage}
-                alt={title}
-                ref={lazyRef}
-                data-src={image !== null ? image : noImage}
-                data-testid="movie-image"
-            />
+            <Image src={image} alt={title} width={'100%'} ref={lazyRef} key={title} tag={tag} />
             <S.movieInfo>{title}</S.movieInfo>
             <S.InfoContainer>
                 <S.movieInfo>{moment(movie?.release_date).year()}</S.movieInfo>

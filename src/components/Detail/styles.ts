@@ -6,37 +6,28 @@ interface image {
 interface posterImage {
     poster: string;
 }
-export const Container = styled.main<posterImage>`
-    width: 85%;
+export const Container = styled.main`
+    width: 100%;
     padding-bottom: 2rem;
     display: flex;
     margin: auto;
     flex-direction: column;
-    &::after {
-        content: '';
-        width: 85%;
-        opacity: 0.5;
-        background-size: cover;
-        z-index: -1;
-        background: url(${(props) => props.poster});
-        position: relative;
-        top: 0;
-        left: 0;
-    }
+    z-index: -1;
 `;
 
-export const Background = styled.section<image>`
+export const Background = styled.section<posterImage>`
     width: 100%;
-    height: 10rem;
-    background-image: url(${(props) => props.logoImg});
-    background-repeat: no-repeat;
-    background-size: 100% 150%;
+    height: 30rem;
+    background: url(${(props) => props.poster}) no-repeat center;
+    background-size: cover;
 `;
 
 export const ListContainer = styled.section`
     display: flex;
     align-content: flex-end;
     overflow: hidden;
+    width: 70%;
+    margin: 0 auto 0;
     &:hover {
         overflow-x: scroll;
     }
@@ -53,19 +44,17 @@ export const ListContainer = styled.section`
 `;
 
 export const IntroduceContainer = styled.section`
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 32rem;
     display: flex;
-    border: 1px solid #ccc;
     border-radius: 1rem;
-    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-    margin-bottom: 3rem;
+    margin: -10rem auto 3rem;
 `;
 export const InfoContainer = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-left: 2rem;
+    margin: 10rem 0 0 2rem;
     width: 100%;
 `;
 export const InfoColumn = styled.section`
@@ -73,25 +62,28 @@ export const InfoColumn = styled.section`
     flex-direction: column;
 `;
 export const Title = styled.article`
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 3rem;
 `;
 
 export const Poster = styled.img`
-    width: 20vw;
-    height: 30vw;
+    width: 20rem;
+    height: 30rem;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
+    margin-top: 1rem;
 `;
 
 export const Description = styled.section`
-    font-size: 1.7rem;
+    font-size: 1.2rem;
+    width: 70%;
+    margin: 0 auto 3rem;
 `;
 
 export const Info = styled.article`
     font-size: 1.5rem;
-    margin: 1rem 8rem 1.1rem 0;
+    margin: 1rem 8rem 0 0;
     text-overflow: ellipsis;
     overflow: hidden;
 `;

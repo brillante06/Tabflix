@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
 import {
     actorInfo,
@@ -10,9 +10,8 @@ import {
 import { fetcher, requestCredit, requestDetail, requestSimilar } from '../../utils/request';
 import * as S from './styles';
 import * as C from '../../utils/constants';
-import Loader from '../Loader';
+import { Loader, SmallCard } from '../index';
 import noImage from '../../assets/noImage.jpg';
-import SmallCard from '../SmallCard';
 
 interface movieID {
     id: string;
@@ -47,41 +46,56 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
         history.push(`/detail/${id}`);
         history.go(0);
     };
+    /* eslint-disable no-console */
+    console.log(detail?.backdrop_path);
+    /* eslint-disable no-console */
     return isLoading ? (
         <Loader />
     ) : (
-        <S.Container poster={`${C.IMAGE_URL_W500}/${detail?.poster_path}`}>
-            <S.Title>
-                🎥{detail?.title}({detail ? new Date(detail?.release_date).getFullYear() : ' '})
-            </S.Title>
+        <S.Container>
+            <S.Background
+                poster={
+                    detail?.backdrop_path
+                        ? `${C.IMAGE_URL_ORIGINAL}/${detail?.backdrop_path}`
+                        : noImage
+                }
+            />
             <S.IntroduceContainer>
-                {detail ? (
-                    <S.Poster src={`${C.IMAGE_URL_W500}/${detail?.poster_path}`} />
-                ) : (
-                    <S.Poster />
-                )}
+                <S.Poster
+                    src={
+                        detail?.poster_path ? `${C.IMAGE_URL_W500}/${detail?.poster_path}` : noImage
+                    }
+                />
                 <S.InfoContainer>
-                    <S.Info>평점:{detail?.vote_average}</S.Info>
-                    <S.Info>런타임:{detail?.runtime}m</S.Info>
-                </S.InfoContainer>
-                <S.InfoContainer>
-                    <S.Info>
+                    <S.Title>
+                        {detail?.title}(
+                        {detail ? new Date(detail?.release_date).getFullYear() : ' '})
+                    </S.Title>
+                    <h3>평점:{detail?.vote_average}</h3>
+                    <h3>런타임:{detail?.runtime}m</h3>
+                    <h3>
                         👀
                         {detail?.genres.map((value, index) => (index ? ', ' : '') + value.name)}
-                    </S.Info>
-                    <S.Info>개봉일:{detail?.release_date}</S.Info>
+                    </h3>
+                    <h3>개봉일:{detail?.release_date}</h3>
                 </S.InfoContainer>
             </S.IntroduceContainer>
 
-            {detail?.tagline && <S.Tagline>{detail?.tagline}</S.Tagline>}
-            <S.Description>{detail?.overview}</S.Description>
-            <h2>Actor</h2>
+            <S.Description>
+                {detail?.tagline && <S.Tagline>{detail?.tagline}</S.Tagline>}
+                {detail?.overview}
+            </S.Description>
+            <S.ListContainer>
+                <h2>Actor</h2>
+            </S.ListContainer>
             <S.ListContainer>
                 {credits?.map((value, index) => (
                     <SmallCard
                         key={index}
                         imgName={
-                            value.profile_path ? `${C.IMAGE_URL_W500}/${value.profile_path}` : null
+                            value.profile_path
+                                ? `${C.IMAGE_URL_W500}/${value.profile_path}`
+                                : noImage
                         }
                         name={value.character}
                         tag={'actor'}
@@ -89,7 +103,10 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                     />
                 ))}
             </S.ListContainer>
-            <h2>Similar movie</h2>
+            <S.ListContainer>
+                <h2>Similar movie</h2>
+            </S.ListContainer>
+
             <S.ListContainer>
                 {similar.map((value, index) => (
                     <SmallCard

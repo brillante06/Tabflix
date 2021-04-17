@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
 import * as S from './styles';
 import { useIntersecting } from '../../hooks/useIntersecting';
-import lazyImage from '../../assets/lazyImage.jpg';
-import noImage from '../../assets/noImage.jpg';
+import { Image } from '../index';
 
 interface infoProps {
     name: string;
-    imgName: string | null;
+    imgName: string | undefined;
     onClick?: (id: number) => void;
     tag: string;
     id: number;
@@ -28,13 +27,7 @@ const SmallCard: React.FC<infoProps> = ({ name, imgName, tag, id, onClick }) => 
     useIntersecting(lazyRef, lazyLoading);
     return (
         <S.Container onClick={onClickMove} tag={tag}>
-            <S.Image
-                data-src={imgName != null ? imgName : noImage}
-                tag={tag}
-                alt={name}
-                ref={lazyRef}
-                src={lazyImage}
-            ></S.Image>
+            <Image src={imgName} alt={name} ref={lazyRef} width={'200vw'} />
             <S.Name>{name}</S.Name>
         </S.Container>
     );
