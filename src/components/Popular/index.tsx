@@ -58,10 +58,8 @@ const Popular: React.FC = () => {
                     height="400px"
                 />
             </div>
-            <S.TextContainer>
-                <S.Text onClick={clickEvent}>Now playing</S.Text> /
-                <S.Text onClick={clickEvent}>Popular</S.Text> /
-                <S.Text onClick={clickEvent}>Most Rated</S.Text>
+            <S.TextContainer onClick={clickEvent}>
+                <S.Text>Now playing</S.Text> /<S.Text>Popular</S.Text> /<S.Text>Most Rated</S.Text>
             </S.TextContainer>
             <Carousel movieArray={movie} />
         </S.Container>
