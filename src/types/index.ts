@@ -107,3 +107,18 @@ export interface providerCountry {
     rent: Array<watchProvider>;
     flatrate: Array<watchProvider>;
 }
+type videoType = 'Trailer' | 'Teaser' | 'Clip' | 'Featurette' | 'Behind the Scenes' | 'Bloopers';
+export interface video {
+    id: string;
+    iso_639_1: string;
+    iso_3166_1: string;
+    key: string;
+    name: string;
+    site: string;
+    size: number;
+    type: videoType;
+}
+export interface videoRespose {
+    id: number;
+    results: Array<video>;
+}

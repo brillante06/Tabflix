@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as S from './styles';
 import * as C from '../../utils/constants';
-import { movieInfo } from '../../types';
+import { movieInfo, video, videoRespose } from '../../types';
 import { useRequest } from '../../hooks/useRequest';
 import Carousel from '../Carousel';
-import { fetcher } from '../../utils/request';
+import { fetcher, getMovieList } from '../../utils/request';
 
 const Popular: React.FC = () => {
     const history = useHistory();
     const [movie, setMovie] = useState<Array<movieInfo>>([]);
     const [req, setReq] = useState<string>('popular');
+    const [video, setVideo] = useState<Array<videoRespose>>([]);
     const { movies, error } = useRequest(C.MOVIE_POPULAR);
     const requestType: { [req: string]: string } = {};
     requestType.popular = C.MOVIE_POPULAR;
@@ -19,16 +20,11 @@ const Popular: React.FC = () => {
 
     useEffect(() => {
         const request = async () => {
-            const result = await fetcher(requestType[req]);
-            const movieArray: Array<movieInfo> = await result.results.reduce(
-                (acc: Array<movieInfo>, cur: movieInfo) => acc.concat(cur),
-                []
-            );
+            const movieArray: Array<movieInfo> = await getMovieList(requestType[req]);
             setMovie(movieArray);
         };
         request();
     }, [req]);
-
     if (error) {
         return <h1>Something went wrong</h1>;
     }

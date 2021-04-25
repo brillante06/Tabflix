@@ -1,3 +1,4 @@
+import { actorInfo, creditResponse, detailMovie, movieInfo, popularResponseType } from '../types';
 import { API_KEY, API_URL_MOVIE } from './constants';
 
 export const fetcher = async (url: string) => {
@@ -9,6 +10,27 @@ export const fetcher = async (url: string) => {
     }
     const result = await response.json();
     return result;
+};
+export const getMovieList = async (req: string) => {
+    const result = await fetcher(req);
+    const movieArray: Array<movieInfo> = await result.results.reduce(
+        (acc: Array<movieInfo>, cur: movieInfo) => acc.concat(cur),
+        []
+    );
+    return movieArray;
+};
+export const getMovieDetail = async (req: string) => {
+    const detail: detailMovie = await fetcher(requestDetail(req));
+    return detail;
+};
+export const getMovieSimilar = async (req: string) => {
+    const similar: popularResponseType = await fetcher(requestSimilar(req));
+    return similar.results;
+};
+export const getMovieCredit = async (req: string) => {
+    const credit: creditResponse = await fetcher(requestCredit(req));
+    const castCredit: Array<actorInfo> = credit.cast;
+    return castCredit;
 };
 
 export const requestDetail = (movieID: string) =>
