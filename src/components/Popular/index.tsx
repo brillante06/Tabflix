@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as S from './styles';
 import * as C from '../../utils/constants';
-import { movieInfo, video, videoRespose } from '../../types';
+import { movieInfo, trailerType } from '../../types';
 import { useRequest } from '../../hooks/useRequest';
 import Carousel from '../Carousel';
-import { fetcher, getMovieList } from '../../utils/request';
+import { fetcher, getMovieList, getMovieVideo } from '../../utils/request';
 
 const Popular: React.FC = () => {
     const history = useHistory();
     const [movie, setMovie] = useState<Array<movieInfo>>([]);
     const [req, setReq] = useState<string>('popular');
-    const [video, setVideo] = useState<Array<videoRespose>>([]);
+    const [video, setVideo] = useState<trailerType>();
     const { movies, error } = useRequest(C.MOVIE_POPULAR);
     const requestType: { [req: string]: string } = {};
     requestType.popular = C.MOVIE_POPULAR;
@@ -25,6 +25,19 @@ const Popular: React.FC = () => {
         };
         request();
     }, [req]);
+    useEffect(() => {
+        const request = async () => {
+            const movies: Array<movieInfo> = await getMovieList(requestType.playing);
+            const trailers: Array<Promise<trailerType>> = movies.map((val) =>
+                getMovieVideo(val.id)
+            );
+            await Promise.all(trailers).then((trailer) => {
+                const randomNumber = Math.floor(Math.random() * (trailer.length - 1));
+                setVideo(trailer[randomNumber]);
+            });
+        };
+        request();
+    }, []);
     if (error) {
         return <h1>Something went wrong</h1>;
     }
@@ -41,11 +54,12 @@ const Popular: React.FC = () => {
             setReq('topRated');
         }
     };
+
     return (
         <S.Container>
             <div style={{ opacity: '0.5', zIndex: -1 }}>
                 <iframe
-                    src="https://www.youtube.com/embed/hEnr6Ewpu_U?autoplay=1&mute=1"
+                    src={video?.path}
                     frameBorder="0"
                     allow="autoplay; encrypted-media"
                     allowFullScreen

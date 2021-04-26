@@ -6,9 +6,9 @@ import { Image } from '../index';
 interface infoProps {
     name: string;
     imgName: string | undefined;
-    onClick?: (id: number) => void;
+    onClick?: (id: string) => void;
     tag: string;
-    id: number;
+    id: string;
 }
 const SmallCard: React.FC<infoProps> = ({ name, imgName, tag, id, onClick }) => {
     const onClickMove = () => {

@@ -2,7 +2,7 @@ export interface movieInfo {
     adult?: boolean;
     backdrop_path: string;
     genre_ids?: Array<number>;
-    id: number;
+    id: string;
     original_language?: string;
     original_title?: string;
     overview?: string;
@@ -21,7 +21,7 @@ export interface creditResponse {
 export interface actorInfo {
     adult: true;
     gender: number;
-    id: number;
+    id: string;
     known_for_department: string;
     name: string;
     original_name: string;
@@ -87,10 +87,15 @@ export interface detailMovie {
     tagline: string;
     title: string;
     video: boolean;
+    videos?: Pick<videoResponse, 'results'>;
     vote_average: number;
     vote_count: number;
 }
-
+export interface trailerType {
+    tagline: string;
+    title: string;
+    path: string;
+}
 export interface watchProvider {
     display_priority: number;
     logo_path: string;
@@ -118,7 +123,7 @@ export interface video {
     size: number;
     type: videoType;
 }
-export interface videoRespose {
+export interface videoResponse {
     id: number;
     results: Array<video>;
 }

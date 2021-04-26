@@ -1,5 +1,25 @@
-import { actorInfo, creditResponse, detailMovie, movieInfo, popularResponseType } from '../types';
-import { API_KEY, API_URL_MOVIE } from './constants';
+import {
+    actorInfo,
+    creditResponse,
+    detailMovie,
+    movieInfo,
+    popularResponseType,
+    trailerType,
+    video,
+    videoResponse,
+} from '../types';
+import { API_KEY, API_URL_MOVIE, YOUTUBE_URL } from './constants';
+
+export const requestDetail = (movieID: string) =>
+    `${API_URL_MOVIE}/${movieID}${API_KEY}&language=ko-KR&append_to_response=similar,credits`;
+export const requestSimilar = (movieID: string) =>
+    `${API_URL_MOVIE}/${movieID}/similar${API_KEY}&language=kr-KR&page=1`;
+export const requestProvider = (movieID: string) =>
+    `${API_URL_MOVIE}/${movieID}/watch/providers${API_KEY}`;
+export const requestCredit = (movieID: string) =>
+    `${API_URL_MOVIE}/${movieID}/credits${API_KEY}&language=kr-KR`;
+export const requestWithVideo = (movieID: string) =>
+    `${API_URL_MOVIE}/${movieID}${API_KEY}&append_to_response=videos`;
 
 export const fetcher = async (url: string) => {
     const response = await fetch(url);
@@ -32,12 +52,16 @@ export const getMovieCredit = async (req: string) => {
     const castCredit: Array<actorInfo> = credit.cast;
     return castCredit;
 };
-
-export const requestDetail = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}${API_KEY}&language=ko-KR&append_to_response=similar,credits`;
-export const requestSimilar = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}/similar${API_KEY}&language=kr-KR&page=1`;
-export const requestProvider = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}/watch/providers${API_KEY}`;
-export const requestCredit = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}/credits${API_KEY}&language=kr-KR`;
+export const getMovieVideo = async (id: string) => {
+    const movie: detailMovie = await fetcher(requestWithVideo(id));
+    let youtube: Array<video> = [];
+    if (movie.videos) {
+        youtube = movie.videos?.results.filter((value) => value.site === 'YouTube');
+    }
+    const trailer = {
+        tagline: movie.tagline,
+        title: movie.title,
+        path: `${YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`,
+    };
+    return trailer;
+};

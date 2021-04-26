@@ -41,7 +41,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     if (error) {
         return <p>something went wrong</p>;
     }
-    const onClick = (id: number) => {
+    const onClick = (id: string) => {
         history.push(`/detail/${id}`);
         history.go(0);
     };
