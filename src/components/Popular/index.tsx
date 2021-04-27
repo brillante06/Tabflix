@@ -8,7 +8,6 @@ import Carousel from '../Carousel';
 import { fetcher, getMovieList, getMovieVideo } from '../../utils/request';
 
 const Popular: React.FC = () => {
-    const history = useHistory();
     const [movie, setMovie] = useState<Array<movieInfo>>([]);
     const [req, setReq] = useState<string>('popular');
     const [video, setVideo] = useState<trailerType>();
@@ -57,6 +56,7 @@ const Popular: React.FC = () => {
 
     return (
         <S.Container>
+            <div style={{ margin: '0 auto 0', fontSize: '2rem' }}>{video?.title}</div>
             <div style={{ opacity: '0.5', zIndex: -1 }}>
                 <iframe
                     src={video?.path}
