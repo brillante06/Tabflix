@@ -7,7 +7,7 @@ import {
     movieInfo,
     popularResponseType,
 } from '../../types';
-import { fetcher, requestCredit, requestDetail, requestSimilar } from '../../utils/request';
+import * as req from '../../utils/request';
 import * as S from './styles';
 import * as C from '../../utils/constants';
 import { Loader, SmallCard } from '../index';
@@ -26,13 +26,12 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
 
     const getData = async () => {
         setIsLoading(true);
-        const movieDetail: detailMovie = await fetcher(requestDetail(match.params.id));
+        const movieDetail: detailMovie = await req.getMovieDetail(match.params.id);
         setDetail(movieDetail);
-        const movieCredit: creditResponse = await fetcher(requestCredit(match.params.id));
-        const credit: Array<actorInfo> = movieCredit.cast;
-        setCredits(credit);
-        const movieSimilar: popularResponseType = await fetcher(requestSimilar(match.params.id));
-        setSimilar(movieSimilar.results);
+        const actorCredit: Array<actorInfo> = await req.getMovieCredit(match.params.id);
+        setCredits(actorCredit);
+        const movieSimilar: Array<movieInfo> = await req.getMovieSimilar(match.params.id);
+        setSimilar(movieSimilar);
         setIsLoading(false);
     };
     useEffect(() => {
@@ -42,7 +41,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
     if (error) {
         return <p>something went wrong</p>;
     }
-    const onClick = (id: number) => {
+    const onClick = (id: string) => {
         history.push(`/detail/${id}`);
         history.go(0);
     };

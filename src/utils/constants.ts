@@ -10,5 +10,5 @@ export const MOVIE_SEARCH = `https://api.themoviedb.org/3/search/movie?api_key=$
 export const MOVIE_NOW_PLAYING = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`;
 export const MOVIE_TOP_RATED = `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`;
 export const API_KEY = `?api_key=${process.env.REACT_APP_API_KEY}`;
-
+export const YOUTUBE_URL = 'https://www.youtube.com/embed/';
 export const browserHistory = createBrowserHistory();

@@ -34,7 +34,7 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
             setIndex(index - 1);
         }
     };
-    const onClick = (id: number) => {
+    const onClick = (id: string) => {
         history.push(`/detail/${id}`);
     };
     return (

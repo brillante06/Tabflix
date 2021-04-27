@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-interface Props {
-    videoURL: string;
-}
-
 export const Container = styled.article`
     width: 100%;
     padding: 3rem auto;
@@ -21,4 +17,7 @@ export const TextContainer = styled.section`
 
 export const Text = styled.article`
     cursor: pointer;
+    &:hover {
+        color: red;
+    }
 `;

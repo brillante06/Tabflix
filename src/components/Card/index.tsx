@@ -8,8 +8,8 @@ import { Image } from '../index';
 interface movieCard {
     image: string;
     title: string;
-    onClick: (id: number) => void;
-    id: number;
+    onClick: (id: string) => void;
+    id: string;
     movie?: movieInfo;
     tag?: boolean;
 }
