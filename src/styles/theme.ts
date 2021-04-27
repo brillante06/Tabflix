@@ -15,5 +15,15 @@ export const Light = {
     translateFirst: 'translateY(0)',
     translateSecond: 'translateY(-100px)',
 };
+export const deviceSize = {
+    mobile: '375px',
+    tablet: '768px',
+    laptop: '1024px',
+};
 
+export const device = {
+    mobile: `screen and (max-width: ${deviceSize.mobile})`,
+    tablet: `screen and (max-width: ${deviceSize.tablet})`,
+    laptop: `scrren and (max-width:${deviceSize.laptop})`,
+};
 export type Theme = typeof Light;

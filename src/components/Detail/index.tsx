@@ -45,9 +45,6 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
         history.push(`/detail/${id}`);
         history.go(0);
     };
-    /* eslint-disable no-console */
-    console.log(detail?.backdrop_path);
-    /* eslint-disable no-console */
     return isLoading ? (
         <Loader />
     ) : (

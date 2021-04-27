@@ -18,6 +18,7 @@ export const Container = styled.nav<props>`
     z-index: 10;
     background: ${({ theme }) => theme.bgColor};
 `;
+
 export const NavContainer = styled.section`
     display: flex;
     width: 60%;
