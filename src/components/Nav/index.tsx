@@ -1,24 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import * as S from './styles';
-import { ThemeContext } from '../../App';
 
 const Header: React.FC = () => {
-    const { theme, toggleTheme } = useContext(ThemeContext);
+    const [active, setActive] = useState(false);
     return (
-        <S.Container theme={theme}>
-            <S.Header>
-                <S.NavContainer>
-                    <S.CheckBox id="checkbox" type="checkbox" onClick={toggleTheme} />
-                    <S.CheckBoxLabel htmlFor="checkbox" />
-                </S.NavContainer>
-                <S.HeaderName to="/">Tabflix</S.HeaderName>
-                <S.HeaderContainer>
-                    <S.HeaderName to="/search">🔍Search</S.HeaderName>
-                    <S.HeaderName to="/about">about</S.HeaderName>
-                    <S.HeaderName to="/login">login</S.HeaderName>
-                </S.HeaderContainer>
-            </S.Header>
-        </S.Container>
+        <S.navBar>
+            <S.Navigation to="/" style={{ fontFamily: 'Bebas Neue', fontSize: '3rem' }}>
+                Tabflix
+            </S.Navigation>
+            <S.MenuButton href="#" onClick={() => setActive((prev) => !prev)}>
+                <S.Menu></S.Menu>
+                <S.Menu></S.Menu>
+                <S.Menu></S.Menu>
+            </S.MenuButton>
+            <S.NavBarLinks className={active ? 'active' : 'inactive'}>
+                <S.UlContainer>
+                    <S.LiContainer>
+                        <S.Navigation to="/search">Search</S.Navigation>
+                    </S.LiContainer>
+                    <S.LiContainer>
+                        <S.Navigation to="/about">About</S.Navigation>
+                    </S.LiContainer>
+                    <S.LiContainer>
+                        <S.Navigation to="/login">Login</S.Navigation>
+                    </S.LiContainer>
+                </S.UlContainer>
+            </S.NavBarLinks>
+        </S.navBar>
     );
 };
 
