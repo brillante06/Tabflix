@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../styles/theme';
 
 interface posterImage {
     poster: string;
@@ -17,6 +18,12 @@ export const Background = styled.section<posterImage>`
     height: 30rem;
     background: url(${(props) => props.poster}) no-repeat center;
     background-size: cover;
+    @media ${device.tablet} {
+        height: 27rem;
+    }
+    @media ${device.mobile} {
+        height: 19rem;
+    }
 `;
 
 export const ListContainer = styled.section`
@@ -46,13 +53,24 @@ export const IntroduceContainer = styled.section`
     display: flex;
     border-radius: 1rem;
     margin: -10rem auto 3rem;
+    @media ${device.tablet} {
+        width: 100%;
+        height: 40rem;
+        margin: -10rem auto 12rem;
+        flex-direction: column;
+        align-items: center;
+    }
 `;
 export const InfoContainer = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin: 10rem 0 0 2rem;
+    margin: 13rem 0 0 2rem;
     width: 100%;
+    @media ${device.tablet} {
+        margin: 2rem 0 1rem;
+        align-items: center;
+    }
 `;
 export const InfoColumn = styled.section`
     display: flex;
@@ -76,18 +94,25 @@ export const Description = styled.section`
     font-size: 1.2rem;
     width: 70%;
     margin: 0 auto 3rem;
+    @media ${device.tablet} {
+        font-size: 1rem;
+        margin: 0 auto 3rem;
+    }
 `;
 
 export const Info = styled.article`
     font-size: 1.5rem;
-    margin: 1rem 8rem 0 0;
-    text-overflow: ellipsis;
-    overflow: hidden;
 `;
 export const Tagline = styled.article`
     font-size: 2.2rem;
     font-weight: bold;
     margin: 0.1rem 0 1rem;
+    @media ${device.tablet} {
+        font-size: 1.8rem;
+    }
+    @media ${device.mobile} {
+        font-size: 1.2rem;
+    }
 `;
 export const Distinct = styled.div`
     border: 1px solid #c1c1c1;

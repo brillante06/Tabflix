@@ -11,6 +11,9 @@ const Global = createGlobalStyle`
         @media ${device.tablet}{
             font-size:80%;
         }
+        @media ${device.mobile}{
+            font-size:70%;
+        }
     } 
     body{
         width:100%;

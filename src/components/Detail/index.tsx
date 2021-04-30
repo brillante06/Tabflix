@@ -61,13 +61,13 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                         {detail?.title}(
                         {detail ? new Date(detail?.release_date).getFullYear() : ' '})
                     </S.Title>
-                    <h3>평점:{detail?.vote_average}</h3>
-                    <h3>런타임:{detail?.runtime}m</h3>
-                    <h3>
+                    <S.Info>평점:{detail?.vote_average}</S.Info>
+                    <S.Info>런타임:{detail?.runtime}m</S.Info>
+                    <S.Info>
                         👀
                         {detail?.genres.map((value, index) => (index ? ', ' : '') + value.name)}
-                    </h3>
-                    <h3>개봉일:{detail?.release_date}</h3>
+                    </S.Info>
+                    <S.Info>개봉일:{detail?.release_date}</S.Info>
                 </S.InfoContainer>
             </S.IntroduceContainer>
 
@@ -76,7 +76,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                 {detail?.overview}
             </S.Description>
             <S.ListContainer>
-                <h2>Actor</h2>
+                <S.Info>Actor</S.Info>
             </S.ListContainer>
             <S.ListContainer>
                 {credits?.map((value, index) => (
@@ -94,9 +94,8 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                 ))}
             </S.ListContainer>
             <S.ListContainer>
-                <h2>Similar movie</h2>
+                <S.Info>Similar movie</S.Info>
             </S.ListContainer>
-
             <S.ListContainer>
                 {similar.map((value, index) => (
                     <SmallCard
