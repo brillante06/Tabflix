@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { device } from './theme';
 
 const Global = createGlobalStyle`
 
@@ -7,6 +8,9 @@ const Global = createGlobalStyle`
         font-size: 100%;
         padding: 0;
         margin: 0;
+        @media ${device.tablet}{
+            font-size:80%;
+        }
     } 
     body{
         width:100%;

@@ -9,12 +9,7 @@ export const Container = styled.article`
     overflow: hidden;
     width: 75%;
 `;
-
-export const Slide = styled.section`
-    display: none;
-`;
-
-export const slideContainer = styled.div`
+export const SlideContainer = styled.div`
     display: grid;
     grid-auto-flow: column;
     grid-gap: 0.8rem;

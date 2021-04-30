@@ -1,20 +1,11 @@
 import styled from 'styled-components';
 
-interface image {
-    src: string;
-    alt?: string;
-}
-export const movieImage = styled.img<image>`
-    src: ${(props) => props.src};
-    alt: ${(props) => props.alt};
-    border-radius: 1rem;
-`;
-export const movieInfo = styled.p`
+export const MovieInfo = styled.p`
     font-size: 1.2rem;
     padding: -1rem 0 0 4rem;
     margin: 0.6rem 0 1rem 0.8rem;
 `;
-export const movieRating = styled.p`
+export const MovieRating = styled.p`
     font-size: 1.2rem;
     padding: -1rem 0 0 4rem;
     margin: 0.4rem 0.8rem 1rem 0;

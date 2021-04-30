@@ -4,9 +4,7 @@ import {
     detailMovie,
     movieInfo,
     popularResponseType,
-    trailerType,
     video,
-    videoResponse,
 } from '../types';
 import { API_KEY, API_URL_MOVIE, YOUTUBE_URL } from './constants';
 

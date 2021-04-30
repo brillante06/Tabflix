@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-interface image {
-    logoImg: string;
-}
 interface posterImage {
     poster: string;
 }

@@ -1,12 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
-import {
-    actorInfo,
-    creditResponse,
-    detailMovie,
-    movieInfo,
-    popularResponseType,
-} from '../../types';
+import { actorInfo, detailMovie, movieInfo } from '../../types';
 import * as req from '../../utils/request';
 import * as S from './styles';
 import * as C from '../../utils/constants';

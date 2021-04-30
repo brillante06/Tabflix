@@ -39,7 +39,7 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
     };
     return (
         <S.Container>
-            <S.slideContainer ref={slideRef}>
+            <S.SlideContainer ref={slideRef}>
                 {movieArray.map((value: movieInfo, idx: number) => (
                     <Card
                         title={value.title}
@@ -55,7 +55,7 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
                         tag={true}
                     ></Card>
                 ))}
-            </S.slideContainer>
+            </S.SlideContainer>
             <S.Arrow onClick={moveNext} rightIndex={'0'}>
                 &#10095;
             </S.Arrow>

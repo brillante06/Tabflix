@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import * as S from './styles';
 import * as C from '../../utils/constants';
 import { movieInfo, trailerType } from '../../types';
 import { useRequest } from '../../hooks/useRequest';
 import Carousel from '../Carousel';
-import { fetcher, getMovieList, getMovieVideo } from '../../utils/request';
+import { getMovieList, getMovieVideo } from '../../utils/request';
 
 const Popular: React.FC = () => {
     const [movie, setMovie] = useState<Array<movieInfo>>([]);
@@ -56,18 +55,16 @@ const Popular: React.FC = () => {
 
     return (
         <S.Container>
-            <div style={{ margin: '0 auto 0', fontSize: '2rem' }}>{video?.title}</div>
-            <div style={{ opacity: '0.5', zIndex: -1 }}>
-                <iframe
+            <S.VideoTitle>&quot;{video?.title}&quot;</S.VideoTitle>
+            <S.VideoContainer>
+                <S.Video
                     src={video?.path}
                     frameBorder="0"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
                     title="video"
-                    width="100%"
-                    height="400px"
-                />
-            </div>
+                ></S.Video>
+            </S.VideoContainer>
             <S.TextContainer onClick={clickEvent}>
                 <S.Text>Now playing</S.Text> /<S.Text>Popular</S.Text> /<S.Text>Most Rated</S.Text>
             </S.TextContainer>
