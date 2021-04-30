@@ -21,6 +21,9 @@ export const navBar = styled.nav`
     width: 100%;
     left: 0;
     right: 0;
+    border-bottom-style: solid;
+    border-width: 0.1px;
+    border-color: beige;
     @media ${device.tablet} {
         flex-direction: column;
         align-items: flex-start;

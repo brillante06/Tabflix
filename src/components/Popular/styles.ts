@@ -30,10 +30,13 @@ export const TextContainer = styled.section`
 `;
 export const VideoTitle = styled.section`
     margin: 0 auto 3rem;
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-style: italic;
     @media ${device.tablet} {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+    }
+    @media ${device.mobile} {
+        font-size: 1.1rem;
     }
 `;
 
