@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { device } from '../../styles/theme';
 
+interface props {
+    isClick: boolean;
+}
+
 export const Menu = styled.div``;
 
 export const navBar = styled.nav`
@@ -48,16 +52,13 @@ export const MenuButton = styled.a`
         margin: 2px;
     }
 `;
-export const NavBarLinks = styled.section`
+export const NavBarLinks = styled.section<props>`
     margin: 0;
     padding: 0;
     height: 100%;
     @media ${device.tablet} {
-        display: none;
+        display: ${(props) => (props.isClick ? 'flex' : 'none')};
         width: 100%;
-        & .active {
-            display: flex;
-        }
     }
 `;
 

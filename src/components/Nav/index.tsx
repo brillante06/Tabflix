@@ -13,7 +13,7 @@ const Header: React.FC = () => {
                 <S.Menu></S.Menu>
                 <S.Menu></S.Menu>
             </S.MenuButton>
-            <S.NavBarLinks className={active ? 'active' : 'inactive'}>
+            <S.NavBarLinks isClick={active}>
                 <S.UlContainer>
                     <S.LiContainer>
                         <S.Navigation to="/search">Search</S.Navigation>
