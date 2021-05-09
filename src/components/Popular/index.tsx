@@ -26,13 +26,9 @@ const Popular: React.FC = () => {
     useEffect(() => {
         const request = async () => {
             const movies: Array<movieInfo> = await getMovieList(requestType.playing);
-            const trailers: Array<Promise<trailerType>> = movies.map((val) =>
-                getMovieVideo(val.id)
-            );
-            await Promise.all(trailers).then((trailer) => {
-                const randomNumber = Math.floor(Math.random() * (trailer.length - 1));
-                setVideo(trailer[randomNumber]);
-            });
+            const randomNumber = Math.floor(Math.random() * (movies.length - 1));
+            const trailer = await getMovieVideo(movies[randomNumber].id);
+            setVideo(trailer);
         };
         request();
     }, []);
