@@ -30,7 +30,7 @@ const Image: React.ForwardRefExoticComponent<Props> = forwardRef(
                 src={tag ? lazyImage : src}
                 alt={alt}
                 width={width}
-                height={height}
+                height="60%"
                 ref={tag ? lazyRef : null}
                 data-src={src !== null ? src : noImage}
             />
