@@ -11,7 +11,7 @@ export const Input = styled.input`
     border: 1px;
     display: block;
     margin: 0 auto 2rem;
-    border-radius: 2rem;
+    border-radius: 1rem;
     border: 1px solid;
     &:focus {
         outline: none;

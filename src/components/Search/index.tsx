@@ -38,6 +38,7 @@ const Search: React.FC = () => {
                 onChange={onChange}
                 value={searchValue}
                 aria-label="movie-input"
+                autoFocus
             ></S.Input>
             <S.movieList data-testid="movie-list">
                 {isSearching ? (
