@@ -62,7 +62,9 @@ const Main: React.FC = () => {
                 ></S.Video>
             </S.VideoContainer>
             <S.TextContainer onClick={clickEvent}>
-                <S.Text>Now playing</S.Text> /<S.Text>Popular</S.Text> /<S.Text>Most Rated</S.Text>
+                <S.Text isChecked={req === 'playing'}>Now playing</S.Text> /
+                <S.Text isChecked={req === 'popular'}>Popular</S.Text> /
+                <S.Text isChecked={req === 'topRated'}>Most Rated</S.Text>
             </S.TextContainer>
             <Carousel movieArray={movie} />
         </S.Container>

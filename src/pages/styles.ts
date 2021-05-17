@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { device } from '../styles/theme';
 
+interface checked {
+    isChecked: boolean;
+}
+
 export const Container = styled.article`
     width: 100%;
     padding: 3rem auto;
@@ -40,9 +44,10 @@ export const VideoTitle = styled.section`
     }
 `;
 
-export const Text = styled.article`
+export const Text = styled.article<checked>`
     cursor: pointer;
     &:hover {
         color: red;
     }
+    ${(props) => (props.isChecked ? 'color:tomato' : 'color:black')}
 `;
