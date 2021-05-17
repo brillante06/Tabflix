@@ -17,7 +17,7 @@ export const Light = {
 };
 export const deviceSize = {
     mobile: '475px',
-    tablet: '768px',
+    tablet: '855px',
     laptop: '1024px',
 };
 
