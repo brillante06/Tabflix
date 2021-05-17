@@ -1,7 +1,6 @@
 export { default as Card } from './Card';
 export { default as CardList } from './CardList';
 export { default as Carousel } from './Carousel';
-export { default as Detail } from './Detail';
 export { default as Image } from './Image';
 export { default as Loader } from './Loader';
 export { default as Header } from './Nav';

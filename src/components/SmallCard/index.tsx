@@ -5,12 +5,13 @@ import { Image } from '../index';
 
 interface infoProps {
     name: string;
+    character?: string;
     imgName: string | undefined;
     onClick?: (id: string) => void;
     tag: string;
     id: string;
 }
-const SmallCard: React.FC<infoProps> = ({ name, imgName, tag, id, onClick }) => {
+const SmallCard: React.FC<infoProps> = ({ name, imgName, tag, id, onClick, character }) => {
     const onClickMove = () => {
         if (onClick) onClick(id);
     };
@@ -28,7 +29,10 @@ const SmallCard: React.FC<infoProps> = ({ name, imgName, tag, id, onClick }) => 
     return (
         <S.Container onClick={onClickMove} tag={tag}>
             <Image src={imgName} alt={name} ref={lazyRef} width={'200vw'} height={'76%'} />
-            <S.Name>{name}</S.Name>
+            <S.Character>{character}</S.Character>
+            <S.Name>
+                {name} {tag === 'similar' ? '' : '역'}
+            </S.Name>
         </S.Container>
     );
 };

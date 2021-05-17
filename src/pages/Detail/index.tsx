@@ -78,36 +78,47 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                 <S.Info>Actor</S.Info>
             </S.ListContainer>
             <S.ListContainer>
-                {credits?.map((value, index) => (
-                    <SmallCard
-                        key={index}
-                        imgName={
-                            value.profile_path
-                                ? `${C.IMAGE_URL_W500}/${value.profile_path}`
-                                : noImage
-                        }
-                        name={value.character}
-                        tag={'actor'}
-                        id={value.id}
-                    />
-                ))}
+                {credits.length !== 0 ? (
+                    credits?.map((value, index) => (
+                        <SmallCard
+                            key={index}
+                            imgName={
+                                value.profile_path
+                                    ? `${C.IMAGE_URL_W500}/${value.profile_path}`
+                                    : noImage
+                            }
+                            name={value.character}
+                            tag={'actor'}
+                            id={value.id}
+                            character={value.name}
+                        />
+                    ))
+                ) : (
+                    <h1>No results about actor</h1>
+                )}
             </S.ListContainer>
             <S.ListContainer isOverflow={false}>
                 <S.Info>Similar movie</S.Info>
             </S.ListContainer>
             <S.ListContainer>
-                {similar.map((value, index) => (
-                    <SmallCard
-                        name={value.title}
-                        imgName={
-                            value.poster_path ? `${C.IMAGE_URL_W500}/${value.poster_path}` : noImage
-                        }
-                        onClick={() => onClick(value.id)}
-                        id={value.id}
-                        tag={'similar'}
-                        key={index}
-                    />
-                ))}
+                {similar.length !== 0 ? (
+                    similar.map((value, index) => (
+                        <SmallCard
+                            name={value.title}
+                            imgName={
+                                value.poster_path
+                                    ? `${C.IMAGE_URL_W500}/${value.poster_path}`
+                                    : noImage
+                            }
+                            onClick={() => onClick(value.id)}
+                            id={value.id}
+                            tag={'similar'}
+                            key={index}
+                        />
+                    ))
+                ) : (
+                    <h1>No results about similar movie</h1>
+                )}
             </S.ListContainer>
         </S.Container>
     );
