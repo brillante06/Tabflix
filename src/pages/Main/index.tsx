@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './styles';
-import * as C from '../utils/constants';
-import { movieInfo, trailerType } from '../types';
-import { useRequest } from '../hooks/useRequest';
-import Carousel from '../components/Carousel';
-import { getMovieList, getMovieVideo } from '../utils/request';
+import * as C from '../../utils/constants';
+import { movieInfo, trailerType } from '../../types';
+import { useRequest } from '../../hooks/useRequest';
+import Carousel from '../../components/Carousel';
+import { getMovieList, getMovieVideo } from '../../utils/request';
 
 const Main: React.FC = () => {
     const [movie, setMovie] = useState<Array<movieInfo>>([]);

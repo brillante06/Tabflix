@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { device } from '../styles/theme';
+import { device } from '../../styles/theme';
 
 interface checked {
     isChecked: boolean;

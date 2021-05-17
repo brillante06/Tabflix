@@ -1,6 +1,6 @@
 import { Route, Router, Switch } from 'react-router-dom';
 import React from 'react';
-import Main from '../../pages/main';
+import Main from '../../pages/Main';
 import { Detail, Header, Search } from '../index';
 import { browserHistory } from '../../utils/constants';
 
