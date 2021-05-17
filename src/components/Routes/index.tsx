@@ -1,7 +1,8 @@
 import { Route, Router, Switch } from 'react-router-dom';
 import React from 'react';
 import Main from '../../pages/Main';
-import { Detail, Header, Search } from '../index';
+import Detail from '../../pages/Detail';
+import { Header, Search } from '../index';
 import { browserHistory } from '../../utils/constants';
 
 const Routes: React.FC = () => (
