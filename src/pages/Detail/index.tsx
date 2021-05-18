@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
-import { actorInfo, detailMovie, movieInfo } from '../../types';
+import { actorInfo, detailMovie, genreColor, movieInfo } from '../../types';
 import * as req from '../../utils/request';
 import * as S from './styles';
 import * as C from '../../utils/constants';
@@ -63,10 +63,13 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                     </S.Title>
                     <S.Info>평점:{detail?.vote_average}</S.Info>
                     <S.Info>런타임:{detail?.runtime}m</S.Info>
-                    <S.Info>
-                        👀
-                        {detail?.genres.map((value, index) => (index ? ', ' : '') + value.name)}
-                    </S.Info>
+                    <S.GenreContainer>
+                        {detail?.genres.map((value, index) => (
+                            <S.Genre key={index} bgColor={genreColor[value.name]}>
+                                {value.name}
+                            </S.Genre>
+                        ))}
+                    </S.GenreContainer>
                     <S.Info>개봉일:{detail?.release_date}</S.Info>
                 </S.InfoContainer>
             </S.IntroduceContainer>

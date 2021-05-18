@@ -127,3 +127,20 @@ export interface videoResponse {
     id: number;
     results: Array<video>;
 }
+export interface colorType {
+    [key: string]: string;
+}
+export const genreColor: colorType = {
+    모험: '#4ec9b0',
+    판타지: '#595ab6',
+    가족: '#FFFF33',
+    SF: '#990066',
+    드라마: '#3bb33b',
+    애니메이션: '#CCFF00',
+    코미디: '#FFFF33',
+    액션: '#FF0000',
+    스릴러: '#336666',
+    범죄: '#CC0000',
+    로맨스: '#FF3399',
+    공포: '#606060',
+};

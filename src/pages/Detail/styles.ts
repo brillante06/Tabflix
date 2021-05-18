@@ -4,8 +4,11 @@ import { device } from '../../styles/theme';
 interface posterImage {
     poster: string;
 }
-interface props {
+interface overflow {
     isOverflow?: boolean;
+}
+interface genreColor {
+    bgColor: string;
 }
 export const Container = styled.main`
     width: 100%;
@@ -28,7 +31,7 @@ export const Background = styled.section<posterImage>`
         height: 19rem;
     }
 `;
-export const ListContainer = styled.section<props>`
+export const ListContainer = styled.section<overflow>`
     display: flex;
     align-content: flex-end;
     overflow: hidden;
@@ -73,6 +76,17 @@ export const InfoContainer = styled.section`
         margin: 2rem 0 1rem;
         align-items: center;
     }
+`;
+export const GenreContainer = styled.section`
+    display: flex;
+`;
+export const Genre = styled.article<genreColor>`
+    border: 1rem;
+    border-radius: 3px;
+    background-color: ${(props) => props.bgColor};
+    color: white;
+    font-size: 1.5rem;
+    margin: 8px 8px 8px 0;
 `;
 export const InfoColumn = styled.section`
     display: flex;
