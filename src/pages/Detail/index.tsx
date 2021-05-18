@@ -87,7 +87,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                             key={index}
                             imgName={
                                 value.profile_path
-                                    ? `${C.IMAGE_URL_W500}/${value.profile_path}`
+                                    ? `${C.IMAGE_URL_W500}${value.profile_path}`
                                     : noImage
                             }
                             name={value.character}
@@ -110,7 +110,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                             name={value.title}
                             imgName={
                                 value.poster_path
-                                    ? `${C.IMAGE_URL_W500}/${value.poster_path}`
+                                    ? `${C.IMAGE_URL_W500}${value.poster_path}`
                                     : noImage
                             }
                             onClick={() => onClick(value.id)}
