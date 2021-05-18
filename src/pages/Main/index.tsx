@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import * as S from './styles';
 import * as C from '../../utils/constants';
 import { movieInfo, trailerType } from '../../types';
@@ -10,6 +11,8 @@ const Main: React.FC = () => {
     const [movie, setMovie] = useState<Array<movieInfo>>([]);
     const [req, setReq] = useState<string>('popular');
     const [video, setVideo] = useState<trailerType>();
+    const [randomMovie, setRandomMovie] = useState<movieInfo>();
+    const history = useHistory();
     const { movies, error } = useRequest(C.MOVIE_POPULAR);
     const requestType: { [req: string]: string } = {};
     requestType.popular = C.MOVIE_POPULAR;
@@ -28,6 +31,7 @@ const Main: React.FC = () => {
             const movies: Array<movieInfo> = await getMovieList(requestType.playing);
             const randomNumber = Math.floor(Math.random() * (movies.length - 1));
             const trailer = await getMovieVideo(movies[randomNumber].id);
+            setRandomMovie(movies[randomNumber]);
             setVideo(trailer);
         };
         request();
@@ -48,10 +52,15 @@ const Main: React.FC = () => {
             setReq('topRated');
         }
     };
-
+    const onClick = (id: string) => {
+        history.push(`/detail/${id}`);
+    };
     return (
         <S.Container>
-            <S.VideoTitle>&quot;{video?.title}&quot;</S.VideoTitle>
+            <S.VideoTitle onClick={() => history.push(`/detail/${randomMovie?.id}`)}>
+                &quot;{video?.title}&quot;
+            </S.VideoTitle>
+            <S.OverView>{randomMovie?.overview}</S.OverView>
             <S.VideoContainer>
                 <S.Video
                     src={video?.path}
