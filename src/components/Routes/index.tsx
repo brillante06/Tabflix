@@ -1,11 +1,12 @@
 import { Route, Router, Switch } from 'react-router-dom';
 import React, { lazy, Suspense } from 'react';
-import { Header, Loader, Search } from '../index';
+import { Header, Loader } from '../index';
 import { browserHistory } from '../../utils/constants';
 
 const Routes: React.FC = () => {
     const Main = lazy(() => import('../../pages/Main'));
     const Detail = lazy(() => import('../../pages/Detail'));
+    const Search = lazy(() => import('../Search'));
     return (
         <Router history={browserHistory}>
             <main>
