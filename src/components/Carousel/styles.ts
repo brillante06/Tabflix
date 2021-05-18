@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../styles/theme';
 
 interface isRight {
     rightIndex?: string;
@@ -14,6 +15,13 @@ export const SlideContainer = styled.div`
     grid-auto-flow: column;
     grid-gap: 0.8rem;
     width: 100%;
+    @media ${device.tablet} {
+        overflow-x: scroll;
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        overflow-y: hidden;
+    }
 `;
 export const Arrow = styled.button<isRight>`
     cursor: pointer;
@@ -26,5 +34,8 @@ export const Arrow = styled.button<isRight>`
     right: ${(props) => props.rightIndex};
     &:hover {
         background-color: rgba(0, 0, 0, 0.8);
+    }
+    @media ${device.tablet} {
+        display: none;
     }
 `;
