@@ -35,7 +35,7 @@ const Main: React.FC = () => {
             setVideo(trailer);
         };
         request();
-    }, []);
+    }, [req]);
     if (error) {
         return <h1>Something went wrong</h1>;
     }
