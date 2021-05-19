@@ -29,7 +29,7 @@ const SmallCard: React.FC<infoProps> = ({ name, imgName, tag, id, onClick, chara
     return (
         <S.Container onClick={onClickMove} tag={tag}>
             <Image src={imgName} alt={name} ref={lazyRef} width={'200vw'} height={'76%'} />
-            <S.Character>{character}</S.Character>
+            <S.Character tag={tag}>{character}</S.Character>
             <S.Name>
                 {name} {tag === 'similar' ? '' : '역'}
             </S.Name>

@@ -50,6 +50,7 @@ export const VideoTitle = styled.section`
     margin: 0 auto 3rem;
     font-size: 1.9rem;
     font-style: italic;
+    font-weight: bold;
     cursor: pointer;
     @media ${device.tablet} {
         font-size: 1.3rem;
