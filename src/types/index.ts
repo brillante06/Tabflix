@@ -133,11 +133,11 @@ export interface colorType {
 export const genreColor: colorType = {
     모험: '#4ec9b0',
     판타지: '#595ab6',
-    가족: '#FFFF33',
+    가족: '#ffa400',
     SF: '#990066',
     드라마: '#3bb33b',
     애니메이션: '#CCFF00',
-    코미디: '#FFFF33',
+    코미디: '#0cce6b',
     액션: '#FF0000',
     스릴러: '#336666',
     범죄: '#CC0000',
