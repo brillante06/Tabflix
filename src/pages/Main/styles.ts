@@ -33,6 +33,9 @@ export const OverView = styled.section`
     @media ${device.mobile} {
         font-size: 1.1rem;
     }
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
 `;
 
 export const TextContainer = styled.section`
