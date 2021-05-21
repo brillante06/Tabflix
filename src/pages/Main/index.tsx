@@ -5,7 +5,7 @@ import * as C from '../../utils/constants';
 import { movieInfo, trailerType } from '../../types';
 import { useRequest } from '../../hooks/useRequest';
 import Carousel from '../../components/Carousel';
-import { getMovieList, getMovieVideo } from '../../utils/request';
+import { getMovieList, getMovieVideo, requestType } from '../../utils/request';
 
 const Main: React.FC = () => {
     const [movie, setMovie] = useState<Array<movieInfo>>([]);
@@ -14,14 +14,11 @@ const Main: React.FC = () => {
     const [randomMovie, setRandomMovie] = useState<movieInfo>();
     const history = useHistory();
     const { movies, error } = useRequest(C.MOVIE_POPULAR);
-    const requestType: { [req: string]: string } = {};
-    requestType.popular = C.MOVIE_POPULAR;
-    requestType.topRated = C.MOVIE_TOP_RATED;
-    requestType.playing = C.MOVIE_NOW_PLAYING;
+    const currentState: string = requestType[req];
 
     useEffect(() => {
         const request = async () => {
-            const movieArray: Array<movieInfo> = await getMovieList(requestType[req]);
+            const movieArray: Array<movieInfo> = await getMovieList(currentState);
             setMovie(movieArray);
         };
         request();
@@ -51,9 +48,6 @@ const Main: React.FC = () => {
         } else if (event.target.innerHTML === 'Most Rated') {
             setReq('topRated');
         }
-    };
-    const onClick = (id: string) => {
-        history.push(`/detail/${id}`);
     };
     return (
         <S.Container>

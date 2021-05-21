@@ -6,29 +6,27 @@ import {
     popularResponseType,
     video,
 } from '../types';
-import { API_KEY, API_URL_MOVIE, YOUTUBE_URL } from './constants';
+import * as C from './constants';
 
 export const requestDetail = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}${API_KEY}&language=ko-KR&append_to_response=similar,credits`;
+    `${C.API_URL_MOVIE}/${movieID}${C.API_KEY}&language=ko-KR&append_to_response=similar,credits`;
 export const requestSimilar = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}/similar${API_KEY}&language=kr-KR&page=1`;
+    `${C.API_URL_MOVIE}/${movieID}/similar${C.API_KEY}&language=kr-KR&page=1`;
 export const requestProvider = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}/watch/providers${API_KEY}`;
+    `${C.API_URL_MOVIE}/${movieID}/watch/providers${C.API_KEY}`;
 export const requestCredit = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}/credits${API_KEY}&language=kr-KR`;
+    `${C.API_URL_MOVIE}/${movieID}/credits${C.API_KEY}&language=kr-KR`;
 export const requestWithVideo = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}${API_KEY}&append_to_response=videos`;
+    `${C.API_URL_MOVIE}/${movieID}${C.API_KEY}&append_to_response=videos`;
 
-export const fetcher = async (url: string) => {
-    const response = await fetch(url);
-    if (!response.ok) {
-        const error = new Error('Error while fetching the data');
-        error.message = await response.json();
-        throw error;
-    }
-    const result = await response.json();
-    return result;
+export const fetcher = async (url: string) => fetch(url).then((res) => res.json());
+
+export const requestType: { [req: string]: string } = {
+    popular: C.MOVIE_POPULAR,
+    topRated: C.MOVIE_TOP_RATED,
+    playing: C.MOVIE_NOW_PLAYING,
 };
+
 export const getMovieList = async (req: string) => {
     const result = await fetcher(req);
     const movieArray: Array<movieInfo> = await result.results.reduce(
@@ -59,7 +57,7 @@ export const getMovieVideo = async (id: string) => {
     const trailer = {
         tagline: movie.tagline,
         title: movie.title,
-        path: `${YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`,
+        path: `${C.YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`,
     };
     return trailer;
 };
