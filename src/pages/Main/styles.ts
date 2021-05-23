@@ -23,6 +23,13 @@ export const Video = styled.iframe`
         height: 300px;
     }
 `;
+export const Error = styled.section`
+    width: 100%;
+    height: 400px;
+    @media ${device.tablet} {
+        height: 300px;
+    }
+`;
 export const OverView = styled.section`
     text-overflow: ellipsis;
     margin: 1rem auto 2rem;

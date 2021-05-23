@@ -20,12 +20,15 @@ const Main: React.FC = () => {
             setIsLoading(false);
             currentState = requestType[req];
             const movie: movieList = await fetcher(currentState);
+            if (!movie) return;
             setMovies(movie.results);
             const movieInfo: {
                 movie: detailMovie;
                 trailer: trailerType | undefined;
             } = await getMovieVideo(movie.results[randomNumber].id);
+            if (!movieInfo.trailer) return;
             setVideo(movieInfo.trailer);
+            if (!movieInfo.movie) return;
             setRandomMovie(movieInfo.movie);
             setIsLoading(true);
         };
@@ -46,9 +49,9 @@ const Main: React.FC = () => {
                 &quot;{randomMovie?.title}&quot;
             </S.VideoTitle>
             <S.OverView>{randomMovie?.overview}</S.OverView>
-            {video ? (
-                video.path ? (
-                    <S.VideoContainer>
+            <S.VideoContainer>
+                {video ? (
+                    video.path ? (
                         <S.Video
                             src={video?.path}
                             frameBorder="0"
@@ -56,13 +59,13 @@ const Main: React.FC = () => {
                             allowFullScreen
                             title="video"
                         ></S.Video>
-                    </S.VideoContainer>
+                    ) : (
+                        <S.Error>Video is not available</S.Error>
+                    )
                 ) : (
-                    <div>error</div>
-                )
-            ) : (
-                <div>error</div>
-            )}
+                    <S.Error>Video is not available</S.Error>
+                )}
+            </S.VideoContainer>
             <S.TextContainer onClick={clickEvent}>
                 <S.Text isChecked={req === 'playing'}>Now playing</S.Text> /
                 <S.Text isChecked={req === 'popular'}>Popular</S.Text> /
