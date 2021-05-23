@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { fetcher } from '../../utils/request';
-import { movieInfo, popularResponseType } from '../../types';
+import { movieInfo, movieList } from '../../types';
 import { useDebounce } from '../../hooks/useDebounce';
 import { Loader } from '../index';
 import * as S from './styles';
@@ -19,7 +19,7 @@ const Search: React.FC = () => {
         if (debounceValue !== '') {
             const data = async () => {
                 await setIsSearching(true);
-                const value: popularResponseType = await fetcher(`${C.MOVIE_SEARCH}${searchValue}`);
+                const value: movieList = await fetcher(`${C.MOVIE_SEARCH}${searchValue}`);
                 await setIsSearching(false);
                 setMovieList(value.results);
             };

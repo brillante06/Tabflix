@@ -15,12 +15,21 @@ export const SlideContainer = styled.div`
     grid-auto-flow: column;
     grid-gap: 0.8rem;
     width: 100%;
+    overflow: hidden;
     @media ${device.tablet} {
-        overflow-x: scroll;
-        ::-webkit-scrollbar {
-            display: none;
+        &:hover {
+            overflow-x: scroll;
+            &::-webkit-scrollbar {
+                width: 0.6rem;
+                height: 10px;
+                border-radius: 2rem;
+                background-color: gainsboro;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.3);
+                border-radius: 1px;
+            }
         }
-        overflow-y: hidden;
     }
 `;
 export const Arrow = styled.button<isRight>`

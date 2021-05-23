@@ -9,16 +9,16 @@ const Routes: React.FC = () => {
     const Search = lazy(() => import('../Search'));
     return (
         <Router history={browserHistory}>
-            <main>
-                <Header />
-                <Suspense fallback={<Loader />}>
+            <Suspense fallback={<Loader />}>
+                <main>
+                    <Header />
                     <Switch>
                         <Route exact path="/" component={Main}></Route>
                         <Route exact path="/search" component={Search}></Route>
                         <Route exact path="/detail/:id" component={Detail}></Route>
                     </Switch>
-                </Suspense>
-            </main>
+                </main>
+            </Suspense>
         </Router>
     );
 };

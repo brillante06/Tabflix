@@ -1,45 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import * as S from './styles';
-import * as C from '../../utils/constants';
-import { movieInfo, trailerType } from '../../types';
-import { useRequest } from '../../hooks/useRequest';
+import { detailMovie, movieInfo, movieList, trailerType } from '../../types';
 import Carousel from '../../components/Carousel';
-import { getMovieList, getMovieVideo, requestType } from '../../utils/request';
+import { fetcher, getMovieVideo, requestType } from '../../utils/request';
+import { Loader } from '../../components';
 
 const Main: React.FC = () => {
-    const [movie, setMovie] = useState<Array<movieInfo>>([]);
     const [req, setReq] = useState<string>('popular');
-    const [video, setVideo] = useState<trailerType>();
-    const [randomMovie, setRandomMovie] = useState<movieInfo>();
+    const [movies, setMovies] = useState<movieInfo[]>([]);
+    const [randomMovie, setRandomMovie] = useState<detailMovie>();
+    const [video, setVideo] = useState<trailerType | undefined>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const history = useHistory();
-    const { movies, error } = useRequest(C.MOVIE_POPULAR);
-    const currentState: string = requestType[req];
-
+    let currentState: string = requestType[req];
+    const randomNumber = Math.floor(Math.random() * 19);
     useEffect(() => {
         const request = async () => {
-            const movieArray: Array<movieInfo> = await getMovieList(currentState);
-            setMovie(movieArray);
+            setIsLoading(false);
+            currentState = requestType[req];
+            const movie: movieList = await fetcher(currentState);
+            setMovies(movie.results);
+            const movieInfo: {
+                movie: detailMovie;
+                trailer: trailerType | undefined;
+            } = await getMovieVideo(movie.results[randomNumber].id);
+            setVideo(movieInfo.trailer);
+            setRandomMovie(movieInfo.movie);
+            setIsLoading(true);
         };
         request();
     }, [req]);
-    useEffect(() => {
-        const request = async () => {
-            const movies: Array<movieInfo> = await getMovieList(requestType.playing);
-            const randomNumber = Math.floor(Math.random() * (movies.length - 1));
-            const trailer = await getMovieVideo(movies[randomNumber].id);
-            setRandomMovie(movies[randomNumber]);
-            setVideo(trailer);
-        };
-        request();
-    }, [req]);
-    if (error) {
-        return <h1>Something went wrong</h1>;
-    }
-    if (!movies) {
-        return <h1>Loading...</h1>;
-    }
-
     const clickEvent = (event: any) => {
         if (event.target.innerHTML === 'Now playing') {
             setReq('playing');
@@ -49,28 +40,38 @@ const Main: React.FC = () => {
             setReq('topRated');
         }
     };
-    return (
+    return isLoading ? (
         <S.Container>
             <S.VideoTitle onClick={() => history.push(`/detail/${randomMovie?.id}`)}>
-                &quot;{video?.title}&quot;
+                &quot;{randomMovie?.title}&quot;
             </S.VideoTitle>
             <S.OverView>{randomMovie?.overview}</S.OverView>
-            <S.VideoContainer>
-                <S.Video
-                    src={video?.path}
-                    frameBorder="0"
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    title="video"
-                ></S.Video>
-            </S.VideoContainer>
+            {video ? (
+                video.path ? (
+                    <S.VideoContainer>
+                        <S.Video
+                            src={video?.path}
+                            frameBorder="0"
+                            allow="autoplay; encrypted-media"
+                            allowFullScreen
+                            title="video"
+                        ></S.Video>
+                    </S.VideoContainer>
+                ) : (
+                    <div>error</div>
+                )
+            ) : (
+                <div>error</div>
+            )}
             <S.TextContainer onClick={clickEvent}>
                 <S.Text isChecked={req === 'playing'}>Now playing</S.Text> /
                 <S.Text isChecked={req === 'popular'}>Popular</S.Text> /
                 <S.Text isChecked={req === 'topRated'}>Most Rated</S.Text>
             </S.TextContainer>
-            <Carousel movieArray={movie} />
+            <Carousel movieArray={movies} />
         </S.Container>
+    ) : (
+        <Loader />
     );
 };
 

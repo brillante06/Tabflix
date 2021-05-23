@@ -1,8 +1,8 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import { RecoilRoot } from 'recoil';
 import Routes from './components/Routes';
 import Global from './styles/global';
-import { RecoilRoot } from 'recoil';
 import theme from './styles/theme';
 
 const App: React.FC = () => (

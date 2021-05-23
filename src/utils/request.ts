@@ -1,11 +1,5 @@
-import {
-    actorInfo,
-    creditResponse,
-    detailMovie,
-    movieInfo,
-    popularResponseType,
-    video,
-} from '../types';
+import axios, { AxiosResponse } from 'axios';
+import { actorInfo, creditResponse, detailMovie, movieInfo, movieList, video } from '../types';
 import * as C from './constants';
 
 export const requestDetail = (movieID: string) =>
@@ -19,7 +13,19 @@ export const requestCredit = (movieID: string) =>
 export const requestWithVideo = (movieID: string) =>
     `${C.API_URL_MOVIE}/${movieID}${C.API_KEY}&append_to_response=videos`;
 
-export const fetcher = async (url: string) => fetch(url).then((res) => res.json());
+export const fetcher = async (URL: string, params?: string) => {
+    const response: AxiosResponse = await axios({
+        method: 'GET',
+        url: URL,
+    });
+    /* eslint-disable no-console */
+    console.log(URL, response.data);
+    /* eslint-disable no-console */
+    if (response.status !== 200) {
+        throw new Error('errrr');
+    }
+    return response.data;
+};
 
 export const requestType: { [req: string]: string } = {
     popular: C.MOVIE_POPULAR,
@@ -40,7 +46,7 @@ export const getMovieDetail = async (req: string) => {
     return detail;
 };
 export const getMovieSimilar = async (req: string) => {
-    const similar: popularResponseType = await fetcher(requestSimilar(req));
+    const similar: movieList = await fetcher(requestSimilar(req));
     return similar.results;
 };
 export const getMovieCredit = async (req: string) => {
@@ -54,10 +60,17 @@ export const getMovieVideo = async (id: string) => {
     if (movie.videos) {
         youtube = movie.videos?.results.filter((value) => value.site === 'YouTube');
     }
-    const trailer = {
-        tagline: movie.tagline,
-        title: movie.title,
-        path: `${C.YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`,
-    };
-    return trailer;
+    /* eslint-disable no-console */
+    console.log(youtube);
+    /* eslint-disable no-console */
+    const trailer = youtube.length
+        ? {
+              tagline: movie.tagline,
+              title: movie.title,
+              path: youtube[0].key
+                  ? `${C.YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`
+                  : undefined,
+          }
+        : undefined;
+    return { movie, trailer };
 };

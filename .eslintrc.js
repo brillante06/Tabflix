@@ -61,6 +61,7 @@ module.exports = {
             'error',
             {
                 multiline: true,
+                consistent: true,
             },
         ],
         'object-property-newline': 'error',

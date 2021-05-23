@@ -32,7 +32,7 @@ export interface actorInfo {
     credit_id: string;
     order: number;
 }
-export interface popularResponseType {
+export interface movieList {
     page: number;
     results: Array<movieInfo>;
     total_pages: number;
@@ -94,23 +94,7 @@ export interface detailMovie {
 export interface trailerType {
     tagline: string;
     title: string;
-    path: string;
-}
-export interface watchProvider {
-    display_priority: number;
-    logo_path: string;
-    provider_id: number;
-    provider_name: string;
-}
-export interface watchProviderResponse {
-    id: string;
-    results: { [key: string]: providerCountry };
-}
-export interface providerCountry {
-    link: string;
-    buy: Array<watchProvider>;
-    rent: Array<watchProvider>;
-    flatrate: Array<watchProvider>;
+    path: string | undefined;
 }
 type videoType = 'Trailer' | 'Teaser' | 'Clip' | 'Featurette' | 'Behind the Scenes' | 'Bloopers';
 export interface video {
