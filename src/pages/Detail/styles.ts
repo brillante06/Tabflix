@@ -17,6 +17,9 @@ export const Container = styled.main`
     margin: auto;
     flex-direction: column;
     z-index: -1;
+    @media ${device.tablet} {
+        z-index: 1;
+    }
 `;
 
 export const Background = styled.section<posterImage>`
