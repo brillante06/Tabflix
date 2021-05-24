@@ -1,28 +1,17 @@
-import React, { createContext, Fragment } from 'react';
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { RecoilRoot } from 'recoil';
 import Routes from './components/Routes';
-import { useDarkMode } from './hooks/useDarkMode';
 import Global from './styles/global';
-import { Dark, Light, Theme } from './styles/theme';
+import theme from './styles/theme';
 
-interface contextProps {
-    theme: Theme;
-    toggleTheme: () => void;
-}
-
-export const ThemeContext = createContext<contextProps>({
-    theme: Light,
-    toggleTheme: () => null,
-});
-const App: React.FC = () => {
-    const { theme, toggleTheme } = useDarkMode();
-    return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
-            <Fragment>
-                <Global theme={theme === Light ? Light : Dark} />
-                <Routes />
-            </Fragment>
-        </ThemeContext.Provider>
-    );
-};
+const App: React.FC = () => (
+    <RecoilRoot>
+        <ThemeProvider theme={theme}>
+            <Global />
+            <Routes />
+        </ThemeProvider>
+    </RecoilRoot>
+);
 
 export default App;

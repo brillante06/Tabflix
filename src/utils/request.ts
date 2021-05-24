@@ -1,36 +1,38 @@
-import {
-    actorInfo,
-    creditResponse,
-    detailMovie,
-    movieInfo,
-    popularResponseType,
-    trailerType,
-    video,
-    videoResponse,
-} from '../types';
-import { API_KEY, API_URL_MOVIE, YOUTUBE_URL } from './constants';
+import axios, { AxiosResponse } from 'axios';
+import { actorInfo, creditResponse, detailMovie, movieInfo, movieList, video } from '../types';
+import * as C from './constants';
 
 export const requestDetail = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}${API_KEY}&language=ko-KR&append_to_response=similar,credits`;
+    `${C.API_URL_MOVIE}/${movieID}${C.API_KEY}&language=ko-KR&append_to_response=similar,credits`;
 export const requestSimilar = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}/similar${API_KEY}&language=kr-KR&page=1`;
+    `${C.API_URL_MOVIE}/${movieID}/similar${C.API_KEY}&language=kr-KR&page=1`;
 export const requestProvider = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}/watch/providers${API_KEY}`;
+    `${C.API_URL_MOVIE}/${movieID}/watch/providers${C.API_KEY}`;
 export const requestCredit = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}/credits${API_KEY}&language=kr-KR`;
+    `${C.API_URL_MOVIE}/${movieID}/credits${C.API_KEY}&language=kr-KR`;
 export const requestWithVideo = (movieID: string) =>
-    `${API_URL_MOVIE}/${movieID}${API_KEY}&append_to_response=videos`;
+    `${C.API_URL_MOVIE}/${movieID}${C.API_KEY}&append_to_response=videos`;
 
-export const fetcher = async (url: string) => {
-    const response = await fetch(url);
-    if (!response.ok) {
-        const error = new Error('Error while fetching the data');
-        error.message = await response.json();
-        throw error;
+export const fetcher = async (URL: string, params?: string) => {
+    const response: AxiosResponse = await axios({
+        method: 'GET',
+        url: URL,
+    });
+    /* eslint-disable no-console */
+    console.log(URL, response.data);
+    /* eslint-disable no-console */
+    if (response.status !== 200) {
+        throw new Error('errrr');
     }
-    const result = await response.json();
-    return result;
+    return response.data;
 };
+
+export const requestType: { [req: string]: string } = {
+    popular: C.MOVIE_POPULAR,
+    topRated: C.MOVIE_TOP_RATED,
+    playing: C.MOVIE_NOW_PLAYING,
+};
+
 export const getMovieList = async (req: string) => {
     const result = await fetcher(req);
     const movieArray: Array<movieInfo> = await result.results.reduce(
@@ -44,7 +46,7 @@ export const getMovieDetail = async (req: string) => {
     return detail;
 };
 export const getMovieSimilar = async (req: string) => {
-    const similar: popularResponseType = await fetcher(requestSimilar(req));
+    const similar: movieList = await fetcher(requestSimilar(req));
     return similar.results;
 };
 export const getMovieCredit = async (req: string) => {
@@ -54,14 +56,26 @@ export const getMovieCredit = async (req: string) => {
 };
 export const getMovieVideo = async (id: string) => {
     const movie: detailMovie = await fetcher(requestWithVideo(id));
+    return movie;
+};
+
+export const videoPath = (randomMovie: detailMovie) => {
+    /* eslint-disable no-console */
+    console.log(randomMovie);
+    /* eslint-disable no-console */
     let youtube: Array<video> = [];
-    if (movie.videos) {
-        youtube = movie.videos?.results.filter((value) => value.site === 'YouTube');
+    if (!randomMovie.videos) {
+        /* eslint-disable no-console */
+        console.log('no video');
+        /* eslint-disable no-console */
+        return null;
     }
-    const trailer = {
-        tagline: movie.tagline,
-        title: movie.title,
-        path: `${YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`,
-    };
-    return trailer;
+    youtube = randomMovie.videos.results.filter((value) => value.site === 'YouTube');
+    if (youtube.length === 0 || !youtube[0].key) {
+        /* eslint-disable no-console */
+        console.log('no video key', youtube);
+        /* eslint-disable no-console */
+        return null;
+    }
+    return `${C.YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`;
 };

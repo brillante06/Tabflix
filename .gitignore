@@ -11,6 +11,7 @@
 # production
 /build
 
+
 # misc
 .DS_Store
 .env.local
@@ -24,3 +25,4 @@ yarn-error.log*
 .env
 .eslintcache
 /src/dummy
+**/__snapshots__/

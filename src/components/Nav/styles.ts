@@ -1,118 +1,113 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Light, Theme } from '../../styles/theme';
+import { device } from '../../styles/theme';
 
 interface props {
-    theme: Theme;
+    isClick: boolean;
 }
 
-export const Container = styled.nav<props>`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 4.5rem;
+export const Menu = styled.div``;
+
+export const navBar = styled.nav`
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: white;
     position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     top: 0;
+    width: 100%;
     left: 0;
     right: 0;
-    z-index: 10;
-    background: ${({ theme }) => theme.bgColor};
+    border-bottom-style: solid;
+    border-width: 0.1px;
+    border-color: beige;
+    @media ${device.tablet} {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 `;
-export const NavContainer = styled.section`
+export const Title = styled(Link)`
+    font-size: 3rem;
+    margin: 0.5rem;
+    font-family: 'Bebas Neue';
+    text-decoration: none;
+`;
+export const MenuButton = styled.a`
+    @media ${device.tablet} {
+        display: flex;
+    }
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    ${Menu} {
+        height: 3px;
+        width: 100%;
+        border-radius: 10px;
+        background-color: tomato;
+        margin: 2px;
+    }
+`;
+export const NavBarLinks = styled.section<props>`
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    @media ${device.tablet} {
+        display: ${(props) => (props.isClick ? 'flex' : 'none')};
+        width: 100%;
+    }
+`;
+
+export const Navigation = styled(Link)`
+    margin: 0.8rem;
+    color: tomato;
+    text-decoration: none;
+`;
+export const NavContainer = styled.section``;
+
+export const LiContainer = styled.li`
+    list-style: none;
+    @media ${device.tablet} {
+        text-align: center;
+        & .link {
+            padding: 0.5rem 1rem;
+        }
+    }
+    &:hover {
+        background-color: seashell;
+    }
+    & .link {
+        color: white;
+        padding: 1rem;
+        display: block;
+        text-decoration: none;
+        @media ${device.tablet} {
+            padding: 0.5rem 1rem;
+            text-align: center;
+        }
+    }
+`;
+
+export const UlContainer = styled.ul`
+    margin: 0;
+    padding: 0;
     display: flex;
-    width: 60%;
+    @media ${device.tablet} {
+        width: 100%;
+        flex-direction: column;
+    }
 `;
+
 export const HeaderContainer = styled.section`
     display: flex;
     justify-content: flex-end;
     width: 95%;
     margin: -1.5rem auto 0;
-`;
-export const navigation = styled.section`
-    height: 2rem;
-    margin: 1rem 1rem 0 1.5rem;
-    text-decoration: none;
-    font-size: 2.3rem;
-`;
-export const HeaderName = styled(Link)`
-    font-size: 1.2rem;
-    text-decoration: none;
-    margin: -0.45rem 2em 0 1.5rem;
-`;
-export const Header = styled.section`
-    width: 70%;
-    margin: 0 auto 0;
-`;
-export const DarkToggle = styled.button<props>`
-    background: ${({ theme }) => theme.gradient};
-    border: 5px solid ${({ theme }) => theme.toggleBorder};
-    border-radius: 30px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-    position: relative;
-    width: 8rem;
-    height: 5rem;
-    overflow: hidden;
-    img {
-        height: 100%;
-        width: 1rem;
-        transition: all 0.3s linear;
-        &:first-child {
-            transform: ${({ theme }) => theme.translateFirst};
-        }
-        &:nth-child(2) {
-            transform: ${({ theme }) => theme.translateSecond};
-        }
-    }
-`;
-
-export const CheckBoxContainer = styled.div`
-    position: relative;
-    margin-left: 1rem;
-`;
-
-export const CheckBoxLabel = styled.label`
-    margin: 1.5rem 0 0 1rem;
-    position: absolute;
-    top: 0.1rem;
-    left: 95%;
-    right: 0.1;
-    width: 2.6rem;
-    height: 1.6rem;
-    border-radius: 16px;
-    background: #1e1e1e;
-    cursor: pointer;
-    &::after {
-        content: '';
-        display: block;
-        border-radius: 50%;
-        width: 18px;
-        height: 18px;
-        margin: 3px;
-        background: #ffffff;
-        box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
-        transition: 0.2s;
-    }
-`;
-
-export const CheckBox = styled.input`
-    opacity: 0;
-    z-index: 1;
-    border-radius: 15px;
-    width: 42px;
-    height: 26px;
-    &:checked + ${CheckBoxLabel} {
-        background: #bebebe;
-        &::after {
-            content: '';
-            display: block;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            margin-left: 21px;
-            transition: 0.2s;
-        }
-    }
 `;

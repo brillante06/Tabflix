@@ -1,23 +1,24 @@
 import styled from 'styled-components';
+import { device } from '../../styles/theme';
 
-interface image {
-    src: string;
-    alt?: string;
-}
-export const movieImage = styled.img<image>`
-    src: ${(props) => props.src};
-    alt: ${(props) => props.alt};
-    border-radius: 1rem;
-`;
-export const movieInfo = styled.p`
+export const MovieInfo = styled.p`
     font-size: 1.2rem;
+    @media ${device.tablet} {
+        font-size: 1rem;
+    }
+    text-overflow: ellipsis;
+    height: 15%;
     padding: -1rem 0 0 4rem;
     margin: 0.6rem 0 1rem 0.8rem;
+    overflow: hidden;
 `;
-export const movieRating = styled.p`
+export const MovieRating = styled.p`
     font-size: 1.2rem;
+    @media ${device.tablet} {
+        font-size: 1rem;
+    }
     padding: -1rem 0 0 4rem;
-    margin: 0.4rem 0.8rem 1rem 0;
+    margin: 0.54rem 0.8rem 1rem 0;
 `;
 export const Container = styled.article`
     border: 1px solid #ccc;

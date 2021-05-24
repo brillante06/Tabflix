@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from '../../styles/theme';
 
 interface isRight {
     rightIndex?: string;
@@ -9,16 +10,27 @@ export const Container = styled.article`
     overflow: hidden;
     width: 75%;
 `;
-
-export const Slide = styled.section`
-    display: none;
-`;
-
-export const slideContainer = styled.div`
+export const SlideContainer = styled.div`
     display: grid;
     grid-auto-flow: column;
     grid-gap: 0.8rem;
     width: 100%;
+    overflow: hidden;
+    @media ${device.tablet} {
+        &:hover {
+            overflow-x: scroll;
+            &::-webkit-scrollbar {
+                width: 0.6rem;
+                height: 10px;
+                border-radius: 2rem;
+                background-color: gainsboro;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.3);
+                border-radius: 1px;
+            }
+        }
+    }
 `;
 export const Arrow = styled.button<isRight>`
     cursor: pointer;
@@ -31,5 +43,8 @@ export const Arrow = styled.button<isRight>`
     right: ${(props) => props.rightIndex};
     &:hover {
         background-color: rgba(0, 0, 0, 0.8);
+    }
+    @media ${device.tablet} {
+        display: none;
     }
 `;

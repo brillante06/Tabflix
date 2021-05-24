@@ -1,16 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
-import {
-    actorInfo,
-    creditResponse,
-    detailMovie,
-    movieInfo,
-    popularResponseType,
-} from '../../types';
+import { actorInfo, detailMovie, genreColor, movieInfo } from '../../types';
 import * as req from '../../utils/request';
 import * as S from './styles';
 import * as C from '../../utils/constants';
-import { Loader, SmallCard } from '../index';
+import { Loader, SmallCard } from '../../components/index';
 import noImage from '../../assets/noImage.jpg';
 
 interface movieID {
@@ -45,9 +39,6 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
         history.push(`/detail/${id}`);
         history.go(0);
     };
-    /* eslint-disable no-console */
-    console.log(detail?.backdrop_path);
-    /* eslint-disable no-console */
     return isLoading ? (
         <Loader />
     ) : (
@@ -70,55 +61,67 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                         {detail?.title}(
                         {detail ? new Date(detail?.release_date).getFullYear() : ' '})
                     </S.Title>
-                    <h3>평점:{detail?.vote_average}</h3>
-                    <h3>런타임:{detail?.runtime}m</h3>
-                    <h3>
-                        👀
-                        {detail?.genres.map((value, index) => (index ? ', ' : '') + value.name)}
-                    </h3>
-                    <h3>개봉일:{detail?.release_date}</h3>
+                    <S.Info>평점:{detail?.vote_average}</S.Info>
+                    <S.Info>런타임:{detail?.runtime}m</S.Info>
+                    <S.GenreContainer>
+                        {detail?.genres.map((value, index) => (
+                            <S.Genre key={index} bgColor={genreColor[value.name]}>
+                                {value.name}
+                            </S.Genre>
+                        ))}
+                    </S.GenreContainer>
+                    <S.Info>개봉일:{detail?.release_date}</S.Info>
                 </S.InfoContainer>
             </S.IntroduceContainer>
-
             <S.Description>
                 {detail?.tagline && <S.Tagline>{detail?.tagline}</S.Tagline>}
                 {detail?.overview}
             </S.Description>
-            <S.ListContainer>
-                <h2>Actor</h2>
+            <S.ListContainer isOverflow={false}>
+                <S.Info>Actor</S.Info>
             </S.ListContainer>
             <S.ListContainer>
-                {credits?.map((value, index) => (
-                    <SmallCard
-                        key={index}
-                        imgName={
-                            value.profile_path
-                                ? `${C.IMAGE_URL_W500}/${value.profile_path}`
-                                : noImage
-                        }
-                        name={value.character}
-                        tag={'actor'}
-                        id={value.id}
-                    />
-                ))}
+                {credits.length !== 0 ? (
+                    credits?.map((value, index) => (
+                        <SmallCard
+                            key={index}
+                            imgName={
+                                value.profile_path
+                                    ? `${C.IMAGE_URL_W500}${value.profile_path}`
+                                    : noImage
+                            }
+                            name={value.character}
+                            tag={'actor'}
+                            id={value.id}
+                            character={value.name}
+                        />
+                    ))
+                ) : (
+                    <h1>No results about actor</h1>
+                )}
+            </S.ListContainer>
+            <S.ListContainer isOverflow={false}>
+                <S.Info>Similar movie</S.Info>
             </S.ListContainer>
             <S.ListContainer>
-                <h2>Similar movie</h2>
-            </S.ListContainer>
-
-            <S.ListContainer>
-                {similar.map((value, index) => (
-                    <SmallCard
-                        name={value.title}
-                        imgName={
-                            value.poster_path ? `${C.IMAGE_URL_W500}/${value.poster_path}` : noImage
-                        }
-                        onClick={() => onClick(value.id)}
-                        id={value.id}
-                        tag={'similar'}
-                        key={index}
-                    />
-                ))}
+                {similar.length !== 0 ? (
+                    similar.map((value, index) => (
+                        <SmallCard
+                            name={value.title}
+                            imgName={
+                                value.poster_path
+                                    ? `${C.IMAGE_URL_W500}${value.poster_path}`
+                                    : noImage
+                            }
+                            onClick={() => onClick(value.id)}
+                            id={value.id}
+                            tag={'similar'}
+                            key={index}
+                        />
+                    ))
+                ) : (
+                    <h1>No results about similar movie</h1>
+                )}
             </S.ListContainer>
         </S.Container>
     );

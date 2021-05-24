@@ -32,7 +32,7 @@ export interface actorInfo {
     credit_id: string;
     order: number;
 }
-export interface popularResponseType {
+export interface movieList {
     page: number;
     results: Array<movieInfo>;
     total_pages: number;
@@ -94,23 +94,7 @@ export interface detailMovie {
 export interface trailerType {
     tagline: string;
     title: string;
-    path: string;
-}
-export interface watchProvider {
-    display_priority: number;
-    logo_path: string;
-    provider_id: number;
-    provider_name: string;
-}
-export interface watchProviderResponse {
-    id: string;
-    results: { [key: string]: providerCountry };
-}
-export interface providerCountry {
-    link: string;
-    buy: Array<watchProvider>;
-    rent: Array<watchProvider>;
-    flatrate: Array<watchProvider>;
+    path: string | undefined;
 }
 type videoType = 'Trailer' | 'Teaser' | 'Clip' | 'Featurette' | 'Behind the Scenes' | 'Bloopers';
 export interface video {
@@ -127,3 +111,20 @@ export interface videoResponse {
     id: number;
     results: Array<video>;
 }
+export interface colorType {
+    [key: string]: string;
+}
+export const genreColor: colorType = {
+    모험: '#4ec9b0',
+    판타지: '#595ab6',
+    가족: '#ffa400',
+    SF: '#990066',
+    드라마: '#3bb33b',
+    애니메이션: '#CCFF00',
+    코미디: '#0cce6b',
+    액션: '#FF0000',
+    스릴러: '#336666',
+    범죄: '#CC0000',
+    로맨스: '#FF3399',
+    공포: '#606060',
+};

@@ -61,6 +61,7 @@ module.exports = {
             'error',
             {
                 multiline: true,
+                consistent: true,
             },
         ],
         'object-property-newline': 'error',
@@ -79,6 +80,7 @@ module.exports = {
                 tsx: 'never',
             },
         ],
+
         'eol-last': ['error', 'always'],
         'import/no-unresolved': 'off',
         '@typescript-eslint/member-delimiter-style': 0,
@@ -87,6 +89,7 @@ module.exports = {
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'linebreak-style': 0,
         'max-len': 0,
+        camelcase: 'off',
     },
     settings: {
         react: {

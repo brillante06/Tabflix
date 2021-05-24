@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface isActive {
+    color: string;
+}
+
 export const Container = styled.main`
     width: 100%;
     padding-bottom: 2rem;
@@ -11,7 +15,7 @@ export const Input = styled.input`
     border: 1px;
     display: block;
     margin: 0 auto 2rem;
-    border-radius: 2rem;
+    border-radius: 1rem;
     border: 1px solid;
     &:focus {
         outline: none;
@@ -36,12 +40,13 @@ export const movieList = styled.section`
         border-radius: 1px;
     }
 `;
-export const movieName = styled.article`
+export const movieName = styled.article<isActive>`
     width: 80%;
     font-size: 2.1rem;
     &:hover {
         background-color: #dee1e5;
     }
+    background-color: ${(props) => props.color};
     border-radius: 0.3rem;
     margin: 0 0 0.5rem 1rem;
 `;

@@ -1,11 +1,9 @@
 export { default as Card } from './Card';
 export { default as CardList } from './CardList';
-export { default as Header } from './Nav';
-export { default as Search } from './Search';
-export { default as Routes } from './Routes';
-export { default as Popular } from './Popular';
-export { default as Detail } from './Detail';
-export { default as SmallCard } from './SmallCard';
 export { default as Carousel } from './Carousel';
 export { default as Image } from './Image';
 export { default as Loader } from './Loader';
+export { default as Header } from './Nav';
+export { default as Routes } from './Routes';
+export { default as Search } from './Search';
+export { default as SmallCard } from './SmallCard';

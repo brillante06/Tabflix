@@ -17,3 +17,8 @@ export const Name = styled.p`
     text-align: center;
     font-size: 1rem;
 `;
+export const Character = styled.p<props>`
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: ${(props) => (props.tag === 'similar' ? '' : 'bolder')};
+`;
