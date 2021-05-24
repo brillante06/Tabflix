@@ -15,7 +15,6 @@ export const SlideContainer = styled.div`
     grid-auto-flow: column;
     grid-gap: 0.8rem;
     width: 100%;
-    overflow: hidden;
     @media ${device.tablet} {
         &:hover {
             overflow-x: scroll;

@@ -13,11 +13,11 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
     const [index, setIndex] = useState(0);
     const history = useHistory();
     const slideRef = useRef<HTMLDivElement>(null);
-    const TOTAL_SLIDES = 3;
+    const TOTAL_SLIDES = 10;
     useEffect(() => {
         if (slideRef.current) {
             slideRef.current.style.transition = 'all 0.5s ease-in-out';
-            slideRef.current.style.transform = `translateX(-${index * 5}0%)`;
+            slideRef.current.style.transform = `translateX(-${index}00%)`;
         }
     }, [index]);
     const moveNext = () => {
