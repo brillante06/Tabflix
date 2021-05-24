@@ -21,9 +21,6 @@ const Header: React.FC = () => {
                     <S.LiContainer>
                         <S.Navigation to="/about">About</S.Navigation>
                     </S.LiContainer>
-                    <S.LiContainer>
-                        <S.Navigation to="/login">Login</S.Navigation>
-                    </S.LiContainer>
                 </S.UlContainer>
             </S.NavBarLinks>
         </S.navBar>
