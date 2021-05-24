@@ -56,21 +56,26 @@ export const getMovieCredit = async (req: string) => {
 };
 export const getMovieVideo = async (id: string) => {
     const movie: detailMovie = await fetcher(requestWithVideo(id));
+    return movie;
+};
+
+export const videoPath = (randomMovie: detailMovie) => {
+    /* eslint-disable no-console */
+    console.log(randomMovie);
+    /* eslint-disable no-console */
     let youtube: Array<video> = [];
-    if (movie.videos) {
-        youtube = movie.videos?.results.filter((value) => value.site === 'YouTube');
+    if (!randomMovie.videos) {
+        /* eslint-disable no-console */
+        console.log('no video');
+        /* eslint-disable no-console */
+        return null;
     }
-    /* eslint-disable no-console */
-    console.log(youtube);
-    /* eslint-disable no-console */
-    const trailer = youtube.length
-        ? {
-              tagline: movie.tagline,
-              title: movie.title,
-              path: youtube[0].key
-                  ? `${C.YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`
-                  : undefined,
-          }
-        : undefined;
-    return { movie, trailer };
+    youtube = randomMovie.videos.results.filter((value) => value.site === 'YouTube');
+    if (youtube.length === 0 || !youtube[0].key) {
+        /* eslint-disable no-console */
+        console.log('no video key', youtube);
+        /* eslint-disable no-console */
+        return null;
+    }
+    return `${C.YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`;
 };

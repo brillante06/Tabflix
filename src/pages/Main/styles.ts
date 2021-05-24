@@ -24,10 +24,20 @@ export const Video = styled.iframe`
     }
 `;
 export const Error = styled.section`
-    width: 100%;
+    display: flex;
     height: 400px;
     @media ${device.tablet} {
         height: 300px;
+    }
+`;
+export const ErrorText = styled.article`
+    margin: 2rem auto 1rem;
+    font-size: 3rem;
+    @media ${device.tablet} {
+        font-size: 2rem;
+    }
+    @media ${device.mobile} {
+        font-size: 1rem;
     }
 `;
 export const OverView = styled.section`
