@@ -20,6 +20,7 @@ export const SlideContainer = styled.div`
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    -webkit-overflow-scrolling: touch;
     grid-gap: 1rem;
     width: 100%;
     scroll-behavior: smooth;
