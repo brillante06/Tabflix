@@ -1,7 +1,7 @@
 # Tabflix
 
 
-[페이지](https://tabflix-qmj761ml5-brillante06.vercel.app/)
+[페이지](https://tabflix.vercel.app/)
 <br/><br/>
 ## 프로젝트 소개
 
