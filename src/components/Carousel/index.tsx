@@ -10,28 +10,36 @@ interface Props {
     movieArray: Array<movieInfo>;
 }
 const Carousel: React.FC<Props> = ({ movieArray }) => {
-    const [index, setIndex] = useState(0);
+    const [scrollAmount, setScrollAmount] = useState(0);
+    const itemRef = useRef<HTMLDivElement>(null);
     const history = useHistory();
     const slideRef = useRef<HTMLDivElement>(null);
-    const TOTAL_SLIDES = 10;
     useEffect(() => {
         if (slideRef.current) {
-            slideRef.current.style.transition = 'all 0.5s ease-in-out';
-            slideRef.current.style.transform = `translateX(-${index}00%)`;
+            slideRef.current.scrollTo({
+                top: 0,
+                left: scrollAmount,
+                behavior: 'smooth',
+            });
         }
-    }, [index]);
+    }, [scrollAmount]);
+
     const moveNext = () => {
-        if (index === TOTAL_SLIDES) {
-            setIndex(0);
-        } else {
-            setIndex(index + 1);
+        if (slideRef.current) {
+            if (itemRef.current) {
+                if (slideRef.current.scrollWidth <= scrollAmount + itemRef.current.clientWidth * 5)
+                    setScrollAmount(0);
+                else setScrollAmount(scrollAmount + itemRef.current.clientWidth * 5);
+            }
         }
     };
     const movePrev = () => {
-        if (index === 0) {
-            setIndex(TOTAL_SLIDES);
-        } else {
-            setIndex(index - 1);
+        if (slideRef.current) {
+            if (itemRef.current) {
+                if (scrollAmount - itemRef.current.clientWidth * 5 < 0)
+                    setScrollAmount(slideRef.current.scrollWidth);
+                else setScrollAmount(scrollAmount - itemRef.current.clientWidth * 5);
+            }
         }
     };
     const onClick = (id: string) => {
@@ -41,19 +49,21 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
         <S.Container>
             <S.SlideContainer ref={slideRef}>
                 {movieArray.map((value: movieInfo, idx: number) => (
-                    <Card
-                        title={value.title}
-                        onClick={onClick}
-                        id={value.id}
-                        key={idx}
-                        image={
-                            value.backdrop_path
-                                ? `${C.IMAGE_URL_W500}/${value.poster_path}`
-                                : noImage
-                        }
-                        movie={value}
-                        tag={true}
-                    ></Card>
+                    <S.Item ref={itemRef} key={idx}>
+                        <Card
+                            title={value.title}
+                            onClick={onClick}
+                            id={value.id}
+                            key={idx}
+                            image={
+                                value.backdrop_path
+                                    ? `${C.IMAGE_URL_W500}/${value.poster_path}`
+                                    : noImage
+                            }
+                            movie={value}
+                            tag={true}
+                        />
+                    </S.Item>
                 ))}
             </S.SlideContainer>
             <S.Arrow onClick={moveNext} rightIndex={'0'}>

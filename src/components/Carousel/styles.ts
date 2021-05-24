@@ -9,12 +9,22 @@ export const Container = styled.article`
     margin: 0 auto 5rem;
     overflow: hidden;
     width: 75%;
+    display: grid;
+    grid-template-columns: repeat(3, 100%);
+    scroll-behavior: smooth;
 `;
+export const Item = styled.section``;
 export const SlideContainer = styled.div`
+    position: relative;
+    width: 100%;
     display: grid;
     grid-auto-flow: column;
-    grid-gap: 0.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 1rem;
     width: 100%;
+    scroll-behavior: smooth;
+    overflow-y: hidden;
+    overflow-x: hidden;
     @media ${device.tablet} {
         &:hover {
             overflow-x: scroll;
@@ -31,6 +41,7 @@ export const SlideContainer = styled.div`
         }
     }
 `;
+
 export const Arrow = styled.button<isRight>`
     cursor: pointer;
     position: absolute;
