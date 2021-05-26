@@ -6,6 +6,7 @@ import * as S from './styles';
 import * as C from '../../utils/constants';
 import { Loader, SmallCard } from '../../components/index';
 import noImage from '../../assets/noImage.jpg';
+import { AspectRatio } from '../../components/AspectRatio';
 
 interface movieID {
     id: string;

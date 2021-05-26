@@ -11,11 +11,20 @@ interface Props {
 }
 const Carousel: React.FC<Props> = ({ movieArray }) => {
     const [scrollAmount, setScrollAmount] = useState(0);
-    const itemRef = useRef<HTMLDivElement>(null);
+    const itemRef = useRef<HTMLLIElement>(null);
     const history = useHistory();
-    const slideRef = useRef<HTMLDivElement>(null);
+    const slideRef = useRef<HTMLUListElement>(null);
     useEffect(() => {
         if (slideRef.current) {
+            /* eslint-disable no-console */
+            console.log(
+                slideRef.current.scrollWidth,
+                scrollAmount,
+                itemRef.current?.clientWidth,
+                slideRef.current.clientWidth,
+                slideRef.current.offsetWidth
+            );
+            /* eslint-disable no-console */
             slideRef.current.scrollTo({
                 top: 0,
                 left: scrollAmount,
@@ -27,18 +36,23 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
     const moveNext = () => {
         if (slideRef.current) {
             if (itemRef.current) {
-                if (slideRef.current.scrollWidth <= scrollAmount + itemRef.current.clientWidth * 5)
-                    setScrollAmount(0);
-                else setScrollAmount(scrollAmount + itemRef.current.clientWidth * 5);
+                if (slideRef.current.scrollWidth === scrollAmount) {
+                    setScrollAmount(scrollAmount * 0);
+                } else if (
+                    slideRef.current.scrollWidth <
+                    scrollAmount + itemRef.current.clientWidth * 4
+                )
+                    setScrollAmount(slideRef.current.scrollWidth);
+                else setScrollAmount(scrollAmount + itemRef.current.clientWidth * 4);
             }
         }
     };
     const movePrev = () => {
         if (slideRef.current) {
             if (itemRef.current) {
-                if (scrollAmount - itemRef.current.clientWidth * 5 < 0)
+                if (scrollAmount - itemRef.current.clientWidth * 4 < 0)
                     setScrollAmount(slideRef.current.scrollWidth);
-                else setScrollAmount(scrollAmount - itemRef.current.clientWidth * 5);
+                else setScrollAmount(scrollAmount - itemRef.current.clientWidth * 4);
             }
         }
     };
@@ -56,8 +70,8 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
                             id={value.id}
                             key={idx}
                             image={
-                                value.backdrop_path
-                                    ? `${C.IMAGE_URL_W500}/${value.poster_path}`
+                                value.poster_path
+                                    ? `${C.IMAGE_URL_W500}${value.backdrop_path}`
                                     : noImage
                             }
                             movie={value}

@@ -21,6 +21,7 @@ export const Container = styled.main`
         z-index: 1;
     }
 `;
+export const Items = styled.section``;
 
 export const Background = styled.section<posterImage>`
     width: 100%;

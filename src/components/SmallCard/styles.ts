@@ -7,6 +7,7 @@ export const Container = styled.article<props>`
     border: 1px solid #ccc;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
     margin: 0 1rem 2rem 1rem;
+    max-width: 24rem;
 `;
 
 export const Image = styled.img<props>`

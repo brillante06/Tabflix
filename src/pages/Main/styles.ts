@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { device } from '../../styles/theme';
+import { OuterWrapper } from '../../components/AspectRatio/index';
 
 interface checked {
     isChecked: boolean;
@@ -18,10 +19,7 @@ export const VideoContainer = styled.section`
 `;
 export const Video = styled.iframe`
     width: 100%;
-    height: 400px;
-    @media ${device.tablet} {
-        height: 300px;
-    }
+    height: 100%;
 `;
 export const Error = styled.section`
     display: flex;

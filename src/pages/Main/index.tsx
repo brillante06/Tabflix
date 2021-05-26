@@ -5,6 +5,7 @@ import { detailMovie, movieInfo, movieList } from '../../types';
 import Carousel from '../../components/Carousel';
 import { fetcher, requestType, requestWithVideo, videoPath } from '../../utils/request';
 import { Loader } from '../../components';
+import { AspectRatio } from '../../components/AspectRatio';
 
 const Main: React.FC = () => {
     const [req, setReq] = useState<string>('popular');
@@ -50,19 +51,22 @@ const Main: React.FC = () => {
             <S.OverView>{randomMovie?.overview}</S.OverView>
             <S.VideoContainer>
                 {video ? (
-                    <S.Video
-                        src={video}
-                        frameBorder="0"
-                        allow="autoplay; encrypted-media"
-                        allowFullScreen
-                        title="video"
-                    ></S.Video>
+                    <AspectRatio ratio={16 / 6}>
+                        <S.Video
+                            src={video}
+                            frameBorder="0"
+                            allow="autoplay; encrypted-media"
+                            allowFullScreen
+                            title="video"
+                        ></S.Video>
+                    </AspectRatio>
                 ) : (
                     <S.Error>
                         <S.ErrorText>Sorry...Video is not available🙏</S.ErrorText>
                     </S.Error>
                 )}
             </S.VideoContainer>
+
             <S.TextContainer onClick={clickEvent}>
                 <S.Text isChecked={req === 'playing'}>Now playing</S.Text> /
                 <S.Text isChecked={req === 'popular'}>Popular</S.Text> /

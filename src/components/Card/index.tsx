@@ -4,6 +4,7 @@ import { useIntersecting } from '../../hooks/useIntersecting';
 import { movieInfo } from '../../types';
 import * as S from './styles';
 import { Image } from '../index';
+import { AspectRatio } from '../AspectRatio';
 
 interface movieCard {
     image: string;
@@ -31,15 +32,11 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, movie, tag }) => {
     useIntersecting(lazyRef, lazyLoading);
     return (
         <S.Container onClick={onClickMove}>
-            <Image
-                src={image}
-                alt={title}
-                width={'100%'}
-                ref={lazyRef}
-                key={title}
-                tag={tag}
-                height={'65%'}
-            />
+            <S.ImgWrapper>
+                <AspectRatio ratio={16 / 10}>
+                    <Image src={image} alt={title} ref={lazyRef} key={title} tag={tag} />
+                </AspectRatio>
+            </S.ImgWrapper>
             <S.MovieInfo>{title}</S.MovieInfo>
             <S.InfoContainer>
                 <S.MovieInfo>{moment(movie?.release_date).year()}</S.MovieInfo>

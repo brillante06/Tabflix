@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 
 const Header: React.FC = () => {
     const [active, setActive] = useState(false);
+    useEffect(() => {
+        setActive(false);
+    }, []);
     return (
         <S.navBar>
             <S.Navigation to="/" style={{ fontFamily: 'Bebas Neue', fontSize: '3rem' }}>
