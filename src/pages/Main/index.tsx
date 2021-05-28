@@ -9,6 +9,7 @@ import { AspectRatio } from '../../components/AspectRatio';
 
 const Main: React.FC = () => {
     const [req, setReq] = useState<string>('popular');
+    const [overView, setOverView] = useState<boolean>(true);
     const [movies, setMovies] = useState<movieInfo[]>([]);
     const [randomMovie, setRandomMovie] = useState<Partial<detailMovie>>({});
     const [video, setVideo] = useState<string | null>('');
@@ -33,6 +34,7 @@ const Main: React.FC = () => {
         };
         request();
     }, [req]);
+    setTimeout(() => setOverView(false), 5500);
 
     const clickEvent = (event: any) => {
         if (event.target.innerHTML === 'Now playing') {
@@ -45,13 +47,18 @@ const Main: React.FC = () => {
     };
     return isLoading ? (
         <S.Container>
-            <S.VideoTitle onClick={() => history.push(`/detail/${randomMovie.id}`)}>
-                &quot;{randomMovie.title}&quot;
-            </S.VideoTitle>
-            <S.OverView>{randomMovie?.overview}</S.OverView>
-            <S.VideoContainer>
-                {video ? (
-                    <AspectRatio ratio={16 / 6}>
+            {video ? (
+                <S.VideoContainer>
+                    <S.Introduce>
+                        <S.VideoTitle
+                            isShow={overView}
+                            onClick={() => history.push(`/detail/${randomMovie.id}`)}
+                        >
+                            &quot;{randomMovie.title}&quot;
+                        </S.VideoTitle>
+                        <S.OverView isShow={overView}>{randomMovie.overview}</S.OverView>
+                    </S.Introduce>
+                    <AspectRatio ratio={16 / 8}>
                         <S.Video
                             src={video}
                             frameBorder="0"
@@ -60,12 +67,12 @@ const Main: React.FC = () => {
                             title="video"
                         ></S.Video>
                     </AspectRatio>
-                ) : (
-                    <S.Error>
-                        <S.ErrorText>Sorry...Video is not available🙏</S.ErrorText>
-                    </S.Error>
-                )}
-            </S.VideoContainer>
+                </S.VideoContainer>
+            ) : (
+                <S.Error>
+                    <S.ErrorText>Sorry...Video is not available🙏</S.ErrorText>
+                </S.Error>
+            )}
 
             <S.TextContainer onClick={clickEvent}>
                 <S.Text isChecked={req === 'playing'}>Now playing</S.Text> /

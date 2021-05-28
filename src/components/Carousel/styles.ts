@@ -10,7 +10,7 @@ export const Container = styled.article`
     margin: 0 auto 0;
 `;
 export const Item = styled.li`
-    flex: 0 0 calc(100% / 6);
+    flex: 0 0 calc(100% / 5);
     list-style: none;
 `;
 export const SlideContainer = styled.ul`
@@ -40,7 +40,7 @@ export const Arrow = styled.button<isRight>`
     position: absolute;
     top: 50%;
     width: auto;
-    padding: 16px;
+    padding: 14px;
     user-select: none;
     transition: 0.6s ease;
     right: ${(props) => props.rightIndex};

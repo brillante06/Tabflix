@@ -16,15 +16,6 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
     const slideRef = useRef<HTMLUListElement>(null);
     useEffect(() => {
         if (slideRef.current) {
-            /* eslint-disable no-console */
-            console.log(
-                slideRef.current.scrollWidth,
-                scrollAmount,
-                itemRef.current?.clientWidth,
-                slideRef.current.clientWidth,
-                slideRef.current.offsetWidth
-            );
-            /* eslint-disable no-console */
             slideRef.current.scrollTo({
                 top: 0,
                 left: scrollAmount,
@@ -36,23 +27,18 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
     const moveNext = () => {
         if (slideRef.current) {
             if (itemRef.current) {
-                if (slideRef.current.scrollWidth === scrollAmount) {
-                    setScrollAmount(scrollAmount * 0);
-                } else if (
-                    slideRef.current.scrollWidth <
-                    scrollAmount + itemRef.current.clientWidth * 4
-                )
-                    setScrollAmount(slideRef.current.scrollWidth);
-                else setScrollAmount(scrollAmount + itemRef.current.clientWidth * 4);
+                if (slideRef.current.scrollWidth < scrollAmount + itemRef.current.clientWidth * 5)
+                    setScrollAmount(0);
+                else setScrollAmount(scrollAmount + itemRef.current.clientWidth * 5);
             }
         }
     };
     const movePrev = () => {
         if (slideRef.current) {
             if (itemRef.current) {
-                if (scrollAmount - itemRef.current.clientWidth * 4 < 0)
+                if (scrollAmount - itemRef.current.clientWidth * 5 < 0)
                     setScrollAmount(slideRef.current.scrollWidth);
-                else setScrollAmount(scrollAmount - itemRef.current.clientWidth * 4);
+                else setScrollAmount(scrollAmount - itemRef.current.clientWidth * 5);
             }
         }
     };

@@ -15,12 +15,7 @@ const Global = createGlobalStyle`
             font-size:70%;
         }
     } 
-    html{
-        --min-card-width:250px;
-        --spacing:24px;
-        --ratio-percent:75%;
-        --addl-height:100px;
-    }
+
     body{
         width:100%;
         height:100%;
