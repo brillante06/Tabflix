@@ -48,11 +48,10 @@ export const OverView = styled.section<props>`
 
 export const TextContainer = styled.section`
     display: flex;
-    width: 65%;
+    width: 80%;
     margin: 2rem auto 2rem;
     font-weight: bold;
     font-size: 1.4rem;
-    justify-content: center;
 `;
 export const VideoTitle = styled.section<props>`
     margin: 0 auto 3rem;
