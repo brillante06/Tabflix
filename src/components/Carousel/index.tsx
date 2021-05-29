@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
+import ResizeObserver from 'resize-observer-polyfill';
 import { movieInfo } from '../../types';
 import { Card } from '../index';
 import * as S from './styles';
@@ -11,6 +12,7 @@ interface Props {
 }
 const Carousel: React.FC<Props> = ({ movieArray }) => {
     const [scrollAmount, setScrollAmount] = useState(0);
+    const [slideCount, setSlideCount] = useState(5);
     const itemRef = useRef<HTMLLIElement>(null);
     const history = useHistory();
     const slideRef = useRef<HTMLUListElement>(null);
@@ -23,22 +25,42 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
             });
         }
     }, [scrollAmount]);
-
+    const calSlideCount = () => {
+        if (window.innerWidth < 1400 && window.innerWidth > 855) {
+            setSlideCount(4);
+        } else if (window.innerWidth <= 855) {
+            setSlideCount(3);
+        }
+    };
+    useEffect(() => {
+        if (slideRef.current) {
+            const resizeObs = new ResizeObserver(calSlideCount);
+            const cleanUp = () => {
+                resizeObs.disconnect();
+            };
+            resizeObs.observe(slideRef.current);
+            return cleanUp();
+        }
+        return undefined;
+    }, []);
     const moveNext = () => {
         if (slideRef.current) {
             if (itemRef.current) {
-                if (slideRef.current.scrollWidth < scrollAmount + itemRef.current.clientWidth * 5)
+                if (
+                    slideRef.current.scrollWidth <
+                    scrollAmount + itemRef.current.clientWidth * slideCount
+                )
                     setScrollAmount(0);
-                else setScrollAmount(scrollAmount + itemRef.current.clientWidth * 5);
+                else setScrollAmount(scrollAmount + itemRef.current.clientWidth * slideCount);
             }
         }
     };
     const movePrev = () => {
         if (slideRef.current) {
             if (itemRef.current) {
-                if (scrollAmount - itemRef.current.clientWidth * 5 < 0)
+                if (scrollAmount - itemRef.current.clientWidth * slideCount < 0)
                     setScrollAmount(slideRef.current.scrollWidth);
-                else setScrollAmount(scrollAmount - itemRef.current.clientWidth * 5);
+                else setScrollAmount(scrollAmount - itemRef.current.clientWidth * slideCount);
             }
         }
     };

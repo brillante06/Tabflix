@@ -1,36 +1,54 @@
 import styled from 'styled-components';
 import { device } from '../../styles/theme';
 
-export const MovieInfo = styled.p`
+export const MovieTitle = styled.p`
     font-size: 1.2rem;
     @media ${device.tablet} {
         font-size: 1rem;
     }
     text-overflow: ellipsis;
-    padding: -1rem 0 0 4rem;
-    margin: 0.6rem 0 1rem 0.8rem;
+    margin: 0.6rem 0 1rem 0;
     overflow: hidden;
+    height: 2.7rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.3rem;
+    @media ${device.tablet} {
+        line-height: 1rem;
+        height: 2rem;
+    }
+`;
+export const MovieYear = styled.div`
+    font-size: 1.2rem;
+    @media ${device.tablet} {
+        font-size: 1rem;
+    }
 `;
 export const MovieRating = styled.p`
     font-size: 1.2rem;
     @media ${device.tablet} {
         font-size: 1rem;
     }
-    padding: -1rem 0 0 4rem;
-    margin: 0.54rem 0.8rem 1rem 0;
+    margin: 0 0.8rem 1rem 0;
 `;
 export const Container = styled.article`
     border: 1px solid #ccc;
     border-radius: 1rem;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-    max-width: 18rem;
+    max-width: 23rem;
     background-color: white;
     margin-right: 10px;
-    height: 17rem;
 `;
 export const InfoContainer = styled.article`
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    margin-left: 0.6rem;
+`;
+export const Info = styled.section`
+    display: flex;
+    justify-content: space-evenly;
 `;
 export const ImgWrapper = styled.section`
     width: 100%;

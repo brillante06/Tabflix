@@ -65,6 +65,7 @@ const Main: React.FC = () => {
                             allow="autoplay; encrypted-media"
                             allowFullScreen
                             title="video"
+                            onEnded={() => alert('12')}
                         ></S.Video>
                     </AspectRatio>
                 </S.VideoContainer>
@@ -75,9 +76,11 @@ const Main: React.FC = () => {
             )}
 
             <S.TextContainer onClick={clickEvent}>
-                <S.Text isChecked={req === 'playing'}>Now playing</S.Text> /
+                <S.Text isChecked={req === 'playing'}>Now playing</S.Text>
+                <S.Showmore>asdf</S.Showmore>
+                {/* /
                 <S.Text isChecked={req === 'popular'}>Popular</S.Text> /
-                <S.Text isChecked={req === 'topRated'}>Most Rated</S.Text>
+                <S.Text isChecked={req === 'topRated'}>Most Rated</S.Text> */}
             </S.TextContainer>
             <Carousel movieArray={movies} />
         </S.Container>

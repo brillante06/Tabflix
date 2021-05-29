@@ -80,11 +80,17 @@ export const Introduce = styled.article`
     position: absolute;
     color: white;
 `;
-
+export const Showmore = styled.article`
+    width: 1rem;
+    display: none;
+`;
 export const Text = styled.article<checked>`
     cursor: pointer;
     &:hover {
         color: red;
+    }
+    &:hover + ${Showmore} {
+        display: block;
     }
     ${(props) => (props.isChecked ? 'color:tomato' : 'color:black')}
 `;

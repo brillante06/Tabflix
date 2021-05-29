@@ -37,10 +37,12 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, movie, tag }) => {
                     <Image src={image} alt={title} ref={lazyRef} key={title} tag={tag} />
                 </AspectRatio>
             </S.ImgWrapper>
-            <S.MovieInfo>{title}</S.MovieInfo>
             <S.InfoContainer>
-                <S.MovieInfo>{moment(movie?.release_date).year()}</S.MovieInfo>
-                <S.MovieRating> ⭐{movie?.vote_average}/10</S.MovieRating>
+                <S.MovieTitle>{title}</S.MovieTitle>
+                <S.Info>
+                    <S.MovieYear>{moment(movie?.release_date).year()}</S.MovieYear>
+                    <S.MovieRating> ⭐{movie?.vote_average}/10</S.MovieRating>
+                </S.Info>
             </S.InfoContainer>
         </S.Container>
     );
