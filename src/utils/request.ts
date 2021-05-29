@@ -18,11 +18,8 @@ export const fetcher = async (URL: string, params?: string) => {
         method: 'GET',
         url: URL,
     });
-    /* eslint-disable no-console */
-    console.log(URL, response.data);
-    /* eslint-disable no-console */
     if (response.status !== 200) {
-        throw new Error('errrr');
+        throw new Error('error');
     }
     return response.data;
 };
@@ -60,21 +57,12 @@ export const getMovieVideo = async (id: string) => {
 };
 
 export const videoPath = (randomMovie: detailMovie) => {
-    /* eslint-disable no-console */
-    console.log(randomMovie);
-    /* eslint-disable no-console */
     let youtube: Array<video> = [];
     if (!randomMovie.videos) {
-        /* eslint-disable no-console */
-        console.log('no video');
-        /* eslint-disable no-console */
         return null;
     }
     youtube = randomMovie.videos.results.filter((value) => value.site === 'YouTube');
     if (youtube.length === 0 || !youtube[0].key) {
-        /* eslint-disable no-console */
-        console.log('no video key', youtube);
-        /* eslint-disable no-console */
         return null;
     }
     return `${C.YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`;
