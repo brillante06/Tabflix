@@ -4,12 +4,15 @@ import * as S from './styles';
 import { detailMovie, movieInfo, movieList } from '../../types';
 import Carousel from '../../components/Carousel';
 import { fetcher, requestType, requestWithVideo, videoPath } from '../../utils/request';
-import { Loader } from '../../components';
+import { Card, Loader } from '../../components';
+import * as C from '../../utils/constants';
+import noImage from '../../assets/noImage.jpg';
+
 import { AspectRatio } from '../../components/AspectRatio';
+import Video from '../../components/Video';
 
 const Main: React.FC = () => {
     const [req, setReq] = useState<string>('popular');
-    const [overView, setOverView] = useState<boolean>(true);
     const [movies, setMovies] = useState<movieInfo[]>([]);
     const [randomMovie, setRandomMovie] = useState<Partial<detailMovie>>({});
     const [video, setVideo] = useState<string | null>('');
@@ -34,7 +37,6 @@ const Main: React.FC = () => {
         };
         request();
     }, [req]);
-    setTimeout(() => setOverView(false), 5500);
 
     const clickEvent = (event: any) => {
         if (event.target.innerHTML === 'Now playing') {
@@ -47,38 +49,27 @@ const Main: React.FC = () => {
     };
     return isLoading ? (
         <S.Container>
-            {video ? (
-                <S.VideoContainer>
-                    <S.Introduce>
-                        <S.VideoTitle
-                            isShow={overView}
-                            onClick={() => history.push(`/detail/${randomMovie.id}`)}
-                        >
-                            &quot;{randomMovie.title}&quot;
-                        </S.VideoTitle>
-                        <S.OverView isShow={overView}>{randomMovie.overview}</S.OverView>
-                    </S.Introduce>
-                    <AspectRatio ratio={16 / 7}>
-                        <S.Video
-                            src={video}
-                            frameBorder="0"
-                            allow="autoplay; encrypted-media"
-                            allowFullScreen
-                            title="video"
-                        ></S.Video>
-                    </AspectRatio>
-                </S.VideoContainer>
-            ) : (
-                <S.Error>
-                    <S.ErrorText>Sorry...Video is not available🙏</S.ErrorText>
-                </S.Error>
-            )}
-
+            <Video videoURL={video} movie={randomMovie} />
             <S.TextContainer onClick={clickEvent}>
                 <S.Text isChecked={req === 'playing'}>Now playing</S.Text>
                 <S.Showmore>모두보기&gt;</S.Showmore>
             </S.TextContainer>
-            <Carousel movieArray={movies} />
+            <Carousel
+                items={movies.map((value: movieInfo, idx) => (
+                    <Card
+                        title={value.title}
+                        id={value.id}
+                        key={idx}
+                        image={
+                            value.poster_path
+                                ? `${C.IMAGE_URL_W500}${value.backdrop_path}`
+                                : noImage
+                        }
+                        movie={value}
+                        tag={true}
+                    />
+                ))}
+            />
         </S.Container>
     ) : (
         <Loader />

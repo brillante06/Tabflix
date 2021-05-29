@@ -1,18 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
-import ResizeObserver from 'resize-observer-polyfill';
-import { movieInfo } from '../../types';
-import { Card } from '../index';
 import * as S from './styles';
-import * as C from '../../utils/constants';
-import noImage from '../../assets/noImage.jpg';
 
 interface Props {
-    movieArray: Array<movieInfo>;
+    items: React.ReactNode;
 }
-const Carousel: React.FC<Props> = ({ movieArray }) => {
+const Carousel: React.FC<Props> = ({ items }) => {
     const [scrollAmount, setScrollAmount] = useState(0);
-    const [slideCount, setSlideCount] = useState(5);
     const itemRef = useRef<HTMLLIElement>(null);
     const history = useHistory();
     const slideRef = useRef<HTMLUListElement>(null);
@@ -25,24 +19,7 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
             });
         }
     }, [scrollAmount]);
-    const calSlideCount = () => {
-        if (window.innerWidth > 1400) {
-            setSlideCount(5);
-        } else if (window.innerWidth <= 1400 && window.innerWidth > 855) {
-            setSlideCount(4);
-        } else if (window.innerWidth <= 855) {
-            setSlideCount(3);
-        }
-    };
-    useEffect(() => {
-        if (slideRef.current) {
-            const resizeObs = new ResizeObserver(calSlideCount);
-            const cleanup = () => resizeObs.disconnect();
-            resizeObs.observe(slideRef.current);
-            return () => cleanup();
-        }
-        return undefined;
-    }, []);
+
     const moveNext = () => {
         if (slideRef.current) {
             if (slideRef.current.scrollWidth < scrollAmount + slideRef.current.offsetWidth)
@@ -57,30 +34,9 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
             else setScrollAmount(scrollAmount - slideRef.current.offsetWidth);
         }
     };
-    const onClick = (id: string) => {
-        history.push(`/detail/${id}`);
-    };
     return (
         <S.Container>
-            <S.SlideContainer ref={slideRef}>
-                {movieArray?.map((value: movieInfo, idx: number) => (
-                    <S.Item ref={itemRef} key={idx}>
-                        <Card
-                            title={value.title}
-                            onClick={onClick}
-                            id={value.id}
-                            key={idx}
-                            image={
-                                value.backdrop_path
-                                    ? `${C.IMAGE_URL_W500}/${value.backdrop_path}`
-                                    : noImage
-                            }
-                            movie={value}
-                            tag={true}
-                        />
-                    </S.Item>
-                ))}
-            </S.SlideContainer>
+            <S.SlideContainer ref={slideRef}>{items}</S.SlideContainer>
             <S.Arrow onClick={moveNext} rightIndex={'0'}>
                 &#10095;
             </S.Arrow>
