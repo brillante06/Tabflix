@@ -26,7 +26,9 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
         }
     }, [scrollAmount]);
     const calSlideCount = () => {
-        if (window.innerWidth < 1400 && window.innerWidth > 855) {
+        if (window.innerWidth > 1400) {
+            setSlideCount(5);
+        } else if (window.innerWidth <= 1400 && window.innerWidth > 855) {
             setSlideCount(4);
         } else if (window.innerWidth <= 855) {
             setSlideCount(3);
@@ -35,33 +37,24 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
     useEffect(() => {
         if (slideRef.current) {
             const resizeObs = new ResizeObserver(calSlideCount);
-            const cleanUp = () => {
-                resizeObs.disconnect();
-            };
+            const cleanup = () => resizeObs.disconnect();
             resizeObs.observe(slideRef.current);
-            return cleanUp();
+            return () => cleanup();
         }
         return undefined;
     }, []);
     const moveNext = () => {
         if (slideRef.current) {
-            if (itemRef.current) {
-                if (
-                    slideRef.current.scrollWidth <
-                    scrollAmount + itemRef.current.clientWidth * slideCount
-                )
-                    setScrollAmount(0);
-                else setScrollAmount(scrollAmount + itemRef.current.clientWidth * slideCount);
-            }
+            if (slideRef.current.scrollWidth < scrollAmount + slideRef.current.offsetWidth)
+                setScrollAmount(0);
+            else setScrollAmount(scrollAmount + slideRef.current.offsetWidth);
         }
     };
     const movePrev = () => {
         if (slideRef.current) {
-            if (itemRef.current) {
-                if (scrollAmount - itemRef.current.clientWidth * slideCount < 0)
-                    setScrollAmount(slideRef.current.scrollWidth);
-                else setScrollAmount(scrollAmount - itemRef.current.clientWidth * slideCount);
-            }
+            if (scrollAmount - slideRef.current.offsetWidth < 0)
+                setScrollAmount(slideRef.current.scrollWidth);
+            else setScrollAmount(scrollAmount - slideRef.current.offsetWidth);
         }
     };
     const onClick = (id: string) => {
