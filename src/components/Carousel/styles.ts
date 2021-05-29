@@ -4,10 +4,30 @@ import { device } from '../../styles/theme';
 interface isRight {
     rightIndex?: string;
 }
+export const Arrow = styled.button<isRight>`
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    width: auto;
+    padding: 14px;
+    user-select: none;
+    transition: 0.6s ease;
+    right: ${(props) => props.rightIndex};
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    @media ${device.tablet} {
+        display: none;
+    }
+`;
 export const Container = styled.article`
     position: relative;
     width: 80%;
     margin: 0 auto 0;
+    &:hover > ${Arrow} {
+        opacity: 1;
+    }
 `;
 export const Item = styled.li`
     flex: 0 0 calc(100% / 5);
@@ -19,6 +39,7 @@ export const Item = styled.li`
     }
     list-style: none;
 `;
+
 export const SlideContainer = styled.ul`
     display: flex;
     flex-wrap: nowrap;
@@ -38,22 +59,5 @@ export const SlideContainer = styled.ul`
             background-color: rgba(0, 0, 0, 0.3);
             border-radius: 1px;
         }
-    }
-`;
-
-export const Arrow = styled.button<isRight>`
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 14px;
-    user-select: none;
-    transition: 0.6s ease;
-    right: ${(props) => props.rightIndex};
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-    @media ${device.tablet} {
-        display: none;
     }
 `;

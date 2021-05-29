@@ -44,14 +44,23 @@ export const OverView = styled.section<props>`
     max-height: 7rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: 2s;
 `;
-
+export const Showmore = styled.article`
+    width: 10rem;
+    visibility: hidden;
+    font-size: 0.8rem;
+    cursor: pointer;
+`;
 export const TextContainer = styled.section`
     display: flex;
     width: 80%;
     margin: 2rem auto 2rem;
     font-weight: bold;
     font-size: 1.4rem;
+    &:hover ${Showmore} {
+        visibility: visible;
+    }
 `;
 export const VideoTitle = styled.section<props>`
     margin: 0 auto 3rem;
@@ -80,17 +89,11 @@ export const Introduce = styled.article`
     position: absolute;
     color: white;
 `;
-export const Showmore = styled.article`
-    width: 1rem;
-    display: none;
-`;
+
 export const Text = styled.article<checked>`
     cursor: pointer;
     &:hover {
         color: red;
-    }
-    &:hover + ${Showmore} {
-        display: block;
     }
     ${(props) => (props.isChecked ? 'color:tomato' : 'color:black')}
 `;

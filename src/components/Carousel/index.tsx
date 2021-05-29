@@ -70,7 +70,7 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
     return (
         <S.Container>
             <S.SlideContainer ref={slideRef}>
-                {movieArray.map((value: movieInfo, idx: number) => (
+                {movieArray?.map((value: movieInfo, idx: number) => (
                     <S.Item ref={itemRef} key={idx}>
                         <Card
                             title={value.title}
@@ -78,8 +78,8 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
                             id={value.id}
                             key={idx}
                             image={
-                                value.poster_path
-                                    ? `${C.IMAGE_URL_W500}${value.backdrop_path}`
+                                value.backdrop_path
+                                    ? `${C.IMAGE_URL_W500}/${value.backdrop_path}`
                                     : noImage
                             }
                             movie={value}

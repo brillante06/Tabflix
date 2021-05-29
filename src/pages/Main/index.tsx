@@ -58,14 +58,13 @@ const Main: React.FC = () => {
                         </S.VideoTitle>
                         <S.OverView isShow={overView}>{randomMovie.overview}</S.OverView>
                     </S.Introduce>
-                    <AspectRatio ratio={16 / 8}>
+                    <AspectRatio ratio={16 / 7}>
                         <S.Video
                             src={video}
                             frameBorder="0"
                             allow="autoplay; encrypted-media"
                             allowFullScreen
                             title="video"
-                            onEnded={() => alert('12')}
                         ></S.Video>
                     </AspectRatio>
                 </S.VideoContainer>
@@ -77,10 +76,7 @@ const Main: React.FC = () => {
 
             <S.TextContainer onClick={clickEvent}>
                 <S.Text isChecked={req === 'playing'}>Now playing</S.Text>
-                <S.Showmore>asdf</S.Showmore>
-                {/* /
-                <S.Text isChecked={req === 'popular'}>Popular</S.Text> /
-                <S.Text isChecked={req === 'topRated'}>Most Rated</S.Text> */}
+                <S.Showmore>모두보기&gt;</S.Showmore>
             </S.TextContainer>
             <Carousel movieArray={movies} />
         </S.Container>
