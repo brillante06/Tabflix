@@ -14,7 +14,7 @@ export const OverView = styled.section<props>`
 export const VideoTitle = styled.section<props>`
     margin: 0 auto 3rem;
     ${(props) => (props.isShow ? '' : 'transform-origin: 0 0;')}
-    ${(props) => (props.isShow ? '' : 'transform: scale(1.5);')}
+    ${(props) => (props.isShow ? '' : 'transform: scale(1.8);')}
     transition: 0.6s ease;
     font-size: 1.9rem;
     font-style: italic;
@@ -51,8 +51,7 @@ export const ErrorText = styled.article`
 export const Introduce = styled.article`
     font-size: 1rem;
     width: 31%;
-    margin-bottom: -15rem;
-    margin-top: 2rem;
+    margin: 2rem 0 -15rem 1rem;
     z-index: 16;
     position: absolute;
     color: white;
