@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import * as S from './styles';
 import { detailMovie, movieInfo, movieList } from '../../types';
 import Carousel from '../../components/Carousel';
@@ -17,7 +18,6 @@ const Main: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     let currentState: string = requestType[req];
     const randomNumber = Math.floor(Math.random() * 19);
-
     useEffect(() => {
         const request = async () => {
             setIsLoading(false);
