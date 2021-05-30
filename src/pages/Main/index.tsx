@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
 import * as S from './styles';
 import { detailMovie, movieInfo, movieList } from '../../types';
 import Carousel from '../../components/Carousel';
@@ -8,7 +7,6 @@ import { Card, Loader } from '../../components';
 import * as C from '../../utils/constants';
 import noImage from '../../assets/noImage.jpg';
 
-import { AspectRatio } from '../../components/AspectRatio';
 import Video from '../../components/Video';
 
 const Main: React.FC = () => {
@@ -17,7 +15,6 @@ const Main: React.FC = () => {
     const [randomMovie, setRandomMovie] = useState<Partial<detailMovie>>({});
     const [video, setVideo] = useState<string | null>('');
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const history = useHistory();
     let currentState: string = requestType[req];
     const randomNumber = Math.floor(Math.random() * 19);
 
