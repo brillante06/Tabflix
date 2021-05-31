@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { actorInfo, creditResponse, detailMovie, movieInfo, movieList, video } from '../types';
 import * as C from './constants';
 
@@ -14,14 +14,16 @@ export const requestWithVideo = (movieID: string) =>
     `${C.API_URL_MOVIE}/${movieID}${C.API_KEY}&append_to_response=videos`;
 
 export const fetcher = async (URL: string, params?: string) => {
-    const response: AxiosResponse = await axios({
-        method: 'GET',
-        url: URL,
-    });
-    if (response.status !== 200) {
-        throw new Error('error');
+    try {
+        const response: AxiosResponse = await axios({
+            method: 'GET',
+            url: URL,
+        });
+        return response.data;
+    } catch (error) {
+        const err: AxiosError = error;
+        throw err;
     }
-    return response.data;
 };
 
 export const requestType: { [req: string]: string } = {

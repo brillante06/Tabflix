@@ -1,29 +1,42 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import { detailMovie } from '../../types';
-import { AspectRatio } from '../AspectRatio';
+import useSWR from 'swr';
+import { detailMovie, movieInfo } from '../../types';
+import { fetcher, requestWithVideo, videoPath } from '../../utils/request';
+import { AspectRatio } from '../index';
 import * as S from './styles';
 
 interface Props {
-    videoURL: string | null;
-    movie: Partial<detailMovie>;
+    videoURL?: string | null;
+    movie?: Partial<detailMovie>;
+    video: movieInfo;
 }
-const Video: React.FC<Props> = ({ videoURL, movie }) => {
+const Video: React.FC<Props> = ({ videoURL, movie, video }) => {
     const [overView, setOverView] = useState<boolean>(true);
-    const { overview, id, title } = movie;
+    const { data: detail } = useSWR<detailMovie>(requestWithVideo(video.id), fetcher, {
+        suspense: true,
+    });
+    if (!detail) {
+        return <div>Loading...</div>;
+    }
+    const URL: string | null = videoPath(detail);
+    // const { overview, id, title } = movie;
     setTimeout(() => setOverView(false), 5500);
     const history = useHistory();
-    return videoURL ? (
+    return URL ? (
         <S.VideoContainer>
             <S.Introduce>
-                <S.VideoTitle isShow={overView} onClick={() => history.push(`/detail/${id}`)}>
-                    &quot;{title}&quot;
+                <S.VideoTitle
+                    isShow={overView}
+                    onClick={() => history.push(`/detail/${detail?.id}`)}
+                >
+                    &quot;{detail?.title}&quot;
                 </S.VideoTitle>
-                <S.OverView isShow={overView}>{overview}</S.OverView>
+                <S.OverView isShow={overView}>{detail?.overview}</S.OverView>
             </S.Introduce>
             <AspectRatio ratio={16 / 7}>
                 <S.Video
-                    src={videoURL}
+                    src={URL}
                     frameBorder="0"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
