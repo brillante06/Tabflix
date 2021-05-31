@@ -24,7 +24,7 @@ export const Arrow = styled.button<isRight>`
 export const Container = styled.article`
     position: relative;
     width: 80%;
-    margin: 0 auto 0;
+    margin: 0 auto 3rem;
     &:hover > ${Arrow} {
         opacity: 1;
     }

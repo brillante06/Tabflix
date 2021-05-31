@@ -1,12 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
+import useSWR from 'swr';
+import { Card } from '..';
+import { movieInfo } from '../../types';
+import { fetcher } from '../../utils/request';
 import * as S from './styles';
+import * as C from '../../utils/constants';
+import noImage from '../../assets/noImage.jpg';
 
 interface Props {
-    items: React.ReactNode;
+    requestURL: string;
 }
-const Carousel: React.FC<Props> = ({ items }) => {
+const Carousel: React.FC<Props> = ({ requestURL }) => {
     const [scrollAmount, setScrollAmount] = useState(0);
     const slideRef = useRef<HTMLUListElement>(null);
+
+    const { data: movies } = useSWR<{ results: movieInfo[] }>(requestURL, fetcher, {
+        suspense: true,
+    });
+    /* eslint-disable no-console */
+    console.log('movies', movies?.results, requestURL);
+    /* eslint-disable no-console */
     useEffect(() => {
         if (slideRef.current) {
             slideRef.current.scrollTo({
@@ -33,7 +46,22 @@ const Carousel: React.FC<Props> = ({ items }) => {
     };
     return (
         <S.Container>
-            <S.SlideContainer ref={slideRef}>{items}</S.SlideContainer>
+            <S.SlideContainer ref={slideRef}>
+                {movies?.results.map((value: movieInfo, idx) => (
+                    <Card
+                        title={value.title}
+                        id={value.id}
+                        key={idx}
+                        image={
+                            value.poster_path
+                                ? `${C.IMAGE_URL_W500}${value.backdrop_path}`
+                                : noImage
+                        }
+                        movie={value}
+                        tag={true}
+                    />
+                ))}
+            </S.SlideContainer>
             <S.Arrow onClick={moveNext} rightIndex={'0'}>
                 &#10095;
             </S.Arrow>

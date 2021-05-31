@@ -90,10 +90,9 @@ export const Introduce = styled.article`
     color: white;
 `;
 
-export const Text = styled.article<checked>`
+export const Text = styled.article`
     cursor: pointer;
     &:hover {
         color: red;
     }
-    ${(props) => (props.isChecked ? 'color:tomato' : 'color:black')}
 `;
