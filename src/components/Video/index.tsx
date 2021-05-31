@@ -31,7 +31,7 @@ const Video: React.FC<Props> = ({ video }) => {
                 </S.VideoTitle>
                 <S.OverView isShow={overView}>{detail?.overview}</S.OverView>
             </S.Introduce>
-            <AspectRatio ratio={16 / 7}>
+            <AspectRatio ratio={16 / 5.5}>
                 <S.Video
                     src={URL}
                     frameBorder="0"
