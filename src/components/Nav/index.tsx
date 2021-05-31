@@ -7,7 +7,7 @@ const Header: React.FC = () => {
         setActive(false);
     }, []);
     return (
-        <S.navBar>
+        <S.NavBar>
             <S.Navigation to="/" style={{ fontFamily: 'Bebas Neue', fontSize: '3rem' }}>
                 Tabflix
             </S.Navigation>
@@ -26,7 +26,7 @@ const Header: React.FC = () => {
                     </S.LiContainer>
                 </S.UlContainer>
             </S.NavBarLinks>
-        </S.navBar>
+        </S.NavBar>
     );
 };
 
