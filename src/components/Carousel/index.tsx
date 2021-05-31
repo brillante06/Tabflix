@@ -17,9 +17,6 @@ const Carousel: React.FC<Props> = ({ requestURL }) => {
     const { data: movies } = useSWR<{ results: movieInfo[] }>(requestURL, fetcher, {
         suspense: true,
     });
-    /* eslint-disable no-console */
-    console.log('movies', movies?.results, requestURL);
-    /* eslint-disable no-console */
     useEffect(() => {
         if (slideRef.current) {
             slideRef.current.scrollTo({
