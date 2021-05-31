@@ -71,9 +71,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                 {detail?.tagline && <S.Tagline>{detail?.tagline}</S.Tagline>}
                 {detail?.overview}
             </S.Description>
-            <S.ListContainer isOverflow={false}>
-                <S.Info>Actor</S.Info>
-            </S.ListContainer>
+            <S.TextContainer>Actor</S.TextContainer>
             <S.ListContainer>
                 {credits?.cast.length !== 0 ? (
                     credits?.cast.map((value, index) => (
@@ -91,12 +89,10 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                         />
                     ))
                 ) : (
-                    <h1>No results about actor</h1>
+                    <S.ErrorMessage>No results about actor🤷‍♀️</S.ErrorMessage>
                 )}
             </S.ListContainer>
-            <S.ListContainer isOverflow={false}>
-                <S.Info>Similar movie</S.Info>
-            </S.ListContainer>
+            <S.TextContainer>Similar Movie</S.TextContainer>
             <S.ListContainer>
                 {similar?.results.length !== 0 ? (
                     similar?.results.map((value, index) => (
@@ -114,7 +110,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                         />
                     ))
                 ) : (
-                    <h1>No results about similar movie</h1>
+                    <S.ErrorMessage>No results about similar movie🤷‍♂️</S.ErrorMessage>
                 )}
             </S.ListContainer>
         </S.Container>

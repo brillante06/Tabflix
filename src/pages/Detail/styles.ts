@@ -35,12 +35,22 @@ export const Background = styled.section<posterImage>`
         height: 19rem;
     }
 `;
-export const ListContainer = styled.section<overflow>`
+export const TextContainer = styled.article`
+    width: 80%;
+    margin: 1rem auto 1rem;
+    font-size: 2.4rem;
+    @media ${device.tablet} {
+        font-size: 1.7rem;
+    }
+`;
+export const ListContainer = styled.ul<overflow>`
     display: flex;
+    flex-wrap: nowrap;
     align-content: flex-end;
     overflow: hidden;
-    width: 70%;
+    width: 80%;
     margin: 0 auto 0;
+    padding: 2rem 0 2rem;
     &:hover {
         ${(props) => (props.isOverflow === true ? 'overflow-x:scroll' : 'overflow-x:hidden')}
     }
@@ -55,9 +65,14 @@ export const ListContainer = styled.section<overflow>`
         border-radius: 1px;
     }
 `;
-
+export const Info = styled.article`
+    font-size: 1rem;
+`;
+export const Text = styled.section`
+    font-size: 1.3rem;
+`;
 export const IntroduceContainer = styled.section`
-    width: 70%;
+    width: 80%;
     height: 32rem;
     display: flex;
     border-radius: 1rem;
@@ -101,6 +116,10 @@ export const Title = styled.article`
     font-weight: bold;
     margin-bottom: 3rem;
 `;
+export const ErrorMessage = styled.article`
+    margin: 2rem 0 2rem;
+    font-size: 1.5rem;
+`;
 
 export const Poster = styled.img`
     width: 20rem;
@@ -112,7 +131,7 @@ export const Poster = styled.img`
 
 export const Description = styled.section`
     font-size: 1.2rem;
-    width: 70%;
+    width: 80%;
     margin: 0 auto 3rem;
     @media ${device.tablet} {
         font-size: 1rem;
@@ -120,9 +139,6 @@ export const Description = styled.section`
     }
 `;
 
-export const Info = styled.article`
-    font-size: 1.5rem;
-`;
 export const Tagline = styled.article`
     font-size: 2.2rem;
     font-weight: bold;

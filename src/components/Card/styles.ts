@@ -38,7 +38,7 @@ export const Container = styled.li`
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
     max-width: 23rem;
     background-color: white;
-    margin-right: 10px;
+    margin-right: 0.1rem;
     flex: 0 0 calc(100% / 5);
     @media screen and (max-width: 1400px) {
         flex: 0 0 calc(100% / 4);
