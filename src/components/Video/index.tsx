@@ -7,20 +7,17 @@ import { AspectRatio } from '../index';
 import * as S from './styles';
 
 interface Props {
-    videoURL?: string | null;
-    movie?: Partial<detailMovie>;
     video: movieInfo;
 }
-const Video: React.FC<Props> = ({ videoURL, movie, video }) => {
+const Video: React.FC<Props> = ({ video }) => {
     const [overView, setOverView] = useState<boolean>(true);
     const { data: detail } = useSWR<detailMovie>(requestWithVideo(video.id), fetcher, {
         suspense: true,
     });
-    if (!detail) {
-        return <div>Loading...</div>;
+    let URL: string | null = null;
+    if (detail) {
+        URL = videoPath(detail);
     }
-    const URL: string | null = videoPath(detail);
-    // const { overview, id, title } = movie;
     setTimeout(() => setOverView(false), 5500);
     const history = useHistory();
     return URL ? (

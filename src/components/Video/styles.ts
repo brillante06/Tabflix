@@ -64,5 +64,8 @@ export const Video = styled.iframe`
     width: 100%;
     height: 100%;
     z-index: -3;
+    @media ${device.tablet} {
+        z-index: 1;
+    }
     position: absolute;
 `;
