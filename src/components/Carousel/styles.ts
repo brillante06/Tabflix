@@ -29,16 +29,6 @@ export const Container = styled.article`
         opacity: 1;
     }
 `;
-export const Item = styled.li`
-    flex: 0 0 calc(100% / 5);
-    @media screen and (max-width: 1400px) {
-        flex: 0 0 calc(100% / 4);
-    }
-    @media ${device.tablet} {
-        flex: 0 0 calc(100% / 3);
-    }
-    list-style: none;
-`;
 
 export const SlideContainer = styled.ul`
     display: flex;

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router';
 import * as S from './styles';
 
 interface Props {
@@ -7,8 +6,6 @@ interface Props {
 }
 const Carousel: React.FC<Props> = ({ items }) => {
     const [scrollAmount, setScrollAmount] = useState(0);
-    const itemRef = useRef<HTMLLIElement>(null);
-    const history = useHistory();
     const slideRef = useRef<HTMLUListElement>(null);
     useEffect(() => {
         if (slideRef.current) {
