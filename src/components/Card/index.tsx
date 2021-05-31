@@ -4,8 +4,7 @@ import { useHistory } from 'react-router';
 import { useIntersecting } from '../../hooks/useIntersecting';
 import { movieInfo } from '../../types';
 import * as S from './styles';
-import { Image } from '../index';
-import { AspectRatio } from '../AspectRatio';
+import { AspectRatio, Image } from '../index';
 
 interface movieCard {
     image: string;

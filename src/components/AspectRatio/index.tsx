@@ -23,4 +23,4 @@ const AspectRatio: FC<RatioProps> = ({ ratio, children }) => (
         <InnerWrapper>{children}</InnerWrapper>
     </OuterWrapper>
 );
-export { AspectRatio, OuterWrapper, InnerWrapper };
+export default AspectRatio;

@@ -1,28 +1,26 @@
 import { Route, Router, Switch } from 'react-router-dom';
-import React, { lazy, Suspense } from 'react';
-import { Header, Loader } from '../index';
+import React, { Suspense } from 'react';
+import { About, Header, Loader, Search } from '../index';
 import { browserHistory } from '../../utils/constants';
-import About from '../About';
+import { Detail, Main } from '../../pages';
+import ErrorBoundary from '../ErrorBoundary';
 
-const Routes: React.FC = () => {
-    const Main = lazy(() => import('../../pages/Main'));
-    const Detail = lazy(() => import('../../pages/Detail'));
-    const Search = lazy(() => import('../Search'));
-    return (
-        <Router history={browserHistory}>
-            <Suspense fallback={<Loader />}>
-                <main>
-                    <Header />
-                    <Switch>
+const Routes: React.FC = () => (
+    <Router history={browserHistory}>
+        <main>
+            <Header />
+            <ErrorBoundary>
+                <Switch>
+                    <Suspense fallback={<Loader />}>
                         <Route exact path="/" component={Main}></Route>
-                        <Route exact path="/search" component={Search}></Route>
-                        <Route exact path="/detail/:id" component={Detail}></Route>
-                        <Route exact path="/about" component={About}></Route>
-                    </Switch>
-                </main>
-            </Suspense>
-        </Router>
-    );
-};
+                    </Suspense>
+                    <Route exact path="/search" component={Search}></Route>
+                    <Route exact path="/detail/:id" component={Detail}></Route>
+                    <Route exact path="/about" component={About}></Route>
+                </Switch>
+            </ErrorBoundary>
+        </main>
+    </Router>
+);
 
 export default Routes;
