@@ -67,4 +67,4 @@ const Carousel: React.FC<Props> = ({ requestURL }) => {
     );
 };
 
-export default Carousel;
+export default React.memo(Carousel);

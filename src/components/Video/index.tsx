@@ -48,4 +48,4 @@ const Video: React.FC<Props> = ({ video }) => {
     );
 };
 
-export default Video;
+export default React.memo(Video);

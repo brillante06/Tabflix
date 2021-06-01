@@ -48,4 +48,4 @@ const Card: FC<movieCard> = ({ image, title, id, movie, tag }) => {
     );
 };
 
-export default Card;
+export default React.memo(Card);
