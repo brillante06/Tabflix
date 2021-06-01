@@ -56,7 +56,7 @@ export const ListContainer = styled.ul<overflow>`
     }
     @media ${device.tablet} {
         overflow-x: scroll;
-        overflow-x: hidden;
+        overflow-y: hidden;
     }
     &::-webkit-scrollbar {
         width: 0.6rem;
