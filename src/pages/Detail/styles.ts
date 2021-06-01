@@ -54,6 +54,10 @@ export const ListContainer = styled.ul<overflow>`
     &:hover {
         ${(props) => (props.isOverflow === true ? 'overflow-x:scroll' : 'overflow-x:hidden')}
     }
+    @media ${device.tablet} {
+        overflow-x: scroll;
+        overflow-x: hidden;
+    }
     &::-webkit-scrollbar {
         width: 0.6rem;
         height: 10px;
