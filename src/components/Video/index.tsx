@@ -43,7 +43,9 @@ const Video: React.FC<Props> = ({ video }) => {
         </S.VideoContainer>
     ) : (
         <S.Error>
-            <S.ErrorText>Sorry...Video is not available🙏</S.ErrorText>
+            <S.ErrorText>
+                Sorry...Video is not available🙏 If you want to see other movie,please refresh
+            </S.ErrorText>
         </S.Error>
     );
 };
