@@ -3,8 +3,6 @@ import useSWR from 'swr';
 import * as S from './styles';
 import { movieInfo } from '../../types';
 import { fetcher, requestType } from '../../utils/request';
-import * as C from '../../utils/constants';
-import noImage from '../../assets/noImage.jpg';
 import { ErrorBoundary, Loader } from '../../components';
 
 const Card = React.lazy(() => import('../../components/Card'));
