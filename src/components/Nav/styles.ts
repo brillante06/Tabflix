@@ -77,6 +77,8 @@ export const LiContainer = styled.li`
     list-style: none;
     @media ${device.tablet} {
         text-align: center;
+        height: 7rem;
+        font-size: 4rem;
         & .link {
             padding: 0.5rem 1rem;
         }
