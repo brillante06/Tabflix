@@ -1,11 +1,10 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useMemo } from 'react';
 import useSWR from 'swr';
 import * as S from './styles';
 import { movieInfo } from '../../types';
 import { fetcher, requestType } from '../../utils/request';
 import { ErrorBoundary, Loader } from '../../components';
 
-const Card = React.lazy(() => import('../../components/Card'));
 const Carousel = React.lazy(() => import('../../components/Carousel'));
 const Video = React.lazy(() => import('../../components/Video'));
 
@@ -14,7 +13,7 @@ const Main: React.FC = () => {
     const TOPRATED = 'topRated';
     const NOWPLAYING = 'playing';
     const currentState: string = requestType[POPULAR];
-    const randomNumber = Math.floor(Math.random() * 19);
+    const randomNumber = useMemo(() => Math.floor(Math.random() * 19), []);
 
     const { data: movies } = useSWR<{ results: movieInfo[] }>(currentState, fetcher, {
         suspense: true,
