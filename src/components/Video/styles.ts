@@ -10,6 +10,12 @@ export const OverView = styled.section<props>`
     overflow: hidden;
     text-overflow: ellipsis;
     transition: 2s;
+    @media ${device.tablet} {
+        max-height: 4rem;
+    }
+    @media ${device.mobile} {
+        max-height: 2.5rem;
+    }
 `;
 export const VideoTitle = styled.section<props>`
     margin: 0 auto 3rem;
@@ -23,10 +29,10 @@ export const VideoTitle = styled.section<props>`
     max-height: 12rem;
     overflow: hidden;
     @media ${device.tablet} {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
     @media ${device.mobile} {
-        font-size: 1.1rem;
+        font-size: 0.9rem;
     }
 `;
 
@@ -41,7 +47,7 @@ export const ErrorText = styled.article`
     margin: 2rem auto 1rem;
     font-size: 3rem;
     @media ${device.tablet} {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
     @media ${device.mobile} {
         font-size: 1rem;
