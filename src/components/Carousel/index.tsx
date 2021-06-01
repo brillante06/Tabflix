@@ -1,59 +1,62 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router';
+import useSWR from 'swr';
+import { Card } from '..';
 import { movieInfo } from '../../types';
-import { Card } from '../index';
+import { fetcher } from '../../utils/request';
 import * as S from './styles';
 import * as C from '../../utils/constants';
 import noImage from '../../assets/noImage.jpg';
 
 interface Props {
-    movieArray: Array<movieInfo>;
+    requestURL: string;
 }
-const Carousel: React.FC<Props> = ({ movieArray }) => {
-    const [index, setIndex] = useState(0);
-    const history = useHistory();
-    const slideRef = useRef<HTMLDivElement>(null);
-    const TOTAL_SLIDES = 3;
+const Carousel: React.FC<Props> = ({ requestURL }) => {
+    const [scrollAmount, setScrollAmount] = useState(0);
+    const slideRef = useRef<HTMLUListElement>(null);
+
+    const { data: movies } = useSWR<{ results: movieInfo[] }>(requestURL, fetcher, {
+        suspense: true,
+    });
     useEffect(() => {
         if (slideRef.current) {
-            slideRef.current.style.transition = 'all 0.5s ease-in-out';
-            slideRef.current.style.transform = `translateX(-${index * 5}0%)`;
+            slideRef.current.scrollTo({
+                top: 0,
+                left: scrollAmount,
+                behavior: 'smooth',
+            });
         }
-    }, [index]);
+    }, [scrollAmount]);
+
     const moveNext = () => {
-        if (index === TOTAL_SLIDES) {
-            setIndex(0);
-        } else {
-            setIndex(index + 1);
+        if (slideRef.current) {
+            if (slideRef.current.scrollWidth < scrollAmount + slideRef.current.offsetWidth)
+                setScrollAmount(0);
+            else setScrollAmount(scrollAmount + slideRef.current.offsetWidth);
         }
     };
     const movePrev = () => {
-        if (index === 0) {
-            setIndex(TOTAL_SLIDES);
-        } else {
-            setIndex(index - 1);
+        if (slideRef.current) {
+            if (scrollAmount - slideRef.current.offsetWidth < 0)
+                setScrollAmount(slideRef.current.scrollWidth);
+            else setScrollAmount(scrollAmount - slideRef.current.offsetWidth);
         }
-    };
-    const onClick = (id: string) => {
-        history.push(`/detail/${id}`);
     };
     return (
         <S.Container>
             <S.SlideContainer ref={slideRef}>
-                {movieArray.map((value: movieInfo, idx: number) => (
+                {movies?.results.map((value: movieInfo, idx) => (
                     <Card
                         title={value.title}
-                        onClick={onClick}
                         id={value.id}
                         key={idx}
                         image={
-                            value.backdrop_path
-                                ? `${C.IMAGE_URL_W500}/${value.poster_path}`
+                            value.poster_path
+                                ? `${C.IMAGE_URL_W500}${value.backdrop_path}`
                                 : noImage
                         }
                         movie={value}
                         tag={true}
-                    ></Card>
+                    />
                 ))}
             </S.SlideContainer>
             <S.Arrow onClick={moveNext} rightIndex={'0'}>
@@ -64,4 +67,4 @@ const Carousel: React.FC<Props> = ({ movieArray }) => {
     );
 };
 
-export default Carousel;
+export default React.memo(Carousel);

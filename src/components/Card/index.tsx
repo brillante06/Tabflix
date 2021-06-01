@@ -1,23 +1,21 @@
 import React, { FC, useRef } from 'react';
 import moment from 'moment';
+import { useHistory } from 'react-router';
 import { useIntersecting } from '../../hooks/useIntersecting';
 import { movieInfo } from '../../types';
 import * as S from './styles';
-import { Image } from '../index';
+import { AspectRatio, Image } from '../index';
 
 interface movieCard {
     image: string;
     title: string;
-    onClick: (id: string) => void;
     id: string;
     movie?: movieInfo;
     tag?: boolean;
 }
 
-const Card: FC<movieCard> = ({ image, title, onClick, id, movie, tag }) => {
-    const onClickMove = () => {
-        onClick(id);
-    };
+const Card: FC<movieCard> = ({ image, title, id, movie, tag }) => {
+    const history = useHistory();
     const lazyRef = useRef<HTMLImageElement | null>(null);
     const lazyLoading: IntersectionObserverCallback = (entries, observer) => {
         entries.forEach((entry) => {
@@ -28,25 +26,26 @@ const Card: FC<movieCard> = ({ image, title, onClick, id, movie, tag }) => {
             }
         });
     };
+    const onClick = () => {
+        history.push(`/detail/${id}`);
+    };
     useIntersecting(lazyRef, lazyLoading);
     return (
-        <S.Container onClick={onClickMove}>
-            <Image
-                src={image}
-                alt={title}
-                width={'100%'}
-                ref={lazyRef}
-                key={title}
-                tag={tag}
-                height={'65%'}
-            />
-            <S.MovieInfo>{title}</S.MovieInfo>
+        <S.Container onClick={onClick}>
+            <S.ImgWrapper>
+                <AspectRatio ratio={16 / 10}>
+                    <Image src={image} alt={title} ref={lazyRef} key={title} tag={tag} />
+                </AspectRatio>
+            </S.ImgWrapper>
             <S.InfoContainer>
-                <S.MovieInfo>{moment(movie?.release_date).year()}</S.MovieInfo>
-                <S.MovieRating> ⭐{movie?.vote_average}/10</S.MovieRating>
+                <S.MovieTitle>{title}</S.MovieTitle>
+                <S.Info>
+                    <S.MovieYear>{moment(movie?.release_date).year()}</S.MovieYear>
+                    <S.MovieRating> ⭐{movie?.vote_average}/10</S.MovieRating>
+                </S.Info>
             </S.InfoContainer>
         </S.Container>
     );
 };
 
-export default Card;
+export default React.memo(Card);

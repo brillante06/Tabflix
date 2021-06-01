@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import * as S from './styles';
 import { useIntersecting } from '../../hooks/useIntersecting';
 import { Image } from '../index';
+import AspectRatio from '../AspectRatio';
 
 interface infoProps {
     name: string;
@@ -27,8 +28,12 @@ const SmallCard: React.FC<infoProps> = ({ name, imgName, tag, id, onClick, chara
     };
     useIntersecting(lazyRef, lazyLoading);
     return (
-        <S.Container onClick={onClickMove} tag={tag}>
-            <Image src={imgName} alt={name} ref={lazyRef} width={'200vw'} height={'76%'} />
+        <S.Container onClick={onClickMove}>
+            <S.ImgWrapper>
+                <AspectRatio ratio={10 / 15}>
+                    <Image src={imgName} alt={name} ref={lazyRef} />
+                </AspectRatio>
+            </S.ImgWrapper>
             <S.Character tag={tag}>{character}</S.Character>
             <S.Name>
                 {name} {tag === 'similar' ? '' : '역'}

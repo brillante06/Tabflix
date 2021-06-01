@@ -8,7 +8,7 @@ interface props {
 
 export const Menu = styled.div``;
 
-export const navBar = styled.nav`
+export const NavBar = styled.nav`
     list-style-type: none;
     margin: 0;
     overflow: hidden;
@@ -24,6 +24,7 @@ export const navBar = styled.nav`
     border-bottom-style: solid;
     border-width: 0.1px;
     border-color: beige;
+    z-index: 20;
     @media ${device.tablet} {
         flex-direction: column;
         align-items: flex-start;
@@ -76,6 +77,8 @@ export const LiContainer = styled.li`
     list-style: none;
     @media ${device.tablet} {
         text-align: center;
+        height: 7rem;
+        font-size: 4rem;
         & .link {
             padding: 0.5rem 1rem;
         }

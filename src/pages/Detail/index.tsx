@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
+import useSWR from 'swr';
 import { actorInfo, detailMovie, genreColor, movieInfo } from '../../types';
-import * as req from '../../utils/request';
+import { fetcher, requestCredit, requestDetail, requestSimilar } from '../../utils/request';
 import * as S from './styles';
 import * as C from '../../utils/constants';
 import { Loader, SmallCard } from '../../components/index';
@@ -11,37 +12,30 @@ interface movieID {
     id: string;
 }
 const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
-    const [detail, setDetail] = useState<detailMovie>();
-    const [similar, setSimilar] = useState<Array<movieInfo>>([]);
-    const [credits, setCredits] = useState<Array<actorInfo>>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(false);
     const history = useHistory();
+    const { data: detail } = useSWR<detailMovie>(requestDetail(match.params.id), fetcher, {
+        suspense: true,
+    });
+    const { data: credits } = useSWR<{ cast: actorInfo[] }>(
+        requestCredit(match.params.id),
+        fetcher,
+        {
+            suspense: true,
+        }
+    );
+    const { data: similar } = useSWR<{ results: movieInfo[] }>(
+        requestSimilar(match.params.id),
+        fetcher,
+        {
+            suspense: true,
+        }
+    );
 
-    const getData = async () => {
-        setIsLoading(true);
-        const movieDetail: detailMovie = await req.getMovieDetail(match.params.id);
-        setDetail(movieDetail);
-        const actorCredit: Array<actorInfo> = await req.getMovieCredit(match.params.id);
-        setCredits(actorCredit);
-        const movieSimilar: Array<movieInfo> = await req.getMovieSimilar(match.params.id);
-        setSimilar(movieSimilar);
-        setIsLoading(false);
-    };
-    useEffect(() => {
-        getData();
-    }, []);
-
-    if (error) {
-        return <p>something went wrong</p>;
-    }
     const onClick = (id: string) => {
         history.push(`/detail/${id}`);
         history.go(0);
     };
-    return isLoading ? (
-        <Loader />
-    ) : (
+    return (
         <S.Container>
             <S.Background
                 poster={
@@ -77,12 +71,10 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                 {detail?.tagline && <S.Tagline>{detail?.tagline}</S.Tagline>}
                 {detail?.overview}
             </S.Description>
-            <S.ListContainer isOverflow={false}>
-                <S.Info>Actor</S.Info>
-            </S.ListContainer>
+            <S.TextContainer>Actor</S.TextContainer>
             <S.ListContainer>
-                {credits.length !== 0 ? (
-                    credits?.map((value, index) => (
+                {credits?.cast.length !== 0 ? (
+                    credits?.cast.map((value, index) => (
                         <SmallCard
                             key={index}
                             imgName={
@@ -97,15 +89,13 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                         />
                     ))
                 ) : (
-                    <h1>No results about actor</h1>
+                    <S.ErrorMessage>No results about actor🤷‍♀️</S.ErrorMessage>
                 )}
             </S.ListContainer>
-            <S.ListContainer isOverflow={false}>
-                <S.Info>Similar movie</S.Info>
-            </S.ListContainer>
+            <S.TextContainer>Similar Movie</S.TextContainer>
             <S.ListContainer>
-                {similar.length !== 0 ? (
-                    similar.map((value, index) => (
+                {similar?.results.length !== 0 ? (
+                    similar?.results.map((value, index) => (
                         <SmallCard
                             name={value.title}
                             imgName={
@@ -120,7 +110,7 @@ const Detail: FC<RouteComponentProps<movieID>> = ({ match }) => {
                         />
                     ))
                 ) : (
-                    <h1>No results about similar movie</h1>
+                    <S.ErrorMessage>No results about similar movie🤷‍♂️</S.ErrorMessage>
                 )}
             </S.ListContainer>
         </S.Container>

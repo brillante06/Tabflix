@@ -7,3 +7,7 @@ export { default as Header } from './Nav';
 export { default as Routes } from './Routes';
 export { default as Search } from './Search';
 export { default as SmallCard } from './SmallCard';
+export { default as Video } from './Video';
+export { default as AspectRatio } from './AspectRatio';
+export { default as About } from './About';
+export { default as ErrorBoundary } from './ErrorBoundary';

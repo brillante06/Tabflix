@@ -127,4 +127,5 @@ export const genreColor: colorType = {
     범죄: '#CC0000',
     로맨스: '#FF3399',
     공포: '#606060',
+    미스터리: '#990066',
 };

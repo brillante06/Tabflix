@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 
 const Header: React.FC = () => {
     const [active, setActive] = useState(false);
+    useEffect(() => {
+        setActive(false);
+    }, []);
     return (
-        <S.navBar>
+        <S.NavBar>
             <S.Navigation to="/" style={{ fontFamily: 'Bebas Neue', fontSize: '3rem' }}>
                 Tabflix
             </S.Navigation>
@@ -16,14 +19,18 @@ const Header: React.FC = () => {
             <S.NavBarLinks isClick={active}>
                 <S.UlContainer>
                     <S.LiContainer>
-                        <S.Navigation to="/search">Search</S.Navigation>
+                        <S.Navigation to="/search" onClick={() => setActive((prev) => !prev)}>
+                            Search
+                        </S.Navigation>
                     </S.LiContainer>
                     <S.LiContainer>
-                        <S.Navigation to="/about">About</S.Navigation>
+                        <S.Navigation to="/about" onClick={() => setActive((prev) => !prev)}>
+                            About
+                        </S.Navigation>
                     </S.LiContainer>
                 </S.UlContainer>
             </S.NavBarLinks>
-        </S.navBar>
+        </S.NavBar>
     );
 };
 

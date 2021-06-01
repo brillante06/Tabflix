@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { actorInfo, creditResponse, detailMovie, movieInfo, movieList, video } from '../types';
 import * as C from './constants';
 
@@ -14,17 +14,16 @@ export const requestWithVideo = (movieID: string) =>
     `${C.API_URL_MOVIE}/${movieID}${C.API_KEY}&append_to_response=videos`;
 
 export const fetcher = async (URL: string, params?: string) => {
-    const response: AxiosResponse = await axios({
-        method: 'GET',
-        url: URL,
-    });
-    /* eslint-disable no-console */
-    console.log(URL, response.data);
-    /* eslint-disable no-console */
-    if (response.status !== 200) {
-        throw new Error('errrr');
+    try {
+        const response: AxiosResponse = await axios({
+            method: 'GET',
+            url: URL,
+        });
+        return response.data;
+    } catch (error) {
+        const err: AxiosError = error;
+        throw err;
     }
-    return response.data;
 };
 
 export const requestType: { [req: string]: string } = {
@@ -60,21 +59,12 @@ export const getMovieVideo = async (id: string) => {
 };
 
 export const videoPath = (randomMovie: detailMovie) => {
-    /* eslint-disable no-console */
-    console.log(randomMovie);
-    /* eslint-disable no-console */
     let youtube: Array<video> = [];
     if (!randomMovie.videos) {
-        /* eslint-disable no-console */
-        console.log('no video');
-        /* eslint-disable no-console */
         return null;
     }
     youtube = randomMovie.videos.results.filter((value) => value.site === 'YouTube');
     if (youtube.length === 0 || !youtube[0].key) {
-        /* eslint-disable no-console */
-        console.log('no video key', youtube);
-        /* eslint-disable no-console */
         return null;
     }
     return `${C.YOUTUBE_URL}${youtube[0].key}?autoplay=1&mute=1`;
