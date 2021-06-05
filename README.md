@@ -1,7 +1,7 @@
 # Tabflix
 
 
-[페이지](https://tabflix.vercel.app/)
+[페이지](https://tab-flix.vercel.app/)
 <br/><br/>
 ## 프로젝트 소개
 
