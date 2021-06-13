@@ -5,19 +5,60 @@
 <br/><br/>
 ## 프로젝트 소개
 
-TMDB(The Movie Database) API를 사용하여 영화 검색 및 상세정보를 보여주는 웹페이지입니다.    
+TMDB(The Movie Database) API를 사용하여 영화 검색 및 상세정보를 보여주는 웹페이지입니다.   
+Netflix의 메인 화면을 바탕으로 만들었습니다.
 <br/><br/>
 
-## 페이지 화면
 
+## 주요기능
 
-|                           홈페이지                           |                           둘러보기                           |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![image](https://user-images.githubusercontent.com/22672155/114724527-9b2c3700-9d76-11eb-9be6-7d935c19dc68.png)|![image](https://user-images.githubusercontent.com/22672155/114724593-ada67080-9d76-11eb-950a-2349b77a5e27.png)
+### IntersectionObserver를 활용한 Custom hook
+React에서 custom hook으로 등록해 놓은 뒤 callback 함수에 따라 다양한 action을 취할 수 있습니다.
+```
+const useIntersecting = (
+    ref: React.RefObject<HTMLDivElement>,//target이 될 element
+    onIntersect: IntersectionObserverCallback //특정 action을 취할 callback 함수
+) => {
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5,
+    };
 
-|                            검색창                            |                           상세정보                           | 
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
-|![image](https://user-images.githubusercontent.com/22672155/117605212-2dff9c00-b192-11eb-839b-62f22775e16c.png)|![image](https://user-images.githubusercontent.com/22672155/117605230-39eb5e00-b192-11eb-8fc8-2022d4866ee8.png)
+    useEffect(() => {
+        const io = new IntersectionObserver(onIntersect, options);
+
+        if (ref.current) {
+            io.observe(ref.current);
+        }
+        return () => {
+           io.disconnect();
+        };
+    }, [ref, onIntersect]);
+};
+```
+custom hook에서는 target이 될 element와 action을 취할 수 있는 callback 함수를 인자로 받습니다. 
+필요한 경우에는 option 객체도 매개변수로 받아 사용할 수 있습니다.
+
+`useEffect` 안에서는 callback함수와 option을 매개변수로 하는 인스턴스를 생성하고 element를 관찰합니다.
+return시에는 cleanup함수를 사용해서 관찰을 중지합니다.
+
+<br>
+
+### lazy loading 예시
+
+```
+const lazyLoading: IntersectionObserverCallback = (entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting)
+                return;
+            const lazyimage = entry.target as HTMLImageElement;
+            observer.unobserve(entry.target);
+            if (lazyimage.dataset.src) lazyimage.src = lazyimage.dataset.src; 
+            // entry가 교차지점에 올경우 data-src를 src로 교체해준다.
+        });
+    };
+```
 
 <br/><br/>
 ## 기술
@@ -26,6 +67,13 @@ TMDB(The Movie Database) API를 사용하여 영화 검색 및 상세정보를 �
 - Typescript
 - React
 - styled-components
+- useSWR
+
+
+
+
+
+
 
 
 
